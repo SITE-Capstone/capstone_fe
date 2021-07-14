@@ -1,38 +1,30 @@
+html {
+  background: radial-gradient(46.41% 73.99% at 46.63% 48.05%, #20135c 0%, #140739 92.82%) repeat;
+  box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.25);
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
+  background: radial-gradient(46.41% 73.99% at 46.63% 48.05%, #20135c 0%, #140739 92.82%);
+  box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.25);
+  color: white;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  flex-grow: 1;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav {
+  width: 190px;
 }

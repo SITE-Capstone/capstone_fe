@@ -17,7 +17,7 @@ function App() {
       if (data) setUser(data.user);
       if (error) setError(error);
     };
-    const token = localStorage.getItem("fitness_tracker_token");
+    const token = localStorage.getItem("kurios_token");
     if (token) {
       apiClient.setToken(token);
       fetchUser();
@@ -33,7 +33,16 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/login" element={<Login user={user} setUser={setUser} />} />
-            <Route path="/tutorial" element={<Tutorial />} />
+            <Route
+              path="/tutorial"
+              element={
+                Object.keys(user).length === 0 ? (
+                  <h1 style={{ marginTop: 200, textAlign: "center" }}>Not logged in</h1>
+                ) : (
+                  <Tutorial />
+                )
+              }
+            />
             <Route path="/coininfo" element={<Chart />} />
           </Routes>
         </div>

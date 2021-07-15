@@ -27,7 +27,6 @@ function Chart() {
     <Line dataKey="rate_open" type="monotone" strokeWidth={2} animationDuration = "2200" stroke={color[1]} dot = {false}/>,
     <Line dataKey="rate_open" type="monotone" strokeWidth={4} animationDuration = "2200" stroke={color[2]} dot = {false}/>
     ]   
-        
 
 
     return (
@@ -36,10 +35,26 @@ function Chart() {
             {GlowLine }
             <YAxis dataKey="rate_open"  stroke="transparent"/>
             <XAxis dataKey="time_open"  stroke="transparent"/>
-            <Tooltip  style/>
+            {/* <Tooltip  style/> */}
+            <Tooltip content={CustomTooltip } />
         </LineChart>
         </div>
     )
 }
+
+//Customizes the content of the Tooltip
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`Price: ${(payload[0].value).toFixed(4)}`}</p>
+        </div>
+      );
+    }
+    return null;
+};
+
+
+
 
 export default Chart

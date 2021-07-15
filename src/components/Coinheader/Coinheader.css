@@ -1,0 +1,11 @@
+.Coinheader{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+.Coinheader img{
+    width: 30px;
+}

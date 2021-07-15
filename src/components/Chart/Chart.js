@@ -1,7 +1,7 @@
 
 import React from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { Data } from "./Data";
+import { Data } from "../Data/Data";
 
 
 const black = ["rgb(0,0,0,.85)", "rgb(0,0,0,.25)", "rgb(0,0,0,.15)"]; //#F68A8A

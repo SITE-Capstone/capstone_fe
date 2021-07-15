@@ -1,6 +1,7 @@
 import "./App.css";
 import Tutorial from "../Tutorial/Tutorial";
 import Navbar from "../Navbar/Navbar";
+import Chart from "../Chart/Chart";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         </div>
         <div className="container">
           <h1>Crypto Capstone</h1>
+          <Chart />
           <Tutorial />
         </div>
       </header>

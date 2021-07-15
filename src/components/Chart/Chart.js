@@ -1,8 +1,6 @@
-
 import React from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { Data } from "./Data";
-
 
 const black = ["rgb(0,0,0,.85)", "rgb(0,0,0,.25)", "rgb(0,0,0,.15)"]; //#F68A8A
 const red = ["rgb(246,138,138,.85)", "rgb(246,138,138,.25)", "rgb(246,138,138,.15)"]; //#F68A8A
@@ -24,7 +22,7 @@ function Chart() {
   }
 
   const GlowLine = [
-    <Line dataKey="time_open" type="monotone"  stroke="transparent" dot = {false}/>,
+    <Line dataKey="time_open" type="monotone" stroke="transparent" dot={false} />,
     <Line dataKey="rate_open" animationDuration="2200" stroke={color[0]} dot={false} />,
     <Line dataKey="rate_open" type="monotone" strokeWidth={2} animationDuration="2200" stroke={color[1]} dot={false} />,
     <Line dataKey="rate_open" type="monotone" strokeWidth={4} animationDuration="2200" stroke={color[2]} dot={false} />,
@@ -40,25 +38,21 @@ function Chart() {
       </LineChart>
     </ResponsiveContainer>
   );
-
 }
 
 //Customizes the content of the Tooltip
-//This custom tooltip is needed since otherwise, 
+//This custom tooltip is needed since otherwise,
 //it would display the price for each line charted for glow line
 const CustomTooltip = ({ active, payload, label }) => {
-
-    if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip">
-          <p className="label">{`Price: ${new Date(payload[0].value)}`}</p>
-          <p className="label">{`Price: ${(payload[1].value).toFixed(4)}`}</p>
-        </div>
-      );
-    }
-    return null;
-
-
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p className="label">{`Time: ${new Date(payload[0].value).toLocaleString()}`}</p>
+        <p className="label">{`Price: ${payload[1].value.toFixed(4)}`}</p>
+      </div>
+    );
+  }
+  return null;
 };
 
 export default Chart;

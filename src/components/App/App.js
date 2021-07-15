@@ -4,8 +4,8 @@ import apiClient from "../Services/apiClient";
 import { Routes, Route } from "react-router-dom";
 import Tutorial from "../Tutorial/Tutorial";
 import Navbar from "../Navbar/Navbar";
-import Chart from "../Chart/Chart";
 import Login from "../Login/Login";
+import Tradeview from "../Tradeview/Tradeview";
 
 function App() {
   const [user, setUser] = useState({});
@@ -43,7 +43,7 @@ function App() {
                 )
               }
             />
-            <Route path="/coininfo" element={<Chart />} />
+            <Route path="/coininfo" element={<Tradeview />} />
           </Routes>
         </div>
       </header>

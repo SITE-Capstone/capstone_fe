@@ -69,13 +69,13 @@ class ApiClient {
 
   async getCoinData(){
     // console.log("Current Price:", await this.getCoinCurrentPrice("BTC"))
+    // console.log("Image Urls", await this.getCoinImage("BTC"))
+    console.log("Hourly Price History:", await this.getCoinHourlyPriceHistory("BTC"))
     // console.log("Daily Price History:", await this.getCoinDailyPriceHistory("BTC"))
-    console.log("Weekly Price History:", await this.getCoinWeeklyPriceHistory("BTC"))
+    // console.log("Weekly Price History:", await this.getCoinWeeklyPriceHistory("BTC"))
     // console.log("Monthly Price History:", await this.getCoinMonthlyPriceHistory("BTC"))
     // console.log("Three Month Price History:", await this.getCoinThreeMonthPriceHistory("BTC"))
     // console.log("Yearly Price History:", await this.getCoinYearlyPriceHistory("BTC"))
-    // console.log("IMGURL", await this.getCoinImage("BTC"))
-
   }
   async getCoinImage(symbol){
     let endpoint = '/v1/assets/icons/256?apikey='
@@ -140,6 +140,17 @@ class ApiClient {
     return data
   }
 
+  async getCoinHourlyPriceHistory(symbol){
+    const date = new Date()
+    date.setTime(date.getTime() - (( 61 * 60 * 1000)+date.getTime()%60000))
+    let period_id='1MIN'
+    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 60, period_id)
+    let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
+    let data=req.data
+    return data
+  }
+
+
 
 
   getPriceHistoryEndpoint(symbol, date, limit, period_id){
@@ -155,8 +166,11 @@ class ApiClient {
     let month = date.getMonth()+1
     let day = date.getDate()
     let time_start = '' + year + monthConnector + (month) + dayConnector +  day
+    if (period_id==='1MIN'){
+      time_start = date.toISOString()
+      console.log('hour:', time_start)
+    }
     let endpoint = '/v1/exchangerate/' + symbol + '/USD/history?&time_start='+time_start +'&period_id='+ period_id + '&limit='+ limit+'&apikey='
-    
     return endpoint
   }
 

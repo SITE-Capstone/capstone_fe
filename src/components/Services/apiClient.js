@@ -69,7 +69,8 @@ class ApiClient {
   }
 
   async getCoinData(){
-    console.log("Price", await this.getCoinPriceHistory("BTC"))
+    console.log("Current Price:", await this.getCoinCurrentPrice("BTC"))
+    // console.log("Price History:", await this.getCoinPriceHistory("BTC"))
     // console.log("IMGURL", await this.getCoinImage("BTC"))
 
   }
@@ -105,6 +106,14 @@ class ApiClient {
     let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
     let data=req.data
     return data
+  }
+
+  async getCoinCurrentPrice(symbol){
+    let endpoint = '/v1/exchangerate/'+ symbol+'/USD?apikey='
+    let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
+    let data=req.data
+      console.log("Found Price:", data.rate)
+    return data.rate
   }
 
   

@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Tutorial from "../Tutorial/Tutorial";
 import Login from "../Login/Login";
 import Tradeview from "../Tradeview/Tradeview";
+import Register from "../Register/Register";
 
 function App() {
   const [user, setUser] = useState({});
@@ -29,6 +30,7 @@ function App() {
         <div className="hasNav">
           <Routes>
             <Route path="/login" element={<Login user={user} setUser={setUser} />} />
+            <Route path="/register" element={<Register user={user} setUser={setUser} />} />
             <Route
               path="/tutorial"
               element={

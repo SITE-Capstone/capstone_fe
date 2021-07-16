@@ -75,10 +75,10 @@ class ApiClient {
     }
   }
 
-  async getCoinData(){
+  async getCoinData(symbol){
     // console.log("Current Price:", await this.getCoinCurrentPrice("BTC"))
     // console.log("Image Urls", await this.getCoinImage("BTC"))
-    console.log("Hourly Price History:", await this.getCoinHourlyPriceHistory("BTC"))
+    // console.log("Hourly Price History:", await this.getCoinHourlyPriceHistory("BTC"))
     // console.log("Daily Price History:", await this.getCoinDailyPriceHistory("BTC"))
     // console.log("Weekly Price History:", await this.getCoinWeeklyPriceHistory("BTC"))
     // console.log("Monthly Price History:", await this.getCoinMonthlyPriceHistory("BTC"))
@@ -108,17 +108,18 @@ class ApiClient {
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 365, period_id)
     let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
     let data=req.data
-    return data
+    return req
   }
 
   async getCoinMonthlyPriceHistory(symbol){
     const date = new Date()
     date.setDate(date.getDate()-30)
     let period_id='1DAY'
-    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 30, period_id)
+    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 31, period_id)
     let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
     let data=req.data
-    return data
+    console.log("APICLIENTmonthly:", data)
+    return req
   }
 
   async getCoinThreeMonthPriceHistory(symbol){
@@ -128,7 +129,7 @@ class ApiClient {
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 90, period_id)
     let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
     let data=req.data
-    return data
+    return req
   }
   async getCoinWeeklyPriceHistory(symbol){
     const date = new Date()
@@ -137,7 +138,7 @@ class ApiClient {
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 42, period_id)
     let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
     let data=req.data
-    return data
+    return req
   }
   async getCoinDailyPriceHistory(symbol){
     const date = new Date()
@@ -146,7 +147,7 @@ class ApiClient {
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 48, period_id)
     let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
     let data=req.data
-    return data
+    return req
   }
 
   async getCoinHourlyPriceHistory(symbol){
@@ -156,7 +157,7 @@ class ApiClient {
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 60, period_id)
     let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
     let data=req.data
-    return data
+    return req
   }
 
 

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { string } from "prop-types";
-require('dotenv').config()
+require("dotenv").config();
 
-const API_KEY = process.env.REACT_APP_API_KEY
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 class ApiClient {
   constructor(remoteHostUrl) {
@@ -37,6 +37,7 @@ class ApiClient {
     }
   }
 
+  // USER AUTHENTICATION
   async fetchUserFromToken() {
     return await this.request({ endpoint: "auth/me", method: "GET" });
   }
@@ -49,9 +50,15 @@ class ApiClient {
     return await this.request({ endpoint: "auth/register", method: "POST", data: credentials });
   }
 
+  // TUTORIAL INFORMATION
+  async getTutorials() {
+    return await this.request({ endpoint: "tutorials/cards", method: "GET" });
+  }
+
+  // COIN INFORMATION
   async coinRequest({ endpoint, method = "GET", data = {} }) {
     const url = this.coinApiBaseUrl + endpoint + API_KEY;
-    console.log("URL:",url)
+    console.log("URL:", url);
 
     const headers = {
       "Content-Type": "application/json",
@@ -64,58 +71,57 @@ class ApiClient {
       console.error({ errorResponse: err.response });
       const message = err?.response?.data?.error?.message;
       // return { data: null, error: message || string(err) };
-      return { data: null, error: message || (err) || "Error"};
+      return { data: null, error: message || err || "Error" };
     }
   }
 
-  async getCoinData(){
-    console.log("Current Price:", await this.getCoinCurrentPrice("BTC"))
+  async getCoinData() {
+    console.log("Current Price:", await this.getCoinCurrentPrice("BTC"));
     // console.log("Price History:", await this.getCoinPriceHistory("BTC"))
     // console.log("IMGURL", await this.getCoinImage("BTC"))
-
   }
-  async getCoinImage(symbol){
-    let endpoint = '/v1/assets/icons/256?apikey='
-    let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
-    let data=req.data
+  async getCoinImage(symbol) {
+    let endpoint = "/v1/assets/icons/256?apikey=";
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
+    let data = req.data;
 
-    for (const element of data){
-      if (element.asset_id===symbol){
-        console.log("found", element.url)
-        return element.url
+    for (const element of data) {
+      if (element.asset_id === symbol) {
+        console.log("found", element.url);
+        return element.url;
       }
     }
-    console.log("Token Not Found")
-    return 'https://pics.freeicons.io/uploads/icons/png/17917263711578289008-512.png'
+    console.log("Token Not Found");
+    return "https://pics.freeicons.io/uploads/icons/png/17917263711578289008-512.png";
   }
 
-  async getCoinPriceHistory(symbol){
-    const date = new Date()
-    let connector = '-'
-    if (date.getMonth()+1<10){
-      console.log('month', date.getMonth())
-      connector='-0'
+  async getCoinPriceHistory(symbol) {
+    const date = new Date();
+    let connector = "-";
+    if (date.getMonth() + 1 < 10) {
+      console.log("month", date.getMonth());
+      connector = "-0";
     }
-    let year = date.getFullYear()
-    let month = date.getMonth()+1
-    let day = date.getDate()
-    let time_start = '' + (year-1) + connector + month + '-' +  day
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let time_start = "" + (year - 1) + connector + month + "-" + day;
     // let time_end = '' + year + connector + month + '-' +  (day+1)
     // let endpoint = '/v1/exchangerate/' + symbol + '/USD/history?&time_start='+time_start+ '&time_end='+ time_end +'&period_id=1DAY&limit=365&apikey='
-    let endpoint = '/v1/exchangerate/' + symbol + '/USD/history?&time_start='+time_start +'&period_id=1DAY&limit=367&apikey='
-    let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
-    let data=req.data
-    return data
+    let endpoint =
+      "/v1/exchangerate/" + symbol + "/USD/history?&time_start=" + time_start + "&period_id=1DAY&limit=367&apikey=";
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
+    let data = req.data;
+    return data;
   }
 
-  async getCoinCurrentPrice(symbol){
-    let endpoint = '/v1/exchangerate/'+ symbol+'/USD?apikey='
-    let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
-    let data=req.data
-      console.log("Found Price:", data.rate)
-    return data.rate
-  }  
+  async getCoinCurrentPrice(symbol) {
+    let endpoint = "/v1/exchangerate/" + symbol + "/USD?apikey=";
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
+    let data = req.data;
+    console.log("Found Price:", data.rate);
+    return data.rate;
+  }
 }
-
 
 export default new ApiClient(process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001");

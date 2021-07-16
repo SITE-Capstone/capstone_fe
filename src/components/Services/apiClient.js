@@ -63,13 +63,14 @@ class ApiClient {
     } catch (err) {
       console.error({ errorResponse: err.response });
       const message = err?.response?.data?.error?.message;
-      return { data: null, error: message || string(err) };
+      // return { data: null, error: message || string(err) };
+      return { data: null, error: message || (err) };
     }
   }
 
   async getCoinData(){
     console.log("Price", await this.getCoinPriceHistory("BTC"))
-    console.log("IMGURL", await this.getCoinImage("BTC"))
+    // console.log("IMGURL", await this.getCoinImage("BTC"))
 
   }
   async getCoinImage(symbol){
@@ -88,10 +89,19 @@ class ApiClient {
   }
 
   async getCoinPriceHistory(symbol){
-    const d = new Date()
-    let da = d.getFullYear()+ '-'+ d.getMonth() + '-' +  d.getDate()
-    console.log("date:", da)
-    let endpoint = '/v1/exchangerate/' + symbol + '/USD/history?time_end='+ da +'&period_id=1DAY&limit=365&apikey='
+    const date = new Date()
+    let connector = '-'
+    if (date.getMonth()+1<10){
+      console.log('month', date.getMonth())
+      connector='-0'
+    }
+    let year = date.getFullYear()
+    let month = date.getMonth()+1
+    let day = date.getDate()
+    let time_start = '' + (year-1) + connector + month + '-' +  day
+    // let time_end = '' + year + connector + month + '-' +  (day+1)
+    // let endpoint = '/v1/exchangerate/' + symbol + '/USD/history?&time_start='+time_start+ '&time_end='+ time_end +'&period_id=1DAY&limit=365&apikey='
+    let endpoint = '/v1/exchangerate/' + symbol + '/USD/history?&time_start='+time_start +'&period_id=1DAY&limit=367&apikey='
     let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
     let data=req.data
     return data

@@ -26,27 +26,20 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <div className="nav">
-          <Navbar />
-        </div>
-        <div className="container">
+      <div className="app-header">
+        <div className="hasNav">
           <Routes>
             <Route path="/login" element={<Login user={user} setUser={setUser} />} />
             <Route
               path="/tutorial"
               element={
-                Object.keys(user).length === 0 ? (
-                  <h1 style={{ marginTop: 200, textAlign: "center" }}>Not logged in</h1>
-                ) : (
-                  <Tutorial />
-                )
+                Object.keys(user).length === 0 ? <h1 style={{ textAlign: "center" }}>Not logged in</h1> : <Tutorial />
               }
             />
             <Route path="/coininfo" element={<Tradeview />} />
           </Routes>
         </div>
-      </header>
+      </div>
     </div>
   );
 }

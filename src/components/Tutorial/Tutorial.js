@@ -1,4 +1,5 @@
 import TutorialCard from "../TutorialCard/TutorialCard";
+import Navbar from "../Navbar/Navbar";
 
 const Tutorial = () => {
   let tutorials = [

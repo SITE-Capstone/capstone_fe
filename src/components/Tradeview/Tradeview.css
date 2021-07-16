@@ -1,8 +1,7 @@
 .Tradeview {
-    width: 100%;
-    max-width: 84vw;
-    display: flex;
-    flex-flow:column nowrap;
-    align-items: center;
+  width: 100%;
+  max-width: 84vw;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 }
-

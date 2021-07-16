@@ -7,7 +7,7 @@ html {
   text-align: center;
 }
 
-.App-header {
+.app-header {
   background: radial-gradient(46.41% 73.99% at 46.63% 48.05%, #20135c 0%, #140739 92.82%);
   box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.25);
   color: white;
@@ -15,7 +15,7 @@ html {
   flex-flow: row nowrap;
 }
 
-.container {
+.hasNav {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -23,8 +23,15 @@ html {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   flex-grow: 1;
+  margin-left: 190px;
 }
 
-.nav {
-  width: 190px;
+.hasNoNav {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  flex-grow: 1;
 }

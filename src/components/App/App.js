@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import apiClient from "../Services/apiClient";
 import { Routes, Route } from "react-router-dom";
 import Tutorial from "../Tutorial/Tutorial";
-import Navbar from "../Navbar/Navbar";
 import Login from "../Login/Login";
 import Tradeview from "../Tradeview/Tradeview";
 

@@ -67,10 +67,10 @@ class ApiClient {
     }
   }
 
-  async getCoinData(){
+  async getCoinData(symbol){
     // console.log("Current Price:", await this.getCoinCurrentPrice("BTC"))
     // console.log("Image Urls", await this.getCoinImage("BTC"))
-    console.log("Hourly Price History:", await this.getCoinHourlyPriceHistory("BTC"))
+    // console.log("Hourly Price History:", await this.getCoinHourlyPriceHistory("BTC"))
     // console.log("Daily Price History:", await this.getCoinDailyPriceHistory("BTC"))
     // console.log("Weekly Price History:", await this.getCoinWeeklyPriceHistory("BTC"))
     // console.log("Monthly Price History:", await this.getCoinMonthlyPriceHistory("BTC"))

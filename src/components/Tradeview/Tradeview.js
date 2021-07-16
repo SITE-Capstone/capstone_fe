@@ -13,7 +13,7 @@ function Tradeview() {
   apiClient.getCoinData()
   return (
     <div className="Tradeview">
-        <Link style={{ color: "white", fontWeight: "bold" }} to="/dashboard">Back</Link>
+        {/* <Link style={{ color: "white", fontWeight: "bold" }} to="/dashboard">Back</Link> */}
         <Chart />
         <Coinheader />
         <About />

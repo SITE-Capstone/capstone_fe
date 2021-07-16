@@ -8,7 +8,8 @@ const red = ["rgb(246,138,138,.85)", "rgb(246,138,138,.25)", "rgb(246,138,138,.1
 const green = ["rgb(138,246, 138,.85)", "rgb(138,246, 138,.25)", "rgb(138,246, 138,.15)"];
 const green2 = ["rgb(175, 243, 173,.85)", "rgb(175, 243, 173,.25)", "rgb(175, 243, 173,.15)"]; //#AFF3AD
 
-function Chart() {
+const Chart = (props) => {
+  console.log(props.name)
   let open = Data[0].rate_open;
   let close = Data[Data.length - 1].rate_open;
   let color = black;

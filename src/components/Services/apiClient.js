@@ -63,14 +63,15 @@ class ApiClient {
     } catch (err) {
       console.error({ errorResponse: err.response });
       const message = err?.response?.data?.error?.message;
-      // return { data: null, error: message || string(err) };
       return { data: null, error: message || (err) || "Error"};
     }
   }
 
   async getCoinData(){
-    console.log("Current Price:", await this.getCoinCurrentPrice("BTC"))
-    // console.log("Price History:", await this.getCoinPriceHistory("BTC"))
+    // console.log("Current Price:", await this.getCoinCurrentPrice("BTC"))
+    // console.log("Monthly Price History:", await this.getCoinMonthlyPriceHistory("BTC"))
+    console.log("Three Month Price History:", await this.getCoinThreeMonthPriceHistory("BTC"))
+    // console.log("Yearly Price History:", await this.getCoinYearlyPriceHistory("BTC"))
     // console.log("IMGURL", await this.getCoinImage("BTC"))
 
   }
@@ -89,30 +90,57 @@ class ApiClient {
     return 'https://pics.freeicons.io/uploads/icons/png/17917263711578289008-512.png'
   }
 
-  async getCoinPriceHistory(symbol){
+  async getCoinYearlyPriceHistory(symbol){
     const date = new Date()
-    let connector = '-'
-    if (date.getMonth()+1<10){
-      console.log('month', date.getMonth())
-      connector='-0'
-    }
-    let year = date.getFullYear()
-    let month = date.getMonth()+1
-    let day = date.getDate()
-    let time_start = '' + (year-1) + connector + month + '-' +  day
-    // let time_end = '' + year + connector + month + '-' +  (day+1)
-    // let endpoint = '/v1/exchangerate/' + symbol + '/USD/history?&time_start='+time_start+ '&time_end='+ time_end +'&period_id=1DAY&limit=365&apikey='
-    let endpoint = '/v1/exchangerate/' + symbol + '/USD/history?&time_start='+time_start +'&period_id=1DAY&limit=367&apikey='
+    date.setDate(date.getDate()-365)
+    let period_id='1DAY'
+    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 365, period_id)
     let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
     let data=req.data
     return data
   }
 
+  async getCoinMonthlyPriceHistory(symbol){
+    const date = new Date()
+    date.setDate(date.getDate()-30)
+    let period_id='1DAY'
+    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 30, period_id)
+    let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
+    let data=req.data
+    return data
+  }
+
+  async getCoinThreeMonthPriceHistory(symbol){
+    const date = new Date()
+    date.setDate(date.getDate()-90)
+    let period_id='1DAY'
+    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 90, period_id)
+    let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
+    let data=req.data
+    return data
+  }
+
+
+
+  getPriceHistoryEndpoint(symbol, date, limit, period_id){
+    let connector = '-'
+    if (date.getMonth()<10){
+      connector='-0'
+    }
+    let year = date.getFullYear()
+    let month = date.getMonth()+1
+    let day = date.getDate()
+    let time_start = '' + year + connector + (month) + '-' +  day
+    let endpoint = '/v1/exchangerate/' + symbol + '/USD/history?&time_start='+time_start +'&period_id='+ period_id + '&limit='+ limit+'&apikey='
+    
+    return endpoint
+  }
+
+
   async getCoinCurrentPrice(symbol){
     let endpoint = '/v1/exchangerate/'+ symbol+'/USD?apikey='
     let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
     let data=req.data
-      console.log("Found Price:", data.rate)
     return data.rate
   }  
 }

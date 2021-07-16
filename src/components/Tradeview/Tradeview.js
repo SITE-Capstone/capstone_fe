@@ -15,7 +15,9 @@ function Tradeview()  {
 
   useEffect(() => {
     const fetchChartData = async () => {
-      const { data, error } = await apiClient.getCoinMonthlyPriceHistory('BTC');
+      // const { data, error } = await apiClient.getCoinMonthlyPriceHistory('BTC');
+      const { data, error } = await apiClient.getCoinThreeMonthPriceHistory('BTC');
+      // const { data, error } = await apiClient.getCoinYearlyPriceHistory('BTC');
       console.log("Tradeview", data)
       if (data) setChartData(data);
       if (error) setError(error);
@@ -25,7 +27,7 @@ function Tradeview()  {
   return (
     <div className="Tradeview">
         <Link style={{ color: "white", fontWeight: "bold" }} to="/dashboard">Back</Link>
-        <Chart name="Test"/>
+        <Chart name="Test" data={chartData}/>
         <Coinheader />
         <About />
         <Statistics />

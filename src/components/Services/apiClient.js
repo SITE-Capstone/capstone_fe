@@ -106,7 +106,7 @@ class ApiClient {
     const date = new Date()
     date.setDate(date.getDate()-30)
     let period_id='1DAY'
-    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 30, period_id)
+    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 31, period_id)
     let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
     let data=req.data
     console.log("APICLIENTmonthly:", data)

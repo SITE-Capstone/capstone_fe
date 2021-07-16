@@ -114,9 +114,7 @@ class ApiClient {
     let data=req.data
       console.log("Found Price:", data.rate)
     return data.rate
-  }
-
-  
+  }  
 }
 
 

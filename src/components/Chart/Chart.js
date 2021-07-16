@@ -22,7 +22,7 @@ function Chart() {
   }
 
   const GlowLine = [
-    <Line dataKey="time_open" type="monotone" stroke="transparent" dot={false} />,
+    <Line dataKey="time_open" type="monotone" animationDuration="0" stroke="transparent" dot={false} />,
     <Line dataKey="rate_open" animationDuration="2200" stroke={color[0]} dot={false} />,
     <Line dataKey="rate_open" type="monotone" strokeWidth={2} animationDuration="2200" stroke={color[1]} dot={false} />,
     <Line dataKey="rate_open" type="monotone" strokeWidth={4} animationDuration="2200" stroke={color[2]} dot={false} />,
@@ -45,12 +45,18 @@ function Chart() {
 //it would display the price for each line charted for glow line
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
+    //TODO: Insert code for updating the coin label here
+    //This is to show the price at different points in time
     return (
       <div className="custom-tooltip">
         <p className="label">{`Time: ${new Date(payload[0].value).toLocaleString()}`}</p>
         <p className="label">{`Price: ${payload[1].value.toFixed(4)}`}</p>
       </div>
     );
+  }else{
+    // console.log('test')
+    // We can set current live price label here
+    // Once the user mouses away from the chart, it should show the default price
   }
   return null;
 };

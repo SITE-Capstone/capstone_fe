@@ -41,6 +41,7 @@ const Tutorial = () => {
             description={tutorial.description}
             color={tutorial.color}
             key={tutorial.id}
+            id={tutorial.id}
           />
         ))}
       </div>

@@ -52,6 +52,7 @@ const Tutorial = () => {
 
   return (
     <div className="Tutorial">
+      <Navbar />
       {tutorials.map((tutorial) => (
         <TutorialCard name={tutorial.name} description={tutorial.description} key={tutorial.id} />
       ))}

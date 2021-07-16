@@ -2,10 +2,14 @@ import { Typography } from "@material-ui/core";
 import { Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import { Icon } from "@material-ui/core";
+// import List from "@material-ui/core/List";
+// import ListItem from "@material-ui/core/ListItem";
+// import ListItemText from "@material-ui/core/ListItemText";
+// import { Icon } from "@material-ui/core";
+import { useState, useEffect } from "react";
+import AccountItems from "./AccountItems";
+import LoginItems from "./LoginItems";
+import UserItems from "./UserItems";
 
 const Navbar = () => {
   const CustomColor = withStyles({
@@ -33,7 +37,12 @@ const Navbar = () => {
       display: "flex",
       justifyContent: "center",
       marginTop: "auto",
-      marginBottom: "15vh",
+    },
+    noAccountItems: {
+      display: "flex",
+      justifyContent: "center",
+      marginTop: "auto",
+      marginBottom: "20vh",
     },
     title: {
       marginTop: 20,
@@ -58,14 +67,6 @@ const Navbar = () => {
       height: 2,
       width: "70%",
     },
-    activeListItem: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height: 60,
-      borderBottom: "2px solid #1288E8",
-      backgroundColor: "#32395E",
-    },
     listItem: {
       display: "flex",
       alignItems: "center",
@@ -82,6 +83,14 @@ const Navbar = () => {
 
   const classes = useStyles();
 
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("kurios_token")) {
+      setLoggedIn(!loggedIn);
+    }
+  }, []);
+
   return (
     <div className={classes.navbar}>
       <div className="sidebar-items">
@@ -91,24 +100,12 @@ const Navbar = () => {
         <div className={classes.container}>
           <Divider className={classes.divider} />
         </div>
-        <List component="nav">
-          <ListItem button className={classes.listItem}>
-            <Icon className={classes.icon}>home</Icon>
-            <ListItemText primary="Back to Home" />
-          </ListItem>
-          <ListItem button className={classes.activeListItem}>
-            <Icon className={classes.icon}>input</Icon>
-            <ListItemText primary="Login" />
-          </ListItem>
-          <ListItem button className={classes.listItem}>
-            <Icon className={classes.icon}>account_circle</Icon>
-            <ListItemText primary="Register" />
-          </ListItem>
-        </List>
+        {!loggedIn ? <LoginItems /> : <UserItems />}
       </div>
-      <div className={classes.accountItems}>
+      <div className={loggedIn ? classes.accountItems : classes.noAccountItems}>
         <Divider className={classes.dividerUser} />
       </div>
+      {loggedIn && <AccountItems />}
     </div>
   );
 };

@@ -69,8 +69,10 @@ class ApiClient {
 
   async getCoinData(){
     // console.log("Current Price:", await this.getCoinCurrentPrice("BTC"))
+    // console.log("Daily Price History:", await this.getCoinDailyPriceHistory("BTC"))
+    console.log("Weekly Price History:", await this.getCoinWeeklyPriceHistory("BTC"))
     // console.log("Monthly Price History:", await this.getCoinMonthlyPriceHistory("BTC"))
-    console.log("Three Month Price History:", await this.getCoinThreeMonthPriceHistory("BTC"))
+    // console.log("Three Month Price History:", await this.getCoinThreeMonthPriceHistory("BTC"))
     // console.log("Yearly Price History:", await this.getCoinYearlyPriceHistory("BTC"))
     // console.log("IMGURL", await this.getCoinImage("BTC"))
 
@@ -119,18 +121,40 @@ class ApiClient {
     let data=req.data
     return data
   }
+  async getCoinWeeklyPriceHistory(symbol){
+    const date = new Date()
+    date.setDate(date.getDate()-7)
+    let period_id='4HRS'
+    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 42, period_id)
+    let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
+    let data=req.data
+    return data
+  }
+  async getCoinDailyPriceHistory(symbol){
+    const date = new Date()
+    date.setDate(date.getDate()-1)
+    let period_id='30MIN'
+    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 48, period_id)
+    let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
+    let data=req.data
+    return data
+  }
 
 
 
   getPriceHistoryEndpoint(symbol, date, limit, period_id){
-    let connector = '-'
+    let monthConnector = '-'
+    let dayConnector = '-'
     if (date.getMonth()<10){
-      connector='-0'
+      monthConnector='-0'
+    }
+    if (date.getDate()<10){
+      dayConnector='-0'
     }
     let year = date.getFullYear()
     let month = date.getMonth()+1
     let day = date.getDate()
-    let time_start = '' + year + connector + (month) + '-' +  day
+    let time_start = '' + year + monthConnector + (month) + dayConnector +  day
     let endpoint = '/v1/exchangerate/' + symbol + '/USD/history?&time_start='+time_start +'&period_id='+ period_id + '&limit='+ limit+'&apikey='
     
     return endpoint

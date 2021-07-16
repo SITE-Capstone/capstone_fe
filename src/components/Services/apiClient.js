@@ -64,7 +64,7 @@ class ApiClient {
       console.error({ errorResponse: err.response });
       const message = err?.response?.data?.error?.message;
       // return { data: null, error: message || string(err) };
-      return { data: null, error: message || (err) };
+      return { data: null, error: message || (err) || "Error"};
     }
   }
 

@@ -51,6 +51,7 @@ class ApiClient {
 
   async coinRequest({ endpoint, method = "GET", data = {} }) {
     const url = this.coinApiBaseUrl + endpoint + API_KEY;
+    console.log("URL:",url)
 
     const headers = {
       "Content-Type": "application/json",
@@ -67,13 +68,14 @@ class ApiClient {
   }
 
   async getCoinData(){
+    console.log("Price", await this.getCoinPriceHistory("BTC"))
     console.log("IMGURL", await this.getCoinImage("BTC"))
 
   }
   async getCoinImage(symbol){
     let endpoint = '/v1/assets/icons/256?apikey='
-    let imgReq = await this.coinRequest({endpoint: endpoint, method: "GET"})
-    let data=imgReq.data
+    let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
+    let data=req.data
 
     for (const element of data){
       if (element.asset_id===symbol){
@@ -83,8 +85,19 @@ class ApiClient {
     }
     console.log("Token Not Found")
     return 'https://pics.freeicons.io/uploads/icons/png/17917263711578289008-512.png'
-
   }
+
+  async getCoinPriceHistory(symbol){
+    const d = new Date()
+    let da = d.getFullYear()+ '-'+ d.getMonth() + '-' +  d.getDate()
+    console.log("date:", da)
+    let endpoint = '/v1/exchangerate/' + symbol + '/USD/history?time_end='+ da +'&period_id=1DAY&limit=365&apikey='
+    let req = await this.coinRequest({endpoint: endpoint, method: "GET"})
+    let data=req.data
+    return data
+  }
+
+  
 }
 
 

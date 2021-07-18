@@ -1,6 +1,7 @@
 import React from "react";
 import { List, ListItem, makeStyles, ListItemText, Icon } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const LoginItems = () => {
   const useStyles = makeStyles({
@@ -24,6 +25,10 @@ const LoginItems = () => {
       height: "25.5px",
       width: "25.5px",
     },
+    links: {
+      color: "inherit",
+      textDecoration: "none",
+    },
   });
 
   const classes = useStyles();
@@ -33,14 +38,18 @@ const LoginItems = () => {
 
   return (
     <List component="nav">
-      <ListItem button className={location.pathname === "/dashboard" ? classes.activeListItem : classes.listItem}>
-        <Icon className={classes.icon}>space_dashboard</Icon>
-        <ListItemText primary="Dashboard" />
-      </ListItem>
-      <ListItem button className={location.pathname === "/tutorial" ? classes.activeListItem : classes.listItem}>
-        <Icon className={classes.icon}>auto_stories</Icon>
-        <ListItemText primary="Tutorials" />
-      </ListItem>
+      <Link to="/dashboard" className={classes.links}>
+        <ListItem button className={location.pathname === "/dashboard" ? classes.activeListItem : classes.listItem}>
+          <Icon className={classes.icon}>space_dashboard</Icon>
+          <ListItemText primary="Dashboard" />
+        </ListItem>
+      </Link>
+      <Link to="/tutorial" className={classes.links}>
+        <ListItem button className={location.pathname === "/tutorial" ? classes.activeListItem : classes.listItem}>
+          <Icon className={classes.icon}>auto_stories</Icon>
+          <ListItemText primary="Tutorials" />
+        </ListItem>
+      </Link>
       <ListItem button className={location.pathname === "/portfolio" ? classes.activeListItem : classes.listItem}>
         <Icon className={classes.icon}>payments</Icon>
         <ListItemText primary="Portfolio" />

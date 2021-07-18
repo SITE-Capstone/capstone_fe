@@ -20,7 +20,7 @@ const TutorialCard = ({ name, description, color, id }) => {
       background: color,
       boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.08)",
       width: "343px",
-      height: "190px",
+      height: "180px",
       borderRadius: "12px",
     },
     name: {
@@ -29,7 +29,7 @@ const TutorialCard = ({ name, description, color, id }) => {
       fontFamily: "Roboto",
       fontWeight: 900,
       fontSize: "16px",
-      marginBottom: "2em",
+      marginBottom: "1.2em",
       height: 30,
       display: "flex",
       alignItems: "flex-end",
@@ -42,7 +42,7 @@ const TutorialCard = ({ name, description, color, id }) => {
     image: {
       height: "74px",
       width: "74px",
-      marginLeft: 230,
+      marginLeft: 250,
     },
   });
   const classes = useStyles();

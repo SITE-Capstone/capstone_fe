@@ -6,6 +6,7 @@ import Tutorial from "../Tutorial/Tutorial";
 import Login from "../Login/Login";
 import Tradeview from "../Tradeview/Tradeview";
 import Register from "../Register/Register";
+import Dashboard from "../Dashboard/Dashboard";
 
 function App() {
   const [user, setUser] = useState({});
@@ -37,6 +38,13 @@ function App() {
                 Object.keys(user).length === 0 ? <h1 style={{ textAlign: "center" }}>Not logged in</h1> : <Tutorial />
               }
             />
+            <Route
+              path="/dashboard"
+              element={
+                Object.keys(user).length === 0 ? <h1 style={{ textAlign: "center" }}>Not logged in</h1> : <Dashboard />
+              }
+            />
+
             <Route path="/coininfo" element={<Tradeview />} />
           </Routes>
         </div>

@@ -32,6 +32,7 @@ const Navbar = () => {
       top: "0px",
       background: "linear-gradient(180.28deg, #1c0f54 -9.12%, rgba(28, 15, 84, 0) 105.86%)",
       filter: "drop-shadow(0px -5px 25px rgba(0, 3, 32, 0.5))",
+      textAlign: "center",
     },
     accountItems: {
       display: "flex",

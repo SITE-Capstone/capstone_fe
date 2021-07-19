@@ -78,6 +78,7 @@ const Dashboard = ({ user }) => {
   const [wallet, setWallet] = useState([]);
 
   console.log("userId", user.id);
+
   useEffect(() => {
     const fetchCoins = async () => {
       const { data } = await apiClient.getCoinWallet(user.id);
@@ -107,7 +108,7 @@ const Dashboard = ({ user }) => {
         </div>
         <div className={classes.info}>
           <div className={classes.balances}>
-            <Balances user={user} />
+            <Balances user={user} wallet={wallet} />
           </div>
           <div className={classes.coinGrid}>
             <Grid container spacing={7}>

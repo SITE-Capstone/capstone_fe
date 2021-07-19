@@ -41,7 +41,11 @@ function App() {
             <Route
               path="/dashboard"
               element={
-                Object.keys(user).length === 0 ? <h1 style={{ textAlign: "center" }}>Not logged in</h1> : <Dashboard />
+                Object.keys(user).length === 0 ? (
+                  <h1 style={{ textAlign: "center" }}>Not logged in</h1>
+                ) : (
+                  <Dashboard user={user} />
+                )
               }
             />
 

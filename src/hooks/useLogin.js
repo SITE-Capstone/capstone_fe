@@ -36,6 +36,7 @@ const useLogin = ({ user, setUser }) => {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
+      textAlign: "center",
     },
     title: {
       marginTop: 60,

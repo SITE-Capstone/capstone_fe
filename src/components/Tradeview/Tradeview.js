@@ -29,7 +29,7 @@ function Tradeview()  {
         <Link style={{ color: "white", fontWeight: "bold" }} to="/dashboard">Back</Link>
         <Chart symbol='BTC'/>
         <Coinheader symbol='BTC'/>
-        <About />
+        <About name='bitcoin' symbol='btc'/>
         <Statistics />
         <Exchanges />
         <News />

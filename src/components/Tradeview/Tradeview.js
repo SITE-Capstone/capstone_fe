@@ -27,7 +27,7 @@ function Tradeview()  {
   return (
     <div className="Tradeview">
         <Link style={{ color: "white", fontWeight: "bold" }} to="/dashboard">Back</Link>
-        <Chart name="Test" data={chartData}/>
+        <Chart symbol='BTC'/>
         <Coinheader />
         <About />
         <Statistics />

@@ -35,14 +35,13 @@ const GlowLine = [
 class Chart extends React.Component {
   state = {
     chartData: Data,
-
-
+    token: this.props.symbol
   }
   componentDidMount() {
-    // console.log("CHART", props.data);
-    // let Data = props.data;
-    apiClient.getCoinMonthlyPriceHistory('BTC').then(res => {
-
+    apiClient.getCoinThreeMonthPriceHistory(this.props.symbol).then(res => {
+      this.setState({
+        chartData:res.data
+      })
     })
     let open = Data[0].rate_open;
     let close = Data[Data.length - 1].rate_open;

@@ -15,13 +15,13 @@ class Coinheader extends React.Component {
     
         apiClient.getCoinCurrentPrice(this.props.symbol).then( res => {
             if (res.data===null){
-                console.log("#18 Chart JS Error:", res)
+                console.log("#18 Coinheader.js Error:", res)
                 price='Error'
                 setTimeout(
                     apiClient.getCoinCurrentPrice(this.props.symbol).then( res2 => {
                         
                         if (res2.data===null){
-                            console.log("#22 Chart JS Error:", res2)
+                            console.log("#22 Coinheader.js Error:", res2)
                             price='Error'
                         }else{
                             price= res2.data.rate.toFixed(2)

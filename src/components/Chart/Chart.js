@@ -19,11 +19,27 @@ class Chart extends React.Component {
   }
   componentDidMount() {
     apiClient.getCoinThreeMonthPriceHistory(this.props.symbol).then(res => {
-      let open = res.data[0].rate_open;
-      let close = res.data[res.data.length - 1].rate_open;
+      let chartData = Data
+      if (res.data===null){
+        console.log("#24 Chart.js Error:", res)
+        setTimeout(
+            apiClient.getCoinCurrentPrice(this.props.symbol).then( res2 => {
+                
+                if (res2.data===null){
+                    console.log("#29 Chart.js Error:", res2)
+                    chartData=Data
+                }else{
+                  chartData=res.data
+                }
+            }), 3000
+        )
+      }else{
+       chartData=res.data
+      }
+
+      let open = chartData[0].rate_open;
+      let close = chartData[chartData.length - 1].rate_open;
       color = black;
-  
-  
       if (open > close) {
         color = red;
       }
@@ -32,7 +48,7 @@ class Chart extends React.Component {
       }
     
       this.setState({
-        chartData:res.data,
+        chartData:chartData,
         token: this.props.symbol,
         color:color
       })

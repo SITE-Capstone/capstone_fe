@@ -23,7 +23,7 @@ class ApiClient {
     this.token = null;
     this.coinApiBaseUrl = "https://rest.coinapi.io";
     this.geckoBaseUrl = 'https://api.coingecko.com/api/v3'
-    this.newBaseUrl = 'https://newsapi.org'
+    this.newsBaseUrl = 'https://newsapi.org'
   }
 
   setToken(token) {
@@ -113,9 +113,7 @@ class ApiClient {
     }
   }
 
-  async getCoinData(symbol) {
 
-  }
   async getCoinImage(symbol) {
     let endpoint = "/v1/assets/icons/256?apikey=";
     let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },0);
@@ -247,21 +245,21 @@ class ApiClient {
 
 
   async newsRequest({ endpoint, method = "GET", data = {} }) {
-    const url = this.coinApiBaseUrl + endpoint + NEWS_API_KEY;
-    console.log("URL:", url);
+    const url = this.newsBaseUrl + endpoint + NEWS_API_KEY;
+    console.log("NEWSURL:", url);
 
-    const headers = {
-      "Content-Type": "application/json",
-    };
+    
 
     try {
-      const res = await axios({ url, method, data, headers });
+
+      const res = await axios({ url, method });
       let response;
+      console.log("#246 TEST",res )
       if (res.data===null){
         console.log("#80 ApiClient.js Error:", res)
         setTimeout(async function() {
-          const url2 = this.coinApiBaseUrl + endpoint + API_KEYs[Math.floor(Math.random()*8)];
-          const res2 = await axios({ url2, method, data, headers })
+          const url2 = this.newsBaseUrl + endpoint + NEWS_API_KEY;
+          const res2 = await axios({ url2, method})
             if (res2.data===null){
               console.log("#85 ApiClient.js Error:", res2)
               }else{
@@ -283,7 +281,7 @@ class ApiClient {
     let req = await this.newsRequest({ endpoint: endpoint, method: "GET" });
     return req;
   }
-
+ 
 }
 
 export default new ApiClient(process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001");

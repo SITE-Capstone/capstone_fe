@@ -267,14 +267,14 @@ const dummy = [
 
 class News extends React.Component{
     state={
-        articles: dummy,
+        articles: [],
         symbol:'Bitcoin',
        
         name:''
     }
     componentDidMount() {
         apiClient.getCoinNews(this.props.symbol).then(res => {
-            let articles = dummy
+            let articles = []
             if (res.data===null){
                 console.log("#24 News.js Error:", res)
                 setTimeout(
@@ -283,20 +283,18 @@ class News extends React.Component{
                             console.log("#29 News.js Error:", res2)
                             articles=dummy
                         }else{
-                        articles=res2
+                        articles=res2.data.articles
                       }
                   }), 3000)
             }else{
-                articles=res
+                articles=res.data.articles
             }
-            articles=dummy
             
             this.setState({
                 articles:articles,
                 symbol: 'Bitcoin',
                 name:'Bitcoin'
             })
-            console.log("#298 ARTICLES:",articles)
             console.log("#299 State:",this.state.articles)
         });
     }

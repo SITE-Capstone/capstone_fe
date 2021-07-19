@@ -55,6 +55,15 @@ class ApiClient {
     return await this.request({ endpoint: "tutorials/cards", method: "GET" });
   }
 
+  // DASHBOARD INFORMATION
+  async getCoinWallet(user_id) {
+    return await this.request({ endpoint: "wallet", method: "GET", data: user_id });
+  }
+
+  async getUsdWallet(user_id) {
+    return await this.request({ endpoint: "wallet", method: "GET", data: user_id });
+  }
+
   // COIN INFORMATION
   async coinRequest({ endpoint, method = "GET", data = {} }) {
     const url = this.coinApiBaseUrl + endpoint + API_KEY;

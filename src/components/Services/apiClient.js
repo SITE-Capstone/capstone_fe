@@ -3,6 +3,18 @@ import { string } from "prop-types";
 require("dotenv").config();
 
 const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEYs = [
+  process.env.REACT_APP_API_KEY1,
+  process.env.REACT_APP_API_KEY2,
+  process.env.REACT_APP_API_KEY3,
+  process.env.REACT_APP_API_KEY4,
+  process.env.REACT_APP_API_KEY5,
+  process.env.REACT_APP_API_KEY6,
+  process.env.REACT_APP_API_KEY7,
+  process.env.REACT_APP_API_KEY8,
+  process.env.REACT_APP_API_KEY9
+]
+let API_KEY_count=0
 
 class ApiClient {
   constructor(remoteHostUrl) {
@@ -66,8 +78,8 @@ class ApiClient {
   }
 
   // COIN INFORMATION
-  async coinRequest({ endpoint, method = "GET", data = {} }) {
-    const url = this.coinApiBaseUrl + endpoint + API_KEY;
+  async coinRequest({ endpoint, method = "GET", data = {} }, key) {
+    const url = this.coinApiBaseUrl + endpoint + API_KEYs[key];
     console.log("URL:", url);
 
     const headers = {
@@ -80,7 +92,8 @@ class ApiClient {
       if (res.data===null){
         console.log("#80 ApiClient.js Error:", res)
         setTimeout(async function() {
-          const res2 = await axios({ url, method, data, headers })
+          const url2 = this.coinApiBaseUrl + endpoint + API_KEYs[Math.floor(Math.random()*8)];
+          const res2 = await axios({ url2, method, data, headers })
             if (res2.data===null){
               console.log("#85 ApiClient.js Error:", res2)
               }else{
@@ -103,7 +116,7 @@ class ApiClient {
   }
   async getCoinImage(symbol) {
     let endpoint = "/v1/assets/icons/256?apikey=";
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },0);
     let data = req.data;
 
     for (const element of data) {
@@ -121,7 +134,7 @@ class ApiClient {
     date.setDate(date.getDate() - 365);
     let period_id = "1DAY";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 365, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },1);
     return req;
   }
 
@@ -130,7 +143,7 @@ class ApiClient {
     date.setDate(date.getDate() - 30);
     let period_id = "1DAY";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 31, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },2);
     return req;
   }
 
@@ -139,7 +152,7 @@ class ApiClient {
     date.setDate(date.getDate() - 90);
     let period_id = "1DAY";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 90, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },3);
     return req;
   }
   async getCoinWeeklyPriceHistory(symbol) {
@@ -147,7 +160,7 @@ class ApiClient {
     date.setDate(date.getDate() - 7);
     let period_id = "4HRS";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 42, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },4);
     return req;
   }
   async getCoinDailyPriceHistory(symbol) {
@@ -155,7 +168,7 @@ class ApiClient {
     date.setDate(date.getDate() - 1);
     let period_id = "30MIN";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 48, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },5);
     return req;
   }
 
@@ -164,7 +177,7 @@ class ApiClient {
     date.setTime(date.getTime() - (61 * 60 * 1000 + (date.getTime() % 60000)));
     let period_id = "1MIN";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 60, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },6);
     return req;
   }
 
@@ -200,7 +213,7 @@ class ApiClient {
 
   async getCoinCurrentPrice(symbol) {
     let endpoint = "/v1/exchangerate/" + symbol + "/USD?apikey=";
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },7);
     return req;
   }
 

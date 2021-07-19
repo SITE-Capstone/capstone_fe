@@ -13,10 +13,22 @@ class Coinheader extends React.Component {
         let url2 = `../../images/btc.png`;
         let url ="https://pics.freeicons.io/uploads/icons/png/17917263711578289008-512.png"
         let price=0.0
+    
         apiClient.getCoinCurrentPrice(this.props.symbol).then( res => {
             if (res.data===null){
                 console.log("#18 Chart JS Error:", res)
                 price='Error'
+                setTimeout(
+                    apiClient.getCoinCurrentPrice(this.props.symbol).then( res2 => {
+                        
+                        if (res2.data===null){
+                            console.log("#22 Chart JS Error:", res2)
+                            price='Error'
+                        }else{
+                            price= res2.data.rate.toFixed(2)
+                        }
+                    }), 3000
+                )
             }else{
                 price= res.data.rate.toFixed(2)
             }

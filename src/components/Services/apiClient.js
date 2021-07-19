@@ -3,6 +3,7 @@ import { string } from "prop-types";
 require("dotenv").config();
 
 const API_KEY = process.env.REACT_APP_API_KEY;
+const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY
 const API_KEYs = [
   process.env.REACT_APP_API_KEY1,
   process.env.REACT_APP_API_KEY2,
@@ -22,6 +23,7 @@ class ApiClient {
     this.token = null;
     this.coinApiBaseUrl = "https://rest.coinapi.io";
     this.geckoBaseUrl = 'https://api.coingecko.com/api/v3'
+    this.newsBaseUrl = 'https://newsapi.org'
   }
 
   setToken(token) {
@@ -111,9 +113,7 @@ class ApiClient {
     }
   }
 
-  async getCoinData(symbol) {
 
-  }
   async getCoinImage(symbol) {
     let endpoint = "/v1/assets/icons/256?apikey=";
     let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },0);
@@ -241,6 +241,47 @@ class ApiClient {
     let req = await this.geckoRequest({ endpoint: endpoint, method: "GET" });
     return req;
   }
+
+
+
+  async newsRequest({ endpoint, method = "GET", data = {} }) {
+    const url = this.newsBaseUrl + endpoint + NEWS_API_KEY;
+    console.log("NEWSURL:", url);
+
+    
+
+    try {
+
+      const res = await axios({ url, method });
+      let response;
+      console.log("#246 TEST",res )
+      if (res.data===null){
+        console.log("#80 ApiClient.js Error:", res)
+        setTimeout(async function() {
+          const url2 = this.newsBaseUrl + endpoint + NEWS_API_KEY;
+          const res2 = await axios({ url2, method})
+            if (res2.data===null){
+              console.log("#85 ApiClient.js Error:", res2)
+              }else{
+                response=res2
+              }
+        },3000)
+      }else {
+        response=res
+      }
+      return { data: response.data, error: null };
+    } catch (err) {
+      console.error({ errorResponse: err.response });
+      const message = err?.response?.data?.error?.message;
+      return { data: null, error: message || err || "Error" };
+    }
+  }
+  async getCoinNews(name) {
+    let endpoint = '/v2/everything?q='+name+'&apiKey='
+    let req = await this.newsRequest({ endpoint: endpoint, method: "GET" });
+    return req;
+  }
+ 
 }
 
 export default new ApiClient(process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001");

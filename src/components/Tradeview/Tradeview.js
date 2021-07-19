@@ -10,29 +10,17 @@ import News from "../News/News";
 import "./Tradeview.css";
 
 function Tradeview()  {
-  const [chartData, setChartData] = useState({});
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchChartData = async () => {
-      // const { data, error } = await apiClient.getCoinMonthlyPriceHistory('BTC');
-      const { data, error } = await apiClient.getCoinThreeMonthPriceHistory('BTC');
-      // const { data, error } = await apiClient.getCoinYearlyPriceHistory('BTC');
-      console.log("Tradeview", data)
-      if (data) setChartData(data);
-      if (error) setError(error);
-    };
-    fetchChartData();
-  }, []);
+
   return (
     <div className="Tradeview">
         <Link style={{ color: "white", fontWeight: "bold" }} to="/dashboard">Back</Link>
-        <Chart symbol='BTC'/>
-        <Coinheader symbol='BTC'/>
-        <About name='bitcoin' symbol='btc'/>
+        {/* <Chart symbol='BTC'/> */}
+        {/* <Coinheader symbol='BTC'/> */}
+        {/* <About name='bitcoin' symbol='btc'/> */}
         <Statistics />
         <Exchanges />
-        <News />
+        <News symbol='bitcoin'/>
     </div>
   );
 

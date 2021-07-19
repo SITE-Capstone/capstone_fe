@@ -116,7 +116,6 @@ class ApiClient {
     let period_id = "1DAY";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 365, period_id);
     let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
-    let data = req.data;
     return req;
   }
 
@@ -126,8 +125,6 @@ class ApiClient {
     let period_id = "1DAY";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 31, period_id);
     let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
-    let data = req.data;
-    console.log("APICLIENTmonthly:", data);
     return req;
   }
 
@@ -137,7 +134,6 @@ class ApiClient {
     let period_id = "1DAY";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 90, period_id);
     let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
-    let data = req.data;
     return req;
   }
   async getCoinWeeklyPriceHistory(symbol) {
@@ -146,7 +142,6 @@ class ApiClient {
     let period_id = "4HRS";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 42, period_id);
     let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
-    let data = req.data;
     return req;
   }
   async getCoinDailyPriceHistory(symbol) {
@@ -155,7 +150,6 @@ class ApiClient {
     let period_id = "30MIN";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 48, period_id);
     let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
-    let data = req.data;
     return req;
   }
 
@@ -165,7 +159,6 @@ class ApiClient {
     let period_id = "1MIN";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 60, period_id);
     let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
-    let data = req.data;
     return req;
   }
 
@@ -202,8 +195,7 @@ class ApiClient {
   async getCoinCurrentPrice(symbol) {
     let endpoint = "/v1/exchangerate/" + symbol + "/USD?apikey=";
     let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
-    let data = req.data;
-    return data.rate;
+    return req;
   }
 
   async geckoRequest({ endpoint, method = "GET", data = {} }) {

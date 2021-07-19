@@ -76,24 +76,30 @@ class ApiClient {
 
     try {
       const res = await axios({ url, method, data, headers });
-      return { data: res.data, error: null };
+      let response;
+      if (res.data===null){
+        console.log("#80 ApiClient.js Error:", res)
+        setTimeout(async function() {
+          const res2 = await axios({ url, method, data, headers })
+            if (res2.data===null){
+              console.log("#85 ApiClient.js Error:", res2)
+              }else{
+                response=res2
+              }
+        },3000)
+      }else {
+        response=res
+      }
+      return { data: response.data, error: null };
     } catch (err) {
       console.error({ errorResponse: err.response });
       const message = err?.response?.data?.error?.message;
-
       return { data: null, error: message || err || "Error" };
     }
   }
 
   async getCoinData(symbol) {
-    // console.log("Current Price:", await this.getCoinCurrentPrice("BTC"))
-    // console.log("Image Urls", await this.getCoinImage("BTC"))
-    // console.log("Hourly Price History:", await this.getCoinHourlyPriceHistory("BTC"))
-    // console.log("Daily Price History:", await this.getCoinDailyPriceHistory("BTC"))
-    // console.log("Weekly Price History:", await this.getCoinWeeklyPriceHistory("BTC"))
-    // console.log("Monthly Price History:", await this.getCoinMonthlyPriceHistory("BTC"))
-    // console.log("Three Month Price History:", await this.getCoinThreeMonthPriceHistory("BTC"))
-    // console.log("Yearly Price History:", await this.getCoinYearlyPriceHistory("BTC"))
+
   }
   async getCoinImage(symbol) {
     let endpoint = "/v1/assets/icons/256?apikey=";

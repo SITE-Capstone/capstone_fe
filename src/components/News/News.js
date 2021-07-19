@@ -1,5 +1,6 @@
 import React from 'react'
 import Article from '../Article/Article'
+import apiClient from '../Services/apiClient'
 
 const dummy = [
       {
@@ -262,21 +263,54 @@ const dummy = [
         "publishedAt": "2021-06-18T20:10:00Z",
         "content": "June 18 (Reuters) - Bitcoin dropped 7% to $35,431.15 at 20:02 GMT on Friday, losing $2,666.53 from its previous close.\r\nBitcoin, the world's biggest and best-known cryptocurrency, is down 45.4% from … [+295 chars]"
       }
-    ]
+    ];
 
 class News extends React.Component{
     state={
-        articles: [],
-        symbol:'',
+        articles: dummy,
+        symbol:'Bitcoin',
+       
         name:''
     }
     componentDidMount() {
-
+        apiClient.getCoinNews(this.props.symbol).then(res => {
+            let articles = dummy
+            if (res.data===null){
+                console.log("#24 News.js Error:", res)
+                setTimeout(
+                    apiClient.getCoinNews(this.props.symbol).then( res2 => {
+                        if (res2.data===null){
+                            console.log("#29 News.js Error:", res2)
+                            articles=dummy
+                        }else{
+                        articles=res2
+                      }
+                  }), 3000)
+            }else{
+                articles=res
+            }
+            articles=dummy
+            
+            this.setState({
+                articles:articles,
+                symbol: 'Bitcoin',
+                name:'Bitcoin'
+            })
+            console.log("#298 ARTICLES:",articles)
+            console.log("#299 State:",this.state.articles)
+        });
     }
+    
+
     render(){
+        const newsItems = this.state.articles.map((article,idx) =>
+        <Article source ={article.source.name} headline={article.title} 
+        url={article.url} urlToImage={article.urlToImage} publishedAt={article.publishedAt} 
+        key={idx}/>
+        );
         return (
             <div>
-                
+                {newsItems}
             </div>
         )
     }

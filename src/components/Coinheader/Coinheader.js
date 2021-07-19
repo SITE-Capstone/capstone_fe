@@ -10,7 +10,6 @@ class Coinheader extends React.Component {
     }
     
     componentDidMount() {
-        let url2 = `../../images/btc.png`;
         let url ="https://pics.freeicons.io/uploads/icons/png/17917263711578289008-512.png"
         let price=0.0
     

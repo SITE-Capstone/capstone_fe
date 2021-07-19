@@ -9,6 +9,7 @@ class ApiClient {
     this.remoteHostUrl = remoteHostUrl;
     this.token = null;
     this.coinApiBaseUrl = "https://rest.coinapi.io";
+    this.geckoBaseUrl = 'https://api.coingecko.com/api/v3'
   }
 
   setToken(token) {
@@ -203,6 +204,31 @@ class ApiClient {
     let req = await this.coinRequest({ endpoint: endpoint, method: "GET" });
     let data = req.data;
     return data.rate;
+  }
+
+  async geckoRequest({ endpoint, method = "GET", data = {} }) {
+    const url = this.geckoBaseUrl + endpoint;
+    console.log("URL:", url);
+
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    try {
+      const res = await axios({ url, method, data, headers });
+      return { data: res.data, error: null };
+    } catch (err) {
+      console.error({ errorResponse: err.response });
+      const message = err?.response?.data?.error?.message;
+
+      return { data: null, error: message || err || "Error" };
+    }
+  }
+
+  async getCoinDescription(name) {
+    let endpoint = '/coins/'+ name +'?localization=en&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false'
+    let req = await this.geckoRequest({ endpoint: endpoint, method: "GET" });
+    return req;
   }
 }
 

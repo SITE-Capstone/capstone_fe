@@ -23,7 +23,7 @@ const Balances = ({ user }) => {
     fetchUsd();
   }, []);
 
-  const COLORS = ["red", "blue", "yellow", "green", "pink", "purple"];
+  const COLORS = ["#484392", "#439284", "#6162D6", "#EB8338", "rgb(146, 67, 138)", "#D66168"];
 
   return (
     <div className="Balances">

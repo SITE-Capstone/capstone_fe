@@ -2,9 +2,27 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
 }
 
 .Coinheader img{
-    width: 30px;
+    width: 50px;
+}
+.Coinheader #details{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.Coinheader .symbol, .price{
+    margin-left: .5em;
+    font-size: 28px;
+}
+.symbol {
+    font-weight: bold;
+}
+
+.exchange-button {
+    margin-right:.5em 
 }

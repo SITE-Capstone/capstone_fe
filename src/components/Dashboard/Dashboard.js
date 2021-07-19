@@ -7,6 +7,7 @@ import CoinCard from "../CoinCard/CoinCard";
 import { useState, useEffect } from "react";
 import apiClient from "../Services/apiClient";
 import { Grid } from "@material-ui/core";
+import Balances from "../Balances/Balances";
 
 const Dashboard = ({ user }) => {
   const useStyles = makeStyles({
@@ -105,7 +106,9 @@ const Dashboard = ({ user }) => {
           } ${today.getDate()}, ${today.getFullYear()}`}</Typography>
         </div>
         <div className={classes.info}>
-          <div className={classes.balances}></div>
+          <div className={classes.balances}>
+            <Balances user={user} />
+          </div>
           <div className={classes.coinGrid}>
             <Grid container spacing={7}>
               {wallet.map((coin) => (

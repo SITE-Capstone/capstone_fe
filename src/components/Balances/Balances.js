@@ -78,7 +78,7 @@ const Balances = ({ user, wallet }) => {
   }
 
   console.log("coinWallet", totalCoinWalletInUsd);
-  const COLORS = ["#484392", "#439284", "#6162D6", "#EB8338", "rgb(146, 67, 138)", "#D66168"];
+  const COLORS = ["#4E93F5", "#17ECC5", "#F5FBFE", "#FAD679", "#F08FE1", "#D66168"];
 
   const useStyles = makeStyles({
     balances: {
@@ -90,13 +90,41 @@ const Balances = ({ user, wallet }) => {
       marginTop: 110,
     },
     data: {
-      width: "30vw",
+      width: "12vw",
+      height: "5vh",
       display: "flex",
+      alignItems: "center",
       justifyContent: "space-between",
     },
     usd: {
       marginTop: 50,
       marginBottom: 100,
+    },
+    col: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    percents: {
+      width: "30vw",
+      display: "flex",
+      justifyContent: "space-between",
+    },
+    circle: {
+      borderRadius: "50%",
+      height: 10,
+      width: 10,
+      background: "#484392",
+    },
+    name: {
+      display: "flex",
+      justifyContent: "space-around",
+      alignItems: "center",
+      width: "8rem",
+    },
+    coin: {
+      width: "5rem",
     },
   });
 
@@ -125,43 +153,91 @@ const Balances = ({ user, wallet }) => {
       <Typography variant="h4" className={classes.usd}>
         Balance USD: ${balance}
       </Typography>
-      <div className="prices">
-        <div className="col">
+      <div className={classes.percents}>
+        <div className={classes.col}>
           <div className={classes.data}>
-            <Typography variant="body1">Bitcoin</Typography>
-            <Typography variant="body1">
+            <div className={classes.name}>
+              <div
+                className={classes.circle}
+                style={{ backgroundColor: "#4E93F5", filter: "drop-shadow(0px 4px 4px rgba(0, 151, 232, 0.8))" }}
+              ></div>
+              <Typography variant="body1" className={classes.coin} style={{ fontSize: "1.1rem" }}>
+                Bitcoin
+              </Typography>
+            </div>
+            <Typography variant="body1" style={{ color: "#4E93F5", fontSize: "1.1rem" }}>
               {wallet.length > 0 && (((wallet[0].amount * coinPrice[0]) / totalCoinWalletInUsd) * 100).toFixed(2) + "%"}
             </Typography>
           </div>
           <div className={classes.data}>
-            <Typography variant="body1">Cardano</Typography>
-            <Typography variant="body1">
+            <div className={classes.name}>
+              <div
+                className={classes.circle}
+                style={{ backgroundColor: "#17ECC5", filter: "drop-shadow(0px 4px 4px rgba(23, 236, 197, 0.8))" }}
+              ></div>
+              <Typography variant="body1" className={classes.coin} style={{ fontSize: "1.1rem" }}>
+                Cardano
+              </Typography>
+            </div>
+            <Typography variant="body1" style={{ color: "#17ECC5", fontSize: "1.1rem" }}>
               {wallet.length > 0 && (((wallet[1].amount * coinPrice[1]) / totalCoinWalletInUsd) * 100).toFixed(2) + "%"}
             </Typography>
           </div>
           <div className={classes.data}>
-            <Typography variant="body1">Ethereum</Typography>
-            <Typography variant="body1">
+            <div className={classes.name}>
+              <div
+                className={classes.circle}
+                style={{ backgroundColor: "#F5FBFE", filter: "drop-shadow(0px 4px 4px rgba(138, 83, 255, 0.8))" }}
+              ></div>
+              <Typography variant="body1" className={classes.coin} style={{ fontSize: "1.1rem" }}>
+                Ethereum
+              </Typography>
+            </div>
+            <Typography variant="body1" style={{ color: "#F5FBFE", fontSize: "1.1rem" }}>
               {wallet.length > 0 && (((wallet[2].amount * coinPrice[2]) / totalCoinWalletInUsd) * 100).toFixed(2) + "%"}
             </Typography>
           </div>
         </div>
-        <div className="col">
+        <div className={classes.col}>
           <div className={classes.data}>
-            <Typography variant="body1">Dogecoin</Typography>
-            <Typography variant="body1">
+            <div className={classes.name}>
+              <div
+                className={classes.circle}
+                style={{ backgroundColor: "#FAD679", filter: "drop-shadow(0px 4px 4px rgba(250, 214, 121, 0.8))" }}
+              ></div>
+              <Typography variant="body1" className={classes.coin} style={{ fontSize: "1.1rem" }}>
+                Dogecoin
+              </Typography>
+            </div>
+            <Typography variant="body1" style={{ color: "#FAD679", fontSize: "1.1rem" }}>
               {wallet.length > 0 && (((wallet[3].amount * coinPrice[3]) / totalCoinWalletInUsd) * 100).toFixed(2) + "%"}
             </Typography>
           </div>
           <div className={classes.data}>
-            <Typography variant="body1">Polkadot</Typography>
-            <Typography variant="body1">
+            <div className={classes.name}>
+              <div
+                className={classes.circle}
+                style={{ backgroundColor: "#F08FE1", filter: "drop-shadow(0px 4px 4px rgba(204, 71, 207, 0.8))" }}
+              ></div>
+              <Typography variant="body1" className={classes.coin} style={{ fontSize: "1.1rem" }}>
+                Polkadot
+              </Typography>
+            </div>
+            <Typography variant="body1" style={{ color: "#F08FE1", fontSize: "1.1rem" }}>
               {wallet.length > 0 && (((wallet[4].amount * coinPrice[4]) / totalCoinWalletInUsd) * 100).toFixed(2) + "%"}
             </Typography>
           </div>
           <div className={classes.data}>
-            <Typography variant="body1">Monero</Typography>
-            <Typography variant="body1">
+            <div className={classes.name}>
+              <div
+                className={classes.circle}
+                style={{ backgroundColor: "#D66168", filter: "drop-shadow(0px 4px 4px rgba(214, 97, 104, 0.8))" }}
+              ></div>
+              <Typography variant="body1" className={classes.coin} style={{ fontSize: "1.1rem" }}>
+                Monero
+              </Typography>
+            </div>
+            <Typography variant="body1" style={{ color: "#D66168", fontSize: "1.1rem" }}>
               {wallet.length > 0 && (((wallet[5].amount * coinPrice[5]) / totalCoinWalletInUsd) * 100).toFixed(2) + "%"}
             </Typography>
           </div>

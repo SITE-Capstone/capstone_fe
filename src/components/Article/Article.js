@@ -1,5 +1,4 @@
 import React from "react";
-import "./Article.css";
 import { makeStyles, Typography, Divider } from "@material-ui/core";
 
 function Article(props) {

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./About.css";
 import apiClient from "../Services/apiClient";
 import { Link } from "react-router-dom";
 import { Typography, makeStyles, Button } from "@material-ui/core";

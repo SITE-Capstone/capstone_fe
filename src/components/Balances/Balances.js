@@ -73,6 +73,10 @@ const Balances = ({ user, wallet }) => {
       wallet[3].amount * coinPrice[3] +
       wallet[4].amount * coinPrice[4] +
       wallet[5].amount * coinPrice[5];
+
+    if (totalCoinWalletInUsd === 0) {
+      totalCoinWalletInUsd = 10000;
+    }
   } else {
     totalCoinWalletInUsd = 10000;
   }

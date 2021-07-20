@@ -119,7 +119,6 @@ const Balances = ({ user, wallet }) => {
       borderRadius: "50%",
       height: 10,
       width: 10,
-      background: "#484392",
     },
     name: {
       display: "flex",

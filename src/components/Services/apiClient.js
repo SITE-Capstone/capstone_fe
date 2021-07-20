@@ -3,7 +3,7 @@ import { string } from "prop-types";
 require("dotenv").config();
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY
+const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY;
 const API_KEYs = [
   process.env.REACT_APP_API_KEY1,
   process.env.REACT_APP_API_KEY2,
@@ -13,17 +13,17 @@ const API_KEYs = [
   process.env.REACT_APP_API_KEY6,
   process.env.REACT_APP_API_KEY7,
   process.env.REACT_APP_API_KEY8,
-  process.env.REACT_APP_API_KEY9
-]
-let API_KEY_count=0
+  process.env.REACT_APP_API_KEY9,
+];
+let API_KEY_count = 0;
 
 class ApiClient {
   constructor(remoteHostUrl) {
     this.remoteHostUrl = remoteHostUrl;
     this.token = null;
     this.coinApiBaseUrl = "https://rest.coinapi.io";
-    this.geckoBaseUrl = 'https://api.coingecko.com/api/v3'
-    this.newsBaseUrl = 'https://newsapi.org'
+    this.geckoBaseUrl = "https://api.coingecko.com/api/v3";
+    this.newsBaseUrl = "https://newsapi.org";
   }
 
   setToken(token) {
@@ -91,19 +91,19 @@ class ApiClient {
     try {
       const res = await axios({ url, method, data, headers });
       let response;
-      if (res.data===null){
-        console.log("#80 ApiClient.js Error:", res)
-        setTimeout(async function() {
-          const url2 = this.coinApiBaseUrl + endpoint + API_KEYs[Math.floor(Math.random()*8)];
-          const res2 = await axios({ url2, method, data, headers })
-            if (res2.data===null){
-              console.log("#85 ApiClient.js Error:", res2)
-              }else{
-                response=res2
-              }
-        },3000)
-      }else {
-        response=res
+      if (res.data === null) {
+        console.log("#80 ApiClient.js Error:", res);
+        setTimeout(async function () {
+          const url2 = this.coinApiBaseUrl + endpoint + API_KEYs[Math.floor(Math.random() * 8)];
+          const res2 = await axios({ url2, method, data, headers });
+          if (res2.data === null) {
+            console.log("#85 ApiClient.js Error:", res2);
+          } else {
+            response = res2;
+          }
+        }, 3000);
+      } else {
+        response = res;
       }
       return { data: response.data, error: null };
     } catch (err) {
@@ -113,10 +113,9 @@ class ApiClient {
     }
   }
 
-
   async getCoinImage(symbol) {
     let endpoint = "/v1/assets/icons/256?apikey=";
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },0);
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 0);
     let data = req.data;
 
     for (const element of data) {
@@ -134,7 +133,7 @@ class ApiClient {
     date.setDate(date.getDate() - 365);
     let period_id = "1DAY";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 365, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },1);
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 1);
     return req;
   }
 
@@ -143,7 +142,7 @@ class ApiClient {
     date.setDate(date.getDate() - 30);
     let period_id = "1DAY";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 31, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },2);
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 2);
     return req;
   }
 
@@ -152,7 +151,7 @@ class ApiClient {
     date.setDate(date.getDate() - 90);
     let period_id = "1DAY";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 90, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },3);
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 3);
     return req;
   }
   async getCoinWeeklyPriceHistory(symbol) {
@@ -160,7 +159,7 @@ class ApiClient {
     date.setDate(date.getDate() - 7);
     let period_id = "4HRS";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 42, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },4);
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 4);
     return req;
   }
   async getCoinDailyPriceHistory(symbol) {
@@ -168,7 +167,7 @@ class ApiClient {
     date.setDate(date.getDate() - 1);
     let period_id = "30MIN";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 48, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },5);
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 5);
     return req;
   }
 
@@ -177,7 +176,7 @@ class ApiClient {
     date.setTime(date.getTime() - (61 * 60 * 1000 + (date.getTime() % 60000)));
     let period_id = "1MIN";
     let endpoint = this.getPriceHistoryEndpoint(symbol, date, 60, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },6);
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 6);
     return req;
   }
 
@@ -213,7 +212,7 @@ class ApiClient {
 
   async getCoinCurrentPrice(symbol) {
     let endpoint = "/v1/exchangerate/" + symbol + "/USD?apikey=";
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" },7);
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 7);
     return req;
   }
 
@@ -237,37 +236,35 @@ class ApiClient {
   }
 
   async getCoinDescription(name) {
-    let endpoint = '/coins/'+ name +'?localization=en&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false'
+    let endpoint =
+      "/coins/" +
+      name +
+      "?localization=en&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false";
     let req = await this.geckoRequest({ endpoint: endpoint, method: "GET" });
     return req;
   }
-
-
 
   async newsRequest({ endpoint, method = "GET", data = {} }) {
     const url = this.newsBaseUrl + endpoint + NEWS_API_KEY;
     console.log("NEWSURL:", url);
 
-    
-
     try {
-
       const res = await axios({ url, method });
       let response;
-      console.log("#246 TEST",res )
-      if (res.data===null){
-        console.log("#80 ApiClient.js Error:", res)
-        setTimeout(async function() {
+      console.log("#246 TEST", res);
+      if (res.data === null) {
+        console.log("#80 ApiClient.js Error:", res);
+        setTimeout(async function () {
           const url2 = this.newsBaseUrl + endpoint + NEWS_API_KEY;
-          const res2 = await axios({ url2, method})
-            if (res2.data===null){
-              console.log("#85 ApiClient.js Error:", res2)
-              }else{
-                response=res2
-              }
-        },3000)
-      }else {
-        response=res
+          const res2 = await axios({ url2, method });
+          if (res2.data === null) {
+            console.log("#85 ApiClient.js Error:", res2);
+          } else {
+            response = res2;
+          }
+        }, 3000);
+      } else {
+        response = res;
       }
       return { data: response.data, error: null };
     } catch (err) {
@@ -277,11 +274,12 @@ class ApiClient {
     }
   }
   async getCoinNews(name) {
+
     let endpoint = '/v2/everything?q='+name+'&pageSize=5&apiKey='
+    
     let req = await this.newsRequest({ endpoint: endpoint, method: "GET" });
     return req;
   }
- 
 }
 
 export default new ApiClient(process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001");

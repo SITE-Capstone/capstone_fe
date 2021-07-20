@@ -1,4 +1,5 @@
-import React from "react";
+import { makeStyles, Typography } from "@material-ui/core";
+import { useState, useEffect } from "react";
 import Article from "../Article/Article";
 import apiClient from "../Services/apiClient";
 
@@ -304,19 +305,19 @@ const dummy = [
   },
 ];
 
-class News extends React.Component {
-  state = {
+function News({ symbol, name }) {
+  const [news, setNews] = useState({
     articles: [],
     symbol: "Bitcoin",
     name: "",
-  };
-  componentDidMount() {
-    apiClient.getCoinNews(this.props.symbol).then((res) => {
+  });
+  useEffect(() => {
+    apiClient.getCoinNews(symbol).then((res) => {
       let articles = [];
       if (res.data === null) {
         console.log("#24 News.js Error:", res);
         setTimeout(
-          apiClient.getCoinNews(this.props.symbol).then((res2) => {
+          apiClient.getCoinNews(symbol).then((res2) => {
             if (res2.data === null) {
               console.log("#29 News.js Error:", res2);
               articles = dummy;
@@ -330,28 +331,26 @@ class News extends React.Component {
         articles = res.data.articles;
       }
 
-      this.setState({
+      setNews({
         articles: articles,
-        symbol: "Bitcoin",
-        name: "Bitcoin",
+        symbol: symbol,
+        name: name,
       });
-      console.log("#299 State:", this.state.articles);
+      console.log("#299 State:", news.articles);
     });
-  }
+  }, []);
 
-  render() {
-    const newsItems = this.state.articles.map((article, idx) => (
-      <Article
-        source={article.source.name}
-        headline={article.title}
-        url={article.url}
-        urlToImage={article.urlToImage}
-        publishedAt={article.publishedAt}
-        key={idx}
-      />
-    ));
-    return <div>{newsItems}</div>;
-  }
+  const newsItems = news.articles.map((article, idx) => (
+    <Article
+      source={article.source.name}
+      headline={article.title}
+      url={article.url}
+      urlToImage={article.urlToImage}
+      publishedAt={article.publishedAt}
+      key={idx}
+    />
+  ));
+  return <div>{newsItems}</div>;
 }
 
 export default News;

@@ -83,6 +83,9 @@ function About({ symbol, name }) {
           <Button className={classes.btn}>Start Lesson</Button>
         </div>
       </div>
+      <Typography variant="h3" style={{ alignSelf: "flex-start" }}>
+        Recent News
+      </Typography>
     </div>
   );
 }

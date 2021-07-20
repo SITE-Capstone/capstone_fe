@@ -20,7 +20,7 @@ function Tradeview() {
       <About name="bitcoin" symbol="btc" />
       <Statistics />
       <Exchanges />
-      <News symbol="bitcoin" />
+      <News symbol="BTC" name="Bitcoin" />
     </div>
   );
 }

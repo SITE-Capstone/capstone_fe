@@ -274,7 +274,9 @@ class ApiClient {
     }
   }
   async getCoinNews(name) {
-    let endpoint = "/v2/everything?q=" + name + "&apiKey=";
+
+    let endpoint = '/v2/everything?q='+name+'&pageSize=5&apiKey='
+    
     let req = await this.newsRequest({ endpoint: endpoint, method: "GET" });
     return req;
   }

@@ -78,7 +78,7 @@ const Balances = ({ user, wallet }) => {
   }
 
   console.log("coinWallet", totalCoinWalletInUsd);
-  const COLORS = ["#484392", "#439284", "#6162D6", "#EB8338", "rgb(146, 67, 138)", "#D66168"];
+  const COLORS = ["#4E93F5", "#17ECC5", "#F5FBFE", "#FAD679", "#F08FE1", "#D66168"];
 
   const useStyles = makeStyles({
     balances: {

@@ -11,8 +11,11 @@ function About({ symbol, name }) {
   });
 
   useEffect(() => {
+
+
     apiClient.getCoinDescription(name.toLowerCase()).then((res) => {
-      let html = res.data.description.en;
+      let html = res.data.description.en
+
       let div = document.createElement("div");
       div.innerHTML = html;
       let description = div.textContent || div.innerText || "";

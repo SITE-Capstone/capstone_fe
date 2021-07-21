@@ -8,6 +8,8 @@ import Tradeview from "../Tradeview/Tradeview";
 import Register from "../Register/Register";
 import Dashboard from "../Dashboard/Dashboard";
 import CoinTutorial from "../CoinTutorial/CoinTutorial";
+import Buy from "../Buy/Buy"
+import Sell from "../Sell/Sell"
 
 function App() {
   const [user, setUser] = useState({});
@@ -65,10 +67,11 @@ function App() {
 
             <Route path="/coin/:symbol" element={<Tradeview symbol={coinSymbol} name={coinName} />} />
 
-            <Route
-              path="/tutorial/:id"
-              element={<CoinTutorial videoUrl={videoUrl} name={tutorialName} desc={tutorialDesc} />}
-            />
+            <Route path="/coin/:symbol/buy" element={<Buy symbol={coinSymbol} name={coinName} />} />
+            <Route path="/coin/:symbol/sell" element={<Sell symbol={coinSymbol} name={coinName} />} />
+            <Route path="/tutorial/:id" element={<CoinTutorial videoUrl={videoUrl} name={tutorialName} desc={tutorialDesc} />} />
+
+
           </Routes>
         </div>
       </div>

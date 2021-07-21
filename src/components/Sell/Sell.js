@@ -5,9 +5,9 @@ import apiClient from "../Services/apiClient";
 import useExchange from "../../hooks/useExchange"
 import { useState, useEffect } from "react";
 
-const Buy = ({ symbol }) => {
+const Sell = ({ symbol }) => {
   // custom hook handles all login logic
-  const type=0
+  const type=1
   const [conversion, setConversion] = useState({});
   const { handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes } = useExchange({ symbol, conversion, setConversion,type });
   const [state, setState] = useState({
@@ -20,12 +20,12 @@ const Buy = ({ symbol }) => {
 
     apiClient.getCoinCurrentPrice(state.symbol).then((res) => {
       if (res.data === null) {
-        console.log("#21 Buy.js Error:", res);
+        console.log("#21 Sell.js Error:", res);
         price = "Error";
         setTimeout(
           apiClient.getCoinCurrentPrice(state.symbol).then((res2) => {
             if (res2.data === null) {
-              console.log("#22 Buy.js Error:", res2);
+              console.log("#22 Sell.js Error:", res2);
               price = "Error";
             } else {
               price = res2.data.rate.toFixed(2);
@@ -44,10 +44,10 @@ const Buy = ({ symbol }) => {
   }, []);
 
   return (
-    <div className="Buy">
+    <div className="Sell">
       <div className={classes.card}>
         <Typography variant="h3" className={classes.title}>
-          Buy {state.symbol}
+          Sell {state.symbol}
         </Typography>
 
         {errors.form && <span className={classes.error}>{errors.form}</span>}
@@ -66,7 +66,7 @@ const Buy = ({ symbol }) => {
               className={classes.input}
             />
             <Button disabled={isProcessing} onClick={handleOnSubmit} variant="contained" className={classes.loginBtn}>
-              {isProcessing ? "Loading..." : "Buy"}
+              {isProcessing ? "Loading..." : "Sell"}
             </Button>
           </form>
         </div>
@@ -84,4 +84,4 @@ const Buy = ({ symbol }) => {
   );
 };
 
-export default Buy;
+export default Sell;

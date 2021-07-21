@@ -49,7 +49,7 @@ function App() {
               }
             />
 
-            <Route path="/coin/btc" element={<Tradeview />} />
+            <Route path="/coin/btc" user={user} element={<Tradeview />} />
           </Routes>
         </div>
       </div>

@@ -53,7 +53,7 @@ function App() {
             />
 
             <Route path="/coin/:symbol" element={<Tradeview symbol={coinSymbol} name={coinName} />} />
-            <Route path="/tutorial/:name" element={<CoinTutorial />} />
+            <Route path="/tutorial/:id" element={<CoinTutorial />} />
           </Routes>
         </div>
       </div>

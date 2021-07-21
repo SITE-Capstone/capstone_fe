@@ -19,6 +19,9 @@ const LoginItems = () => {
       justifyContent: "center",
       height: 60,
       color: "#616A8B",
+      "&:hover $child": {
+        fill: "red",
+      },
     },
     icon: {
       marginRight: 16,
@@ -50,10 +53,10 @@ const LoginItems = () => {
           <ListItemText primary="Tutorials" />
         </ListItem>
       </Link>
-      <ListItem button className={location.pathname === "/portfolio" ? classes.activeListItem : classes.listItem}>
+      {/* <ListItem button className={location.pathname === "/portfolio" ? classes.activeListItem : classes.listItem}>
         <Icon className={classes.icon}>payments</Icon>
         <ListItemText primary="Portfolio" />
-      </ListItem>
+      </ListItem> */}
     </List>
   );
 };

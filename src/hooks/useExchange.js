@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import apiClient from "../components/Services/apiClient";
 
-const useExchange = ({ symbol, conversion, setConversion }) => {
+const useExchange = ({ symbol, conversion, setConversion,type }) => {
   const useStyles = makeStyles({
     input: {
       color: "black",
@@ -94,19 +94,34 @@ const useExchange = ({ symbol, conversion, setConversion }) => {
         }    
         console.log("Price", price)
         console.log("SYmbol", symbol)
+        let order=''
         if (price!==0 && parseInt(form.quantity)){
-            let order={
-                "buying_id": symbol.toLowerCase(),
-                "selling_id": "usd",
-                "quantity": parseInt(form.quantity),
-                "type":0,
-                "price":price
+            if(type===0){
+                order={
+                    "buying_id": symbol.toLowerCase(),
+                    "selling_id": "usd",
+                    "quantity": parseInt(form.quantity),
+                    "type":type,
+                    "price":price
+                }
             }
+            else{
+                order={
+                    "buying_id": "usd",
+                    "selling_id": symbol.toLowerCase(),
+                    "quantity": parseInt(form.quantity),
+                    "type":type,
+                    "price":price
+                }
+
+            }
+
             console.log("order",order)
             apiClient.exchangeCurrencies(order).then((orderRes) =>{
                 if (orderRes.data === null) {
                     console.log("#18 useExchange.js Error:", orderRes);
                     setErrors((e) => ({ ...e, form: orderRes.error }));
+                    setIsProcessing(false);
                 }
                 else{
                     setIsProcessing(false);

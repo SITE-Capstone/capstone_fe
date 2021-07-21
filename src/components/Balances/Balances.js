@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core";
 const Balances = ({ user, wallet }) => {
   const [balance, setBalance] = useState([]);
   const [coinPrice, setCoinPrice] = useState([]);
+  const portfolio = [];
 
   useEffect(() => {
     const fetchBalances = async () => {
@@ -14,11 +15,12 @@ const Balances = ({ user, wallet }) => {
       console.log("usd", data.Wallet.usd);
       const result = data.Wallet.usd;
       if (data) {
-        setBalance(result.toLocaleString());
+        setBalance(result);
       }
 
       const coins = [];
       const prices = [];
+
       wallet.map((coin) => {
         coins.push(coin.symbol);
       });
@@ -74,12 +76,19 @@ const Balances = ({ user, wallet }) => {
       wallet[4].amount * coinPrice[4] +
       wallet[5].amount * coinPrice[5];
 
+    wallet.map((entry, index) => {
+      console.log("index", coinPrice[index]);
+      const obj = { symbol: entry.symbol, amount: entry.amount * coinPrice[index] };
+      portfolio.push(obj);
+    });
     if (totalCoinWalletInUsd === 0) {
-      totalCoinWalletInUsd = 10000;
+      totalCoinWalletInUsd = 0;
     }
   } else {
     totalCoinWalletInUsd = 10000;
   }
+
+  console.log("portfolio", portfolio);
 
   console.log("coinWallet", totalCoinWalletInUsd);
   const COLORS = ["#4E93F5", "#17ECC5", "#F5FBFE", "#FAD679", "#F08FE1", "#D66168"];
@@ -101,8 +110,8 @@ const Balances = ({ user, wallet }) => {
       justifyContent: "space-between",
     },
     usd: {
-      marginTop: 50,
-      marginBottom: 100,
+      marginTop: 20,
+      marginBottom: 70,
     },
     col: {
       display: "flex",
@@ -129,18 +138,23 @@ const Balances = ({ user, wallet }) => {
     coin: {
       width: "5rem",
     },
+    portfolio: {
+      marginTop: 50,
+    },
   });
 
   const classes = useStyles();
+
+  console.log("bal", balance);
 
   return (
     <div className={classes.balances}>
       <div className={classes.chart}>
         <PieChart width={730} height={250}>
           <Pie
-            data={wallet}
+            data={portfolio}
             dataKey="amount"
-            nameKey="name"
+            nameKey="symbol"
             cx="50%"
             cy="50%"
             outerRadius={100}
@@ -153,8 +167,11 @@ const Balances = ({ user, wallet }) => {
           </Pie>
         </PieChart>
       </div>
-      <Typography variant="h4" className={classes.usd}>
-        Balance USD: ${balance}
+      <Typography variant="h4" className={classes.portfolio}>
+        Total Portfolio: ${(totalCoinWalletInUsd + balance).toLocaleString()}
+      </Typography>
+      <Typography variant="h5" className={classes.usd}>
+        Buying Power: ${balance.toLocaleString()}
       </Typography>
       <div className={classes.percents}>
         <div className={classes.col}>

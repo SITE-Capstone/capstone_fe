@@ -76,7 +76,7 @@ const useExchange = ({ symbol, conversion, setConversion,type }) => {
     let price = 0
     apiClient.getCoinCurrentPrice(symbol).then((res) => {
         if (res.data === null) {
-          console.log("#18 Coinheader.js Error:", res);
+          console.log("#18  Coinheader.js Error:", res);
           setErrors((e) => ({ ...e, form: res.error }));
           setTimeout(
             apiClient.getCoinCurrentPrice(symbol).then((res2) => {

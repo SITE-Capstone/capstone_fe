@@ -79,6 +79,10 @@ class ApiClient {
     return await this.request({ endpoint: "wallet", method: "GET", data: user_id });
   }
 
+  async exchangeCurrencies(order){
+    return await this.request({ endpoint: "wallet/exchange", method: "PUT", data: order })
+  }
+
   // COIN INFORMATION
   async coinRequest({ endpoint, method = "GET", data = {} }, key) {
     const url = this.coinApiBaseUrl + endpoint + API_KEYs[key];

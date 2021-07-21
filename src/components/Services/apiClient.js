@@ -216,7 +216,7 @@ class ApiClient {
 
   async getCoinCurrentPrice(symbol) {
     let endpoint = "/v1/exchangerate/" + symbol + "/USD?apikey=";
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 8);
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 7);
     return req;
   }
 

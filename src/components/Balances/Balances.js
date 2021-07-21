@@ -12,26 +12,25 @@ const Balances = ({ user, wallet }) => {
   useEffect(() => {
     const fetchBalances = async () => {
       const { data } = await apiClient.getUsdWallet(user.id);
-      console.log("usd", data.Wallet.usd);
       const result = data.Wallet.usd;
       if (data) {
         setBalance(result);
       }
 
-      const coins = [];
+      // const coins = [];
       const prices = [];
 
-      wallet.map((coin) => {
-        coins.push(coin.symbol);
-      });
-      console.log(coins);
+      // wallet.map((coin) => {
+      //   coins.push(coin.symbol);
+      // });
+      // console.log(coins);
 
-      // const BTC = await apiClient.getCoinCurrentPrice(coins[0]);
-      // const ADA = await apiClient.getCoinCurrentPrice(coins[1]);
-      // const ETH = await apiClient.getCoinCurrentPrice(coins[2]);
-      // const DOGE = await apiClient.getCoinCurrentPrice(coins[3]);
-      // const DOT = await apiClient.getCoinCurrentPrice(coins[4]);
-      // const XMR = await apiClient.getCoinCurrentPrice(coins[5]);
+      // const BTC = await apiClient.getCoinCurrentPrice("BTC");
+      // const ADA = await apiClient.getCoinCurrentPrice("ADA");
+      // const ETH = await apiClient.getCoinCurrentPrice("ETH");
+      // const DOGE = await apiClient.getCoinCurrentPrice("DOGE");
+      // const DOT = await apiClient.getCoinCurrentPrice("DOT");
+      // const XMR = await apiClient.getCoinCurrentPrice("XMR");
       const BTC = 30738.19;
       const ADA = 1.12;
       const ETH = 1826.22;
@@ -66,6 +65,7 @@ const Balances = ({ user, wallet }) => {
   console.log("wallet", wallet);
 
   let totalCoinWalletInUsd;
+  let assetTotal;
 
   if (wallet.length > 0) {
     totalCoinWalletInUsd =
@@ -76,18 +76,21 @@ const Balances = ({ user, wallet }) => {
       wallet[4].amount * coinPrice[4] +
       wallet[5].amount * coinPrice[5];
 
+    assetTotal = totalCoinWalletInUsd + balance;
     wallet.map((entry, index) => {
       console.log("index", coinPrice[index]);
       const obj = { symbol: entry.symbol, amount: entry.amount * coinPrice[index] };
       portfolio.push(obj);
     });
     if (totalCoinWalletInUsd === 0) {
-      totalCoinWalletInUsd = 0;
+      totalCoinWalletInUsd = balance;
+      assetTotal = balance;
     }
   } else {
-    totalCoinWalletInUsd = 10000;
+    totalCoinWalletInUsd = balance;
   }
 
+  // console.log("------", wallet[2].amount * coinPrice[2]);
   console.log("portfolio", portfolio);
 
   console.log("coinWallet", totalCoinWalletInUsd);
@@ -168,10 +171,10 @@ const Balances = ({ user, wallet }) => {
         </PieChart>
       </div>
       <Typography variant="h4" className={classes.portfolio}>
-        Total Portfolio: ${(totalCoinWalletInUsd + balance).toLocaleString()}
+        Total Portfolio: ${assetTotal && assetTotal.toLocaleString()}
       </Typography>
       <Typography variant="h5" className={classes.usd}>
-        Buying Power: ${balance.toLocaleString()}
+        Buying Power: ${balance && balance.toLocaleString()}
       </Typography>
       <div className={classes.percents}>
         <div className={classes.col}>

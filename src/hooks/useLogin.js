@@ -13,7 +13,7 @@ const useLogin = ({ user, setUser }) => {
       height: "57px",
       margin: "35px 0 35px 0",
     },
-    loginBtn: {
+    btn: {
       marginTop: 20,
       marginBottom: 50,
       borderRadius: "25px",

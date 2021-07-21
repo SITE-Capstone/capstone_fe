@@ -14,6 +14,9 @@ function App() {
   const [error, setError] = useState(null);
   const [coinSymbol, setCoinSymbol] = useState("");
   const [coinName, setCoinName] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
+  const [tutorialName, setTutorialName] = useState("");
+  const [tutorialDesc, setTutorialDesc] = useState("");
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -38,7 +41,15 @@ function App() {
             <Route
               path="/tutorial"
               element={
-                Object.keys(user).length === 0 ? <h1 style={{ textAlign: "center" }}>Not logged in</h1> : <Tutorial />
+                Object.keys(user).length === 0 ? (
+                  <h1 style={{ textAlign: "center" }}>Not logged in</h1>
+                ) : (
+                  <Tutorial
+                    setVideoUrl={setVideoUrl}
+                    setTutorialName={setTutorialName}
+                    setTutorialDesc={setTutorialDesc}
+                  />
+                )
               }
             />
             <Route
@@ -52,11 +63,12 @@ function App() {
               }
             />
 
-
             <Route path="/coin/:symbol" element={<Tradeview symbol={coinSymbol} name={coinName} />} />
 
-            <Route path="/tutorial/:id" element={<CoinTutorial />} />
-
+            <Route
+              path="/tutorial/:id"
+              element={<CoinTutorial videoUrl={videoUrl} name={tutorialName} desc={tutorialDesc} />}
+            />
           </Routes>
         </div>
       </div>

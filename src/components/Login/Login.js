@@ -42,7 +42,7 @@ const Login = ({ user, setUser }) => {
               fullWidth
               className={classes.input}
             />
-            <Button disabled={isProcessing} onClick={handleOnSubmit} variant="contained" className={classes.loginBtn}>
+            <Button disabled={isProcessing} onClick={handleOnSubmit} variant="contained" className={classes.btn}>
               {isProcessing ? "Loading..." : "Login"}
             </Button>
           </form>

@@ -14,6 +14,9 @@ const AccountItems = () => {
       justifyContent: "center",
       height: 60,
       color: "#616A8B",
+      "&:hover": {
+        background: "rgba(0,0,0,0.2) !important",
+      },
     },
     icon: {
       marginRight: 16,

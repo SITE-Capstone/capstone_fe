@@ -92,7 +92,9 @@ function Coinheader({ symbol }) {
       <Link to={"/coin/" + state.symbol+"/Buy"}>
         <Button className={classes.btn}>Buy</Button>
       </Link>
+      <Link to={"/coin/" + state.symbol+"/Sell"}>
         <Button className={classes.btn}>Sell</Button>
+      </Link>
       </div>
     </div>
   );

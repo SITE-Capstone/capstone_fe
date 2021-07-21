@@ -7,10 +7,13 @@ import Login from "../Login/Login";
 import Tradeview from "../Tradeview/Tradeview";
 import Register from "../Register/Register";
 import Dashboard from "../Dashboard/Dashboard";
+import CoinTutorial from "../CoinTutorial/CoinTutorial";
 
 function App() {
   const [user, setUser] = useState({});
   const [error, setError] = useState(null);
+  const [coinSymbol, setCoinSymbol] = useState("");
+  const [coinName, setCoinName] = useState("");
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -44,12 +47,15 @@ function App() {
                 Object.keys(user).length === 0 ? (
                   <h1 style={{ textAlign: "center" }}>Not logged in</h1>
                 ) : (
-                  <Dashboard user={user} />
+                  <Dashboard user={user} setSymbol={setCoinSymbol} setName={setCoinName} />
                 )
               }
             />
 
-            <Route path="/coin/btc" user={user} element={<Tradeview />} />
+
+            <Route path="/coin/:symbol" element={<Tradeview symbol={coinSymbol} name={coinName} />} />
+            <Route path="/tutorial/:name" element={<CoinTutorial />} />
+
           </Routes>
         </div>
       </div>

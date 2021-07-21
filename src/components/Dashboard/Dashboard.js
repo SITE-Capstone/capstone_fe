@@ -8,8 +8,9 @@ import { useState, useEffect } from "react";
 import apiClient from "../Services/apiClient";
 import { Grid } from "@material-ui/core";
 import Balances from "../Balances/Balances";
+import { Link } from "react-router-dom";
 
-const Dashboard = ({ user }) => {
+const Dashboard = ({ user, setSymbol, setName }) => {
   const useStyles = makeStyles({
     dash: {
       height: "100%",
@@ -52,6 +53,10 @@ const Dashboard = ({ user }) => {
       height: "65vh",
       borderRadius: "5px",
       marginLeft: 40,
+    },
+    link: {
+      textDecoration: "none",
+      color: "white",
     },
   });
 
@@ -114,13 +119,22 @@ const Dashboard = ({ user }) => {
             <Grid container spacing={7}>
               {wallet.map((coin) => (
                 <Grid item sm={12} md={6}>
-                  <CoinCard
-                    name={coin.name}
-                    symbol={coin.symbol}
-                    amount={coin.amount}
-                    color={coin.color}
-                    id={coin.id}
-                  />
+                  <Link
+                    className={classes.link}
+                    to={"/coin/" + coin.symbol}
+                    onClick={() => {
+                      setSymbol(coin.symbol);
+                      setName(coin.name);
+                    }}
+                  >
+                    <CoinCard
+                      name={coin.name}
+                      symbol={coin.symbol}
+                      amount={coin.amount}
+                      color={coin.color}
+                      id={coin.id}
+                    />
+                  </Link>
                 </Grid>
               ))}
             </Grid>

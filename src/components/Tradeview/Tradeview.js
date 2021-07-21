@@ -9,18 +9,18 @@ import Exchanges from "../Exchanges/Exchanges";
 import News from "../News/News";
 import "./Tradeview.css";
 
-function Tradeview() {
+function Tradeview({ symbol, name }) {
   return (
     <div className="Tradeview">
       <Link style={{ color: "white", fontWeight: "bold" }} to="/dashboard">
         Back
       </Link>
       {/* <Chart symbol='BTC'/> */}
-      <Coinheader symbol="BTC" />
-      <About name="bitcoin" symbol="btc" />
+      <Coinheader symbol={symbol} />
+      <About name={name} symbol={symbol} />
       <Statistics />
       <Exchanges />
-      <News symbol="BTC" name="Bitcoin" />
+      <News symbol={symbol} name={name} />
     </div>
   );
 }

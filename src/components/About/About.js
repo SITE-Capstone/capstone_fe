@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import apiClient from "../Services/apiClient";
 import { Link } from "react-router-dom";
-import { Typography, makeStyles, Button } from "@material-ui/core";
+import { Typography, makeStyles, Button, Divider } from "@material-ui/core";
 
 function About({ symbol, name }) {
   const [about, setAbout] = useState({
@@ -11,12 +11,14 @@ function About({ symbol, name }) {
   });
 
   useEffect(() => {
+
     apiClient.getCoinDescription(name).then((res) => {
       let html = res.data.description.en
       let div = document.createElement("div");
       div.innerHTML = html;
       let description = div.textContent || div.innerText || "";
       description=description.split(".");
+
       description = description.slice(0, 3);
       description = description.join(". ")+'.';
       let coinName = name.charAt(0).toUpperCase() + name.slice(1);
@@ -41,7 +43,7 @@ function About({ symbol, name }) {
       justifyContent: "space-between",
       width: "80%",
       marginTop: "2rem",
-      marginBottom: "4rem",
+      marginBottom: "2rem",
     },
     desc: {
       width: "80%",
@@ -65,13 +67,24 @@ function About({ symbol, name }) {
       color: "white",
       marginTop: "1rem",
     },
+    header: {
+      alignSelf: "flex-start",
+      color: "rgba(255,255,255,0.8)",
+      fontSize: "2.5rem",
+    },
+    divider: {
+      height: "1.5px",
+      width: "80%",
+      background: "rgba(255,255,255,0.5)",
+      marginBottom: "3rem",
+    },
   });
 
   const classes = useStyles();
 
   return (
     <div className={classes.about}>
-      <Typography style={{ alignSelf: "flex-start" }} variant="h3">
+      <Typography className={classes.header} variant="h3">
         {about.name}
       </Typography>
       <div className={classes.section}>
@@ -87,7 +100,8 @@ function About({ symbol, name }) {
           <Button className={classes.btn}>Start Lesson</Button>
         </div>
       </div>
-      <Typography variant="h3" style={{ alignSelf: "flex-start" }}>
+      <Divider className={classes.divider} />
+      <Typography variant="h3" className={classes.header}>
         Recent News
       </Typography>
     </div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import apiClient from "../Services/apiClient";
 import { makeStyles, Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 function Coinheader({ symbol }) {
   const [state, setState] = useState({
@@ -88,7 +89,9 @@ function Coinheader({ symbol }) {
         </Typography>
       </div>
       <div className={classes.btnContainer}>
+      <Link to={"/coin/" + state.symbol+"/Buy"}>
         <Button className={classes.btn}>Buy</Button>
+      </Link>
         <Button className={classes.btn}>Sell</Button>
       </div>
     </div>

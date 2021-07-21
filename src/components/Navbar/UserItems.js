@@ -19,8 +19,8 @@ const LoginItems = () => {
       justifyContent: "center",
       height: 60,
       color: "#616A8B",
-      "&:hover $child": {
-        fill: "red",
+      "&:hover": {
+        background: "rgba(0,0,0,0.2) !important",
       },
     },
     icon: {

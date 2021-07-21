@@ -79,8 +79,8 @@ class ApiClient {
     return await this.request({ endpoint: "wallet", method: "GET", data: user_id });
   }
 
-  async exchangeCurrencies(order){
-    return await this.request({ endpoint: "wallet/exchange", method: "PUT", data: order })
+  async exchangeCurrencies(order) {
+    return await this.request({ endpoint: "wallet/exchange", method: "PUT", data: order });
   }
 
   // COIN INFORMATION
@@ -216,7 +216,7 @@ class ApiClient {
 
   async getCoinCurrentPrice(symbol) {
     let endpoint = "/v1/exchangerate/" + symbol + "/USD?apikey=";
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 7);
+    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 8);
     return req;
   }
 
@@ -278,9 +278,8 @@ class ApiClient {
     }
   }
   async getCoinNews(name) {
+    let endpoint = "/v2/everything?q=" + name + "&pageSize=5&apiKey=";
 
-    let endpoint = '/v2/everything?q='+name+'&pageSize=5&apiKey='
-    
     let req = await this.newsRequest({ endpoint: endpoint, method: "GET" });
     return req;
   }

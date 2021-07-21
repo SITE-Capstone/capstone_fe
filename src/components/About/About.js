@@ -12,15 +12,17 @@ function About({ symbol, name }) {
 
   useEffect(() => {
 
+
     apiClient.getCoinDescription(name.toLowerCase()).then((res) => {
       let html = res.data.description.en
+
       let div = document.createElement("div");
       div.innerHTML = html;
       let description = div.textContent || div.innerText || "";
-      description=description.split(".");
+      description = description.split(".");
 
       description = description.slice(0, 3);
-      description = description.join(". ")+'.';
+      description = description.join(". ") + ".";
       let coinName = name.charAt(0).toUpperCase() + name.slice(1);
       setAbout({
         symbol: symbol,

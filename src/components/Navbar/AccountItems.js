@@ -1,7 +1,10 @@
-import React from "react";
+import { useContext } from "react";
 import { List, ListItem, ListItemText, Icon, makeStyles } from "@material-ui/core";
+import UserContext from "../../hooks/userContext";
 
 const AccountItems = () => {
+  const user = useContext(UserContext);
+
   const useStyles = makeStyles({
     list: {
       display: "flex",
@@ -36,7 +39,7 @@ const AccountItems = () => {
     <List className={classes.list}>
       <ListItem button className={classes.listItem}>
         <Icon className={classes.icon}>account_circle</Icon>
-        <ListItemText primary="username" />
+        <ListItemText primary={user.username} />
       </ListItem>
       <ListItem button className={classes.listItem}>
         <Icon className={classes.icon}>exit_to_app</Icon>

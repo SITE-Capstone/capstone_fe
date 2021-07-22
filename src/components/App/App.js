@@ -8,8 +8,9 @@ import Tradeview from "../Tradeview/Tradeview";
 import Register from "../Register/Register";
 import Dashboard from "../Dashboard/Dashboard";
 import CoinTutorial from "../CoinTutorial/CoinTutorial";
-import Buy from "../Buy/Buy"
-import Sell from "../Sell/Sell"
+import Buy from "../Buy/Buy";
+import Sell from "../Sell/Sell";
+import UserContext from "../../hooks/userContext";
 
 function App() {
   const [user, setUser] = useState({});
@@ -34,48 +35,51 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <div className="app-header">
-        <div className="hasNav">
-          <Routes>
-            <Route path="/login" element={<Login user={user} setUser={setUser} />} />
-            <Route path="/register" element={<Register user={user} setUser={setUser} />} />
-            <Route
-              path="/tutorial"
-              element={
-                Object.keys(user).length === 0 ? (
-                  <h1 style={{ textAlign: "center" }}>Not logged in</h1>
-                ) : (
-                  <Tutorial
-                    setVideoUrl={setVideoUrl}
-                    setTutorialName={setTutorialName}
-                    setTutorialDesc={setTutorialDesc}
-                  />
-                )
-              }
-            />
-            <Route
-              path="/dashboard"
-              element={
-                Object.keys(user).length === 0 ? (
-                  <h1 style={{ textAlign: "center" }}>Not logged in</h1>
-                ) : (
-                  <Dashboard user={user} setSymbol={setCoinSymbol} setName={setCoinName} />
-                )
-              }
-            />
+    <UserContext.Provider value={user}>
+      <div className="App">
+        <div className="app-header">
+          <div className="hasNav">
+            <Routes>
+              <Route path="/login" element={<Login setUser={setUser} />} />
+              <Route path="/register" element={<Register setUser={setUser} />} />
+              <Route
+                path="/tutorial"
+                element={
+                  Object.keys(user).length === 0 ? (
+                    <h1 style={{ textAlign: "center" }}>Not logged in</h1>
+                  ) : (
+                    <Tutorial
+                      setVideoUrl={setVideoUrl}
+                      setTutorialName={setTutorialName}
+                      setTutorialDesc={setTutorialDesc}
+                    />
+                  )
+                }
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  Object.keys(user).length === 0 ? (
+                    <h1 style={{ textAlign: "center" }}>Not logged in</h1>
+                  ) : (
+                    <Dashboard setSymbol={setCoinSymbol} setName={setCoinName} />
+                  )
+                }
+              />
 
-            <Route path="/coin/:symbol" element={<Tradeview symbol={coinSymbol} name={coinName} />} />
+              <Route path="/coin/:symbol" element={<Tradeview symbol={coinSymbol} name={coinName} />} />
 
-            <Route path="/coin/:symbol/buy" element={<Buy symbol={coinSymbol} name={coinName} />} />
-            <Route path="/coin/:symbol/sell" element={<Sell symbol={coinSymbol} name={coinName} />} />
-            <Route path="/tutorial/:id" element={<CoinTutorial videoUrl={videoUrl} name={tutorialName} desc={tutorialDesc} />} />
-
-
-          </Routes>
+              <Route path="/coin/:symbol/buy" element={<Buy symbol={coinSymbol} name={coinName} />} />
+              <Route path="/coin/:symbol/sell" element={<Sell symbol={coinSymbol} name={coinName} />} />
+              <Route
+                path="/tutorial/:id"
+                element={<CoinTutorial videoUrl={videoUrl} name={tutorialName} desc={tutorialDesc} />}
+              />
+            </Routes>
+          </div>
         </div>
       </div>
-    </div>
+    </UserContext.Provider>
   );
 }
 

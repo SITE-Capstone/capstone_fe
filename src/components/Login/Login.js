@@ -4,9 +4,9 @@ import { InputBase, Button } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import useLogin from "../../hooks/useLogin";
 
-const Login = ({ user, setUser }) => {
+const Login = ({ setUser }) => {
   // custom hook handles all login logic
-  const { handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes } = useLogin({ user, setUser });
+  const { handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes } = useLogin({ setUser });
 
   return (
     <div className="Login">

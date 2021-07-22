@@ -5,9 +5,9 @@ import Navbar from "../Navbar/Navbar";
 import { Typography } from "@material-ui/core";
 import useRegister from "../../hooks/useRegister";
 
-export default function Register({ user, setUser }) {
+export default function Register({ setUser }) {
   // custom hook handles all register logic
-  const { handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes } = useRegister({ user, setUser });
+  const { handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes } = useRegister({ setUser });
 
   return (
     <div className="Register">

@@ -1,9 +1,12 @@
 import { makeStyles } from "@material-ui/core";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 import apiClient from "../components/Services/apiClient";
+import UserContext from "./userContext";
 
-function useRegister({ user, setUser }) {
+function useRegister({ setUser }) {
+  const user = useContext(UserContext);
+
   const useStyles = makeStyles({
     input: {
       color: "black",

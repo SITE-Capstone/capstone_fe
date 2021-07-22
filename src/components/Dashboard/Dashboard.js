@@ -1,16 +1,18 @@
-import React from "react";
 import Navbar from "../Navbar/Navbar";
 import { Typography } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core";
 import { Divider } from "@material-ui/core";
 import CoinCard from "../CoinCard/CoinCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import apiClient from "../Services/apiClient";
 import { Grid } from "@material-ui/core";
 import Balances from "../Balances/Balances";
 import { Link } from "react-router-dom";
+import UserContext from "../../hooks/userContext";
 
-const Dashboard = ({ user, setSymbol, setName }) => {
+const Dashboard = ({ setSymbol, setName }) => {
+  const user = useContext(UserContext);
+
   const CustomColor = withStyles({
     root: {
       fontSize: 24,
@@ -127,7 +129,7 @@ const Dashboard = ({ user, setSymbol, setName }) => {
           <div className={classes.coinGrid}>
             <Grid container spacing={7}>
               {wallet.map((coin) => (
-                <Grid item sm={12} md={6}>
+                <Grid item sm={12} lg={6}>
                   <Link
                     className={classes.link}
                     to={"/coin/" + coin.symbol}

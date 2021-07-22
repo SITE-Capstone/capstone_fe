@@ -1,9 +1,12 @@
 import { makeStyles } from "@material-ui/core";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 import apiClient from "../components/Services/apiClient";
+import UserContext from "./userContext";
 
-const useLogin = ({ user, setUser }) => {
+const useLogin = ({ setUser }) => {
+  const user = useContext(UserContext);
+
   const useStyles = makeStyles({
     input: {
       color: "black",
@@ -63,7 +66,7 @@ const useLogin = ({ user, setUser }) => {
     // if user is already logged in,
     // redirect them to the home page
     if (user?.username) {
-      navigate("/tutorial");
+      navigate("/dashboard");
     }
   }, [user, navigate]);
 

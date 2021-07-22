@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, withStyles } from "@material-ui/core";
 import { Divider } from "@material-ui/core";
 import CoinCard from "../CoinCard/CoinCard";
 import { useState, useEffect } from "react";
@@ -11,6 +11,15 @@ import Balances from "../Balances/Balances";
 import { Link } from "react-router-dom";
 
 const Dashboard = ({ user, setSymbol, setName }) => {
+  const CustomColor = withStyles({
+    root: {
+      fontSize: 24,
+      background: "-webkit-linear-gradient(271.88deg, #3887FE 4.26%, #3BA0FF 51.37%, #5FB2FF 99.01%)",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
+    },
+  })(Typography);
+
   const useStyles = makeStyles({
     dash: {
       height: "100%",
@@ -100,9 +109,9 @@ const Dashboard = ({ user, setSymbol, setName }) => {
     <div className={classes.dash}>
       <Navbar />
       <div className="mainScreen">
-        <Typography variant="h5" className={classes.header}>
+        <CustomColor variant="h5" className={classes.header}>
           {user.username + "'s Dashboard"}
-        </Typography>
+        </CustomColor>
         <div className={classes.dividerContainer}>
           <Divider className={classes.divider} />
         </div>

@@ -312,12 +312,12 @@ function News({ symbol, name }) {
     name: "",
   });
   useEffect(() => {
-    apiClient.getCoinNews(symbol).then((res) => {
+    apiClient.getCoinNews(name,symbol).then((res) => {
       let articles = [];
       if (res.data === null) {
         console.log("#24 News.js Error:", res);
         setTimeout(
-          apiClient.getCoinNews(symbol).then((res2) => {
+          apiClient.getCoinNews(name,symbol).then((res2) => {
             if (res2.data === null) {
               console.log("#29 News.js Error:", res2);
               articles = dummy;

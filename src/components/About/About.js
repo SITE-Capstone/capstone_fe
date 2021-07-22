@@ -99,7 +99,9 @@ function About({ symbol, name }) {
           <Typography variant="body1" className={classes.learn}>
             Learn more about {about.name}
           </Typography>
-          <Button className={classes.btn}>Start Lesson</Button>
+          <Link className={classes.link} to={"/tutorial/" + about.symbol}>
+            <Button className={classes.btn}>Start Lesson</Button>
+          </Link>
         </div>
       </div>
       <Divider className={classes.divider} />

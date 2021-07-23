@@ -46,6 +46,7 @@ const Sell = ({ symbol }) => {
         <br />
 
         <div className="form">
+        <Typography variant="h5" >{state.price && "Market Price:  $"+state.price}</Typography>
         <Typography variant="h5" >{state.text && "Estimated Cost:  $"+state.text}</Typography>
           <form noValidate autoComplete="off" className="login-form">
             <InputBase

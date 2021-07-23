@@ -3,12 +3,21 @@ import apiClient from "../Services/apiClient";
 import { Link } from "react-router-dom";
 import { Typography, makeStyles, Button, Divider } from "@material-ui/core";
 
-function About({ symbol, name }) {
+function About({ symbol, name, setTutorialId }) {
   const [about, setAbout] = useState({
     symbol: symbol,
     name: name,
     description: "",
   });
+
+  const ids = {
+    BTC: 4,
+    ETH: 5,
+    ADA: 6,
+    DOGE: 7,
+    DOT: 8,
+    XMR: 9,
+  };
 
   useEffect(() => {
     apiClient.getCoinDescription(name.toLowerCase()).then((res) => {
@@ -101,7 +110,13 @@ function About({ symbol, name }) {
           <Typography variant="body1" className={classes.learn}>
             Learn more about {about.name}
           </Typography>
-          <Link className={classes.link} to={"/tutorial/" + about.symbol}>
+          <Link
+            className={classes.link}
+            to={"/tutorial/" + about.symbol}
+            onClick={() => {
+              setTutorialId(ids[about.symbol]);
+            }}
+          >
             <Button className={classes.btn}>Start Lesson</Button>
           </Link>
         </div>

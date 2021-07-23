@@ -69,14 +69,25 @@ function App() {
                 }
               />
 
-              <Route path="/coin/:symbol" element={<Tradeview symbol={coinSymbol} name={coinName} />} />
+              <Route
+                path="/coin/:symbol"
+                element={<Tradeview symbol={coinSymbol} name={coinName} setTutorialId={setTutorialId} />}
+              />
 
               <Route path="/coin/:symbol/buy" element={<Buy symbol={coinSymbol} name={coinName} />} />
               <Route path="/coin/:symbol/sell" element={<Sell symbol={coinSymbol} name={coinName} />} />
               <Route
                 path="/tutorial/:id"
                 element={
-                  <CoinTutorial videoUrl={videoUrl} name={tutorialName} desc={tutorialDesc} tutorialId={tutorialId} />
+                  <CoinTutorial
+                    videoUrl={videoUrl}
+                    name={tutorialName}
+                    desc={tutorialDesc}
+                    tutorialId={tutorialId}
+                    setVideoUrl={setVideoUrl}
+                    setTutorialName={setTutorialName}
+                    setTutorialDesc={setTutorialDesc}
+                  />
                 }
               />
             </Routes>

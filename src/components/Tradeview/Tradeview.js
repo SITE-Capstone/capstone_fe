@@ -10,7 +10,7 @@ import News from "../News/News";
 import "./Tradeview.css";
 import { makeStyles, Icon } from "@material-ui/core";
 
-function Tradeview({ symbol, name }) {
+function Tradeview({ symbol, name, setTutorialId }) {
   const useStyles = makeStyles({
     back: {
       transform: "rotate(-90deg)",
@@ -35,7 +35,7 @@ function Tradeview({ symbol, name }) {
       </Link>
       {/* <Chart symbol={symbol} /> */}
       <Coinheader symbol={symbol} />
-      <About name={name} symbol={symbol} />
+      <About name={name} symbol={symbol} setTutorialId={setTutorialId} />
       <Statistics />
       <Exchanges />
       <News symbol={symbol} name={name} />

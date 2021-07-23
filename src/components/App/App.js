@@ -20,6 +20,7 @@ function App() {
   const [videoUrl, setVideoUrl] = useState("");
   const [tutorialName, setTutorialName] = useState("");
   const [tutorialDesc, setTutorialDesc] = useState("");
+  const [tutorialId, setTutorialId] = useState();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -52,6 +53,7 @@ function App() {
                       setVideoUrl={setVideoUrl}
                       setTutorialName={setTutorialName}
                       setTutorialDesc={setTutorialDesc}
+                      setTutorialId={setTutorialId}
                     />
                   )
                 }
@@ -73,7 +75,9 @@ function App() {
               <Route path="/coin/:symbol/sell" element={<Sell symbol={coinSymbol} name={coinName} />} />
               <Route
                 path="/tutorial/:id"
-                element={<CoinTutorial videoUrl={videoUrl} name={tutorialName} desc={tutorialDesc} />}
+                element={
+                  <CoinTutorial videoUrl={videoUrl} name={tutorialName} desc={tutorialDesc} tutorialId={tutorialId} />
+                }
               />
             </Routes>
           </div>

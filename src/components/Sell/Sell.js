@@ -8,12 +8,8 @@ import { useState, useEffect } from "react";
 const Sell = ({ symbol }) => {
   // custom hook handles all login logic
   const type=1
-  const [conversion, setConversion] = useState({});
-  const { handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes } = useExchange({ symbol, conversion, setConversion,type });
-  const [state, setState] = useState({
-    symbol: symbol,
-    price: "0.00"
-  });
+
+  const { state, setState, handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes } = useExchange({ symbol, type });
 
   useEffect(() => {
     let price = 0.0;
@@ -21,12 +17,11 @@ const Sell = ({ symbol }) => {
     apiClient.getCoinCurrentPrice(state.symbol).then((res) => {
       if (res.data === null) {
         console.log("#21 Sell.js Error:", res);
-        price = "Error";
         setTimeout(
           apiClient.getCoinCurrentPrice(state.symbol).then((res2) => {
             if (res2.data === null) {
               console.log("#22 Sell.js Error:", res2);
-              price = "Error";
+              price = 0;
             } else {
               price = res2.data.rate.toFixed(2);
             }
@@ -36,10 +31,7 @@ const Sell = ({ symbol }) => {
       } else {
         price = res.data.rate.toFixed(2);
       }
-      setState({
-        symbol: symbol,
-        price: price,
-      });
+      setState((f) => ({ ...f, ["price"]: price }));
     });
   }, []);
 
@@ -54,12 +46,14 @@ const Sell = ({ symbol }) => {
         <br />
 
         <div className="form">
+        <Typography variant="h5" >{state.price && "Market Price:  $"+state.price}</Typography>
+        <Typography variant="h5" >{state.text && "Estimated Cost:  $"+state.text}</Typography>
           <form noValidate autoComplete="off" className="login-form">
             <InputBase
               label="quantity"
               variant="standard"
               name="quantity"
-              placeholder='Amount' 
+              placeholder={"Amount in "+state.symbol}
               value={form.quantity}
               onChange={handleOnInputChange}
               fullWidth

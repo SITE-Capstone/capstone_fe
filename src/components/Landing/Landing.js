@@ -9,23 +9,28 @@ function Landing() {
     const img2= 'https://i.imgur.com/TeeOVk8.png'
     const img3= 'https://i.imgur.com/MWVzVwW.png'
     const useStyles = makeStyles({
-        // backImg:{
-        //     backgroundImage: `url('${url}')`,
-        //     backgroundRepeat: "no-repeat",
-        //     backgroundSize:"cover",
-        //     width:"100vw",
-        //     height:"55vw",
-        //     filter:"blur(8px)"
-        // },
-        img:{
-            width:"700px",
-        },
-        hero:{
+        backImg:{
             backgroundImage: `url('${url}')`,
             backgroundRepeat: "no-repeat",
             backgroundSize:"cover",
-            width:"100%",
+            width:"100vw",
             height:"55vw",
+            filter:"blur(12px)"
+        },
+        img:{
+            width:"600px",
+            margin:"16px"
+        },
+        heroContainer:{
+            backgroundSize:"cover",
+            width:"100%",
+            display: "flex",
+            flexFlow: "column nowrap",
+        },
+        hero:{
+            position:"absolute",
+            width:"100%",
+            top:"256px",
             display: "flex",
             flexFlow: "column nowrap",
             justifyContent: "center",
@@ -34,7 +39,7 @@ function Landing() {
             textShadow:"3px 3px black",
             color: "white",
             zIndex:"2",
-            backdropFilter:"blur(5px)"
+            backdropFilter:"blur(3px)"
         },
         btnContainer: {
           width: 350,
@@ -54,7 +59,6 @@ function Landing() {
           color: "white",
         },
         section:{
-            width:"100%",
             display: "flex",
             flexFlow: "row nowrap",
             justifyContent: "center",
@@ -71,7 +75,7 @@ function Landing() {
     let textVariant="h4"
     return (
         <div className="Landing">
-            <div >
+            <div classname={classes.heroContainer}>
                 <div className={classes.backImg}></div>
                 <div className={classes.hero}>
                     <Typography variant="h1">Start Learning. Start Investing.</Typography>
@@ -88,15 +92,15 @@ function Landing() {
                 </div>
             </div>
             <div className={classes.section}>
-                <img src={img1} alt="Tutorial View" className={classes.img}/>
+                <img src={img2} alt="Tutorial View" className={classes.img}/>
                 <Typography variant={textVariant}>Learn about crypto currencies and develop essential knowledge with quick lessons</Typography>
             </div>
             <div className={classes.section}>
                 <Typography variant={textVariant}>Paper Trade crypto currency trading strategies before investing with real money</Typography>
-                <img src={img2} alt="Buy View" className={classes.img}/>
+                <img src={img3} alt="Buy View" className={classes.img}/>
             </div>
             <div className={classes.section}>
-                <img src={img3} alt="Portfolio View" className={classes.img}/>
+                <img src={img1} alt="Portfolio View" className={classes.img}/>
                 <Typography variant={textVariant}>Diversify your portfolio and build up your account</Typography>
             </div>
 

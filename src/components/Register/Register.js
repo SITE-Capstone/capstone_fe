@@ -4,6 +4,7 @@ import { Button } from "@material-ui/core";
 import Navbar from "../Navbar/Navbar";
 import { Typography } from "@material-ui/core";
 import useRegister from "../../hooks/useRegister";
+import "./Register.css";
 
 export default function Register({ setUser }) {
   // custom hook handles all register logic

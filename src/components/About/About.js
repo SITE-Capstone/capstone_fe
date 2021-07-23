@@ -11,10 +11,8 @@ function About({ symbol, name }) {
   });
 
   useEffect(() => {
-
-
     apiClient.getCoinDescription(name.toLowerCase()).then((res) => {
-      let html = res.data.description.en
+      let html = res.data.description.en;
 
       let div = document.createElement("div");
       div.innerHTML = html;
@@ -79,6 +77,10 @@ function About({ symbol, name }) {
       width: "80%",
       background: "rgba(255,255,255,0.5)",
       marginBottom: "3rem",
+    },
+    link: {
+      textDecoration: "none",
+      color: "white",
     },
   });
 

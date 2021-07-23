@@ -40,12 +40,10 @@ function App() {
   return (
     <UserContext.Provider value={user}>
       <div className="App">
-      <Routes>
-            <Route path="/" element={<Landing/>} />
-          </Routes>
         <div className="app-header">
           <div className="container">
             <Routes>
+            <Route path="/" element={<Landing/>} />
               <Route path="/login" element={<Login setUser={setUser} />} />
               <Route path="/register" element={<Register setUser={setUser} />} />
               <Route

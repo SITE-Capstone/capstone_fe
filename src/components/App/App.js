@@ -12,6 +12,7 @@ import Buy from "../Buy/Buy";
 import Sell from "../Sell/Sell";
 import Landing from "../Landing/Landing"
 import UserContext from "../../hooks/userContext";
+import Navbar from "../Navbar/Navbar";
 
 function App() {
   const [user, setUser] = useState({});
@@ -38,10 +39,12 @@ function App() {
   return (
     <UserContext.Provider value={user}>
       <div className="App">
+      <Routes>
+            <Route path="/" element={<Landing/>} />
+          </Routes>
         <div className="app-header">
           <div className="hasNav">
             <Routes>
-            <Route path="/" element={<Landing/>} />
               <Route path="/login" element={<Login setUser={setUser} />} />
               <Route path="/register" element={<Register setUser={setUser} />} />
               <Route

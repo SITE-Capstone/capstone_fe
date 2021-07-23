@@ -31,7 +31,7 @@ class ApiClient {
     localStorage.setItem("kurios_token", token);
   }
 
-  async request({ endpoint, method = "GET", data = {} }) {
+  async request({ endpoint, method = "GET", data = {}, params = {} }) {
     const url = `${this.remoteHostUrl}/${endpoint}`;
 
     const headers = {
@@ -43,7 +43,7 @@ class ApiClient {
     }
 
     try {
-      const res = await axios({ url, method, data, headers });
+      const res = await axios({ url, method, data, headers, params });
       return { data: res.data, error: null };
     } catch (err) {
       console.error({ errorResponse: err.response });
@@ -68,6 +68,18 @@ class ApiClient {
   // TUTORIAL INFORMATION
   async getTutorials() {
     return await this.request({ endpoint: "tutorials/cards", method: "GET" });
+  }
+
+  async markTutorialAsCompleted(user_id, tutorial_id, completed) {
+    return await this.request({
+      endpoint: "tutorials/completed",
+      method: "PUT",
+      data: { user_id, tutorial_id, completed },
+    });
+  }
+
+  async fetchSingleTutorialStatus(tutorial_id) {
+    return await this.request({ endpoint: "tutorials/single", method: "GET", params: { tutorial_id } });
   }
 
   // DASHBOARD INFORMATION
@@ -277,12 +289,23 @@ class ApiClient {
       return { data: null, error: message || err || "Error" };
     }
   }
-  async getCoinNews(name,symbol) {
-    let pageSize="5"
-    let sortBy="publishedAt"//"publishedAt" || "relevancy"
-    let language="en"
-    let endpoint = "/v2/everything?q=" + name+ " AND " +symbol+ "&pageSize="+pageSize+"&sortBy="+sortBy+"&language="+language+"&apiKey=";
-    
+  async getCoinNews(name, symbol) {
+    let pageSize = "5";
+    let sortBy = "publishedAt"; //"publishedAt" || "relevancy"
+    let language = "en";
+    let endpoint =
+      "/v2/everything?q=" +
+      name +
+      " AND " +
+      symbol +
+      "&pageSize=" +
+      pageSize +
+      "&sortBy=" +
+      sortBy +
+      "&language=" +
+      language +
+      "&apiKey=";
+
     let req = await this.newsRequest({ endpoint: endpoint, method: "GET" });
     return req;
   }

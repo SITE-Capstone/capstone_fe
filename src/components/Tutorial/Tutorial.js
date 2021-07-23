@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Tutorial = ({ setVideoUrl, setTutorialName, setTutorialDesc }) => {
+const Tutorial = ({ setVideoUrl, setTutorialName, setTutorialDesc, setTutorialId }) => {
   const [tutorials, setTutorials] = useState([]);
   const videos = [
     "https://www.youtube.com/embed/6Gu2QMTAkEU",
@@ -69,6 +69,7 @@ const Tutorial = ({ setVideoUrl, setTutorialName, setTutorialDesc }) => {
                 setVideoUrl(videos[index]);
                 setTutorialName(tutorial.name);
                 setTutorialDesc(description[index]);
+                setTutorialId(tutorial.id);
               }}
             >
               <TutorialCard

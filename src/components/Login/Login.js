@@ -3,6 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import { InputBase, Button } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import useLogin from "../../hooks/useLogin";
+import "./Login.css";
 
 const Login = ({ setUser }) => {
   // custom hook handles all login logic

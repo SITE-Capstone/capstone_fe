@@ -39,7 +39,7 @@ function App() {
     <UserContext.Provider value={user}>
       <div className="App">
         <div className="app-header">
-          <div className="hasNav">
+          <div className="container">
             <Routes>
               <Route path="/login" element={<Login setUser={setUser} />} />
               <Route path="/register" element={<Register setUser={setUser} />} />

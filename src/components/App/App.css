@@ -11,7 +11,7 @@ html {
   flex-flow: row nowrap;
 }
 
-.hasNav {
+.container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,6 @@ html {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   flex-grow: 1;
-  margin-left: 190px;
 }
 
 .hasNoNav {

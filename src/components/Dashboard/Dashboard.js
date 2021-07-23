@@ -9,6 +9,7 @@ import { Grid } from "@material-ui/core";
 import Balances from "../Balances/Balances";
 import { Link } from "react-router-dom";
 import UserContext from "../../hooks/userContext";
+import "./Dashboard.css";
 
 const Dashboard = ({ setSymbol, setName }) => {
   const user = useContext(UserContext);
@@ -110,7 +111,7 @@ const Dashboard = ({ setSymbol, setName }) => {
   return (
     <div className={classes.dash}>
       <Navbar />
-      <div className="mainScreen">
+      <div className="Dashboard">
         <CustomColor variant="h5" className={classes.header}>
           {user.username + "'s Dashboard"}
         </CustomColor>

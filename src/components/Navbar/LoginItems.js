@@ -40,10 +40,12 @@ const LoginItems = () => {
 
   return (
     <List component="nav">
-      <ListItem button className={location.pathname === "/" ? classes.activeListItem : classes.listItem}>
-        <Icon className={classes.icon}>home</Icon>
-        <ListItemText primary="Back to Home" />
-      </ListItem>
+      <Link to="/" className={classes.links}>
+        <ListItem button className={location.pathname === "/" ? classes.activeListItem : classes.listItem}>
+          <Icon className={classes.icon}>home</Icon>
+          <ListItemText primary="Back to Home" />
+        </ListItem>
+      </Link>
       <Link to="/login" className={classes.links}>
         <ListItem button className={location.pathname === "/login" ? classes.activeListItem : classes.listItem}>
           <Icon className={classes.icon}>input</Icon>

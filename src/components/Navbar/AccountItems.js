@@ -41,9 +41,9 @@ const AccountItems = () => {
         <Icon className={classes.icon}>account_circle</Icon>
         <ListItemText primary={user.username} />
       </ListItem>
-      <ListItem button className={classes.listItem}>
+      <ListItem button className={classes.listItem} onClick={handleLogOut}>
         <Icon className={classes.icon}>exit_to_app</Icon>
-        <ListItemText primary="Logout" onClick={handleLogOut} />
+        <ListItemText primary="Logout" />
       </ListItem>
     </List>
   );

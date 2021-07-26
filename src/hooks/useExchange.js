@@ -107,12 +107,12 @@ const useExchange = ({ symbol, type }) => {
         console.log("Price", price)
         console.log("SYmbol", symbol)
         let order=''
-        if (price!==0 && parseInt(form.quantity)){
+        if (price!==0 && Number(form.quantity)){
             if(type===0){
                 order={
                     "buying_id": symbol.toLowerCase(),
                     "selling_id": "usd",
-                    "quantity": parseInt(form.quantity),
+                    "quantity": Number(form.quantity),
                     "type":type,
                     "price":price
                 }
@@ -121,7 +121,7 @@ const useExchange = ({ symbol, type }) => {
                 order={
                     "buying_id": "usd",
                     "selling_id": symbol.toLowerCase(),
-                    "quantity": parseInt(form.quantity),
+                    "quantity": Number(form.quantity),
                     "type":type,
                     "price":price
                 }

@@ -3,6 +3,7 @@ import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import apiClient from "../Services/apiClient";
 import UserContext from "../../hooks/userContext";
+import { Grid } from "@material-ui/core";
 
 const CoinTutorial = ({
   videoUrl,
@@ -26,6 +27,9 @@ const CoinTutorial = ({
     },
     desc: {
       width: "32rem",
+      "@media (max-width: 1400px)": {
+        width: "70rem",
+      },
     },
     title: {
       width: "200px",
@@ -38,8 +42,8 @@ const CoinTutorial = ({
     },
     btn: {
       position: "absolute",
-      bottom: "0%",
-      right: "5%",
+      top: "-1%",
+      right: "1%",
       marginTop: 20,
       marginBottom: 50,
       borderRadius: "25px",
@@ -50,6 +54,37 @@ const CoinTutorial = ({
       color: "white",
       fontSize: "24px",
       fontWeight: "bold",
+    },
+    btnBack: {
+      position: "absolute",
+      top: "-1%",
+      right: "16%",
+      marginTop: 20,
+      marginBottom: 50,
+      borderRadius: "25px",
+      boxShadow: "0px 2px 4px rgba(85, 35, 221, 0.4)",
+      height: "64px",
+      width: "189px",
+      background: "linear-gradient(271.88deg, #3887FE 4.26%, #3BA0FF 51.37%, #5FB2FF 99.01%)",
+      color: "white",
+      fontSize: "24px",
+      fontWeight: "bold",
+    },
+    video: {
+      height: "100vh",
+      display: "flex",
+      alignItems: "center",
+    },
+    text: {
+      height: "100vh",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      "@media (max-width: 1400px)": {
+        height: "50vh",
+        marginBottom: "-10rem",
+        marginTop: "4rem",
+      },
     },
   });
 
@@ -105,28 +140,37 @@ const CoinTutorial = ({
       <Link className={classes.link} to="/tutorial" onClick={completeTutorial}>
         <Button className={classes.btn}>Finish</Button>
       </Link>
-      <div className={classes.container}>
-        <div className="text">
-          <Typography variant="h3" className={classes.title}>
-            {name}
-          </Typography>
-          <Typography varaint="body1" className={classes.desc}>
-            {desc}
-          </Typography>
-        </div>
-        <div className="video">
-          <iframe
-            width="840"
-            height="473"
-            src={videoUrl}
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </div>
+      <Link className={classes.link} to="/tutorial">
+        <Button className={classes.btnBack}>Back</Button>
+      </Link>
+      {/* <div className={classes.container}> */}
+      <Grid container direction="row" justifyContent="center" spacing={10}>
+        <Grid item>
+          <div className={classes.text}>
+            <Typography variant="h3" className={classes.title}>
+              {name}
+            </Typography>
+            <Typography varaint="body1" className={classes.desc}>
+              {desc}
+            </Typography>
+          </div>
+        </Grid>
+        <Grid item>
+          <div className={classes.video}>
+            <iframe
+              width="800"
+              height="433"
+              src={videoUrl}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </Grid>
+      </Grid>
     </div>
+    // </div>
   );
 };
 

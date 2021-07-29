@@ -10,8 +10,17 @@ import "./Tutorial.css";
 const useStyles = makeStyles({
   gridCont: {
     width: "80vw",
-    height: "70vh",
+    height: "100vh",
     marginLeft: 20,
+    display: "flex",
+    alignItems: "center",
+    "@media (max-width: 1560px)": {
+      height: "100vh",
+    },
+    "@media (max-width: 960px)": {
+      width: "70%",
+      marginLeft: "15%",
+    },
   },
   link: {
     textDecoration: "none",

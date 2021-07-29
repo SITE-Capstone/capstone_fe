@@ -23,7 +23,7 @@ const Navbar = () => {
 
   const useStyles = makeStyles({
     navbar: {
-      position: "absolute",
+      position: "fixed",
       width: "190px",
       display: "flex",
       flexDirection: "column",

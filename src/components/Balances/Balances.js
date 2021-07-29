@@ -104,6 +104,9 @@ const Balances = ({ user, wallet }) => {
     },
     chart: {
       marginTop: 110,
+      "@media (max-width: 1560px)": {
+        marginTop: 0,
+      },
     },
     data: {
       width: "12vw",

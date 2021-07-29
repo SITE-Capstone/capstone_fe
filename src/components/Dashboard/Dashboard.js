@@ -59,6 +59,7 @@ const Dashboard = ({ setSymbol, setName }) => {
     },
     info: {
       display: "flex",
+      // flexDirection: "column",
     },
     coinGrid: {
       width: "45vw",

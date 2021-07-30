@@ -10,9 +10,8 @@ import Dashboard from "../Dashboard/Dashboard";
 import CoinTutorial from "../CoinTutorial/CoinTutorial";
 import Buy from "../Buy/Buy";
 import Sell from "../Sell/Sell";
-import Landing from "../Landing/Landing"
+import Landing from "../Landing/Landing";
 import UserContext from "../../hooks/userContext";
-import Navbar from "../Navbar/Navbar";
 
 function App() {
   const [user, setUser] = useState({});
@@ -43,7 +42,7 @@ function App() {
         <div className="app-header">
           <div className="container">
             <Routes>
-            <Route path="/" element={<Landing/>} />
+              <Route path="/" element={<Landing />} />
               <Route path="/login" element={<Login setUser={setUser} />} />
               <Route path="/register" element={<Register setUser={setUser} />} />
               <Route

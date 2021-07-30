@@ -50,26 +50,44 @@ const Dashboard = ({ setSymbol, setName }) => {
       width: "35vw",
       height: "70vh",
       borderRadius: "5px",
+      "@media (max-width: 1560px)": {
+        height: "77vh",
+      },
+      "@media (max-width: 1400px)": {
+        width: "80vw",
+      },
     },
     date: {
       height: 150,
       display: "flex",
       alignItems: "center",
       marginLeft: 40,
+      "@media (max-width: 1560px)": {
+        height: 50,
+        marginBottom: 16,
+      },
     },
     info: {
       display: "flex",
-      // flexDirection: "column",
+      "@media (max-width: 1400px)": {
+        flexDirection: "column",
+      },
     },
     coinGrid: {
       width: "45vw",
       height: "65vh",
       borderRadius: "5px",
       marginLeft: 40,
-    },
-    link: {
-      textDecoration: "none",
-      color: "white",
+      "@media (max-width: 1400px)": {
+        width: "80vw",
+        marginTop: 40,
+        marginLeft: "10%",
+      },
+      "@media (max-width: 1000px)": {
+        width: "80vw",
+        marginTop: 40,
+        marginLeft: "20%",
+      },
     },
   });
 
@@ -131,23 +149,16 @@ const Dashboard = ({ setSymbol, setName }) => {
           <div className={classes.coinGrid}>
             <Grid container spacing={7}>
               {wallet.map((coin) => (
-                <Grid item sm={12} lg={6}>
-                  <Link
-                    className={classes.link}
-                    to={"/coin/" + coin.symbol}
-                    onClick={() => {
-                      setSymbol(coin.symbol);
-                      setName(coin.name);
-                    }}
-                  >
-                    <CoinCard
-                      name={coin.name}
-                      symbol={coin.symbol}
-                      amount={coin.amount}
-                      color={coin.color}
-                      id={coin.id}
-                    />
-                  </Link>
+                <Grid item xs={12} lg={6}>
+                  <CoinCard
+                    name={coin.name}
+                    symbol={coin.symbol}
+                    amount={coin.amount}
+                    color={coin.color}
+                    id={coin.id}
+                    setSymbol={setSymbol}
+                    setName={setName}
+                  />
                 </Grid>
               ))}
             </Grid>

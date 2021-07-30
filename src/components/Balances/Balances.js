@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { useState, useEffect } from "react";
 import apiClient from "../Services/apiClient";
 import { Typography } from "@material-ui/core";
@@ -105,7 +105,7 @@ const Balances = ({ user, wallet }) => {
     chart: {
       marginTop: 110,
       "@media (max-width: 1560px)": {
-        marginTop: 0,
+        marginTop: 20,
       },
     },
     data: {
@@ -118,6 +118,9 @@ const Balances = ({ user, wallet }) => {
     usd: {
       marginTop: 20,
       marginBottom: 70,
+      "@media (max-width: 1560px)": {
+        marginBottom: 40,
+      },
     },
     col: {
       display: "flex",
@@ -146,6 +149,10 @@ const Balances = ({ user, wallet }) => {
     },
     portfolio: {
       marginTop: 50,
+      "@media (max-width: 1560px)": {
+        marginTop: 0,
+        fontSize: 28,
+      },
     },
   });
 

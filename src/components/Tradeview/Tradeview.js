@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import apiClient from "../Services/apiClient";
-import Chart from "../Chart/Chart";
+// import apiClient from "../Services/apiClient";
+// import Chart from "../Chart/Chart";
 import Coinheader from "../Coinheader/Coinheader";
 import About from "../About/About";
 import Statistics from "../Statistics/Statistics";

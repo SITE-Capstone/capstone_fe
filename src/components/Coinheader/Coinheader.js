@@ -3,8 +3,29 @@ import apiClient from "../Services/apiClient";
 import { makeStyles, Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import btc from "../../images/btc.png";
+import eth from "../../images/eth.png";
+import ada from "../../images/ada.png";
+import doge from "../../images/doge.png";
+import dot from "../../images/dot.png";
+import xmr from "../../images/xmr.png";
 
 function Coinheader({ symbol }) {
+  let currCoin;
+  if (symbol === "BTC") {
+    currCoin = btc;
+  } else if (symbol === "ADA") {
+    currCoin = ada;
+  } else if (symbol === "ETH") {
+    currCoin = eth;
+  } else if (symbol === "DOGE") {
+    currCoin = doge;
+  } else if (symbol === "DOT") {
+    currCoin = dot;
+  } else if (symbol === "XMR") {
+    currCoin = xmr;
+  }
+
   const [state, setState] = useState({
     symbol: symbol,
     price: "0.00",
@@ -84,7 +105,7 @@ function Coinheader({ symbol }) {
   return (
     <div className={classes.Coinheader}>
       <div className={classes.details}>
-        <img className={classes.symbolImage} src={state.url} alt={state.symbol} />
+        <img className={classes.symbolImage} src={currCoin} alt={state.symbol} />
         <Typography variant="h4" className="symbol">
           {state.symbol}
         </Typography>

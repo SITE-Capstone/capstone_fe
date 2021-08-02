@@ -9,14 +9,12 @@ function Statistics({symbol}) {
 
     useEffect(() => {
         apiClient.getCoinStatistics().then((res) => {
-            console.log("TEST",res.data)
             res.data.forEach(element => {
                 // console.log(element.symbol, symbol.toLowerCase())
                 if(element.symbol===symbol.toLowerCase()){
                     setStats(element)
                 }
             });
-            console.log("data", stats)
         })
     }, [])
 

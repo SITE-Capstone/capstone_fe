@@ -336,7 +336,6 @@ function News({ symbol, name }) {
         symbol: symbol,
         name: name,
       });
-      console.log("#299 State:", news.articles);
     });
   }, []);
 

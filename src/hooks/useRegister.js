@@ -15,6 +15,9 @@ function useRegister({ setUser }) {
       borderRadius: "8px",
       height: "57px",
       margin: "20px 0 20px 0",
+      "@media (max-width: 1440px)": {
+        margin: "16px 0 16px 0",
+      },
     },
     registerBtn: {
       marginTop: 20,
@@ -27,9 +30,12 @@ function useRegister({ setUser }) {
       color: "white",
       fontSize: "24px",
       fontWeight: "bold",
+      "@media (max-width: 1440px)": {
+        marginTop: 10,
+        marginBottom: 30,
+      },
     },
     card: {
-      backgroundColor: "red",
       background: "radial-gradient(50% 50% at 50% 50%, #20135C 0%, #140739 100%)",
       boxShadow: "0px 0px 8px 8px rgba(255, 255, 255, 0.25)",
       borderRadius: "25px",
@@ -40,10 +46,18 @@ function useRegister({ setUser }) {
       justifyContent: "center",
       alignItems: "center",
       textAlign: "center",
+      "@media (max-width: 1440px)": {
+        height: 603,
+        width: 630,
+      },
     },
     title: {
       marginTop: 60,
       marginBottom: 50,
+      "@media (max-width: 1440px)": {
+        marginTop: 40,
+        marginBottom: 30,
+      },
     },
     name: {
       display: "flex",

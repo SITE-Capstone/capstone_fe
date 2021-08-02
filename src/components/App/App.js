@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import apiClient from "../Services/apiClient";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import Tutorial from "../Tutorial/Tutorial";
 import Login from "../Login/Login";
 import Tradeview from "../Tradeview/Tradeview";
@@ -12,6 +12,7 @@ import Buy from "../Buy/Buy";
 import Sell from "../Sell/Sell";
 import Landing from "../Landing/Landing";
 import UserContext from "../../hooks/userContext";
+import { Button } from "@material-ui/core";
 
 function App() {
   const [user, setUser] = useState({});
@@ -49,7 +50,17 @@ function App() {
                 path="/tutorial"
                 element={
                   Object.keys(user).length === 0 ? (
-                    <h1 style={{ textAlign: "center" }}>Not logged in</h1>
+                    <div>
+                      <h1 style={{ textAlign: "center" }}>Not logged in</h1>
+                      <div style={{ display: "flex", width: 385, justifyContent: "space-between" }}>
+                        <Link to="/login" style={{ textDecoration: "none" }}>
+                          <Button variant="contained">Sign in</Button>
+                        </Link>
+                        <Link to="/register" style={{ textDecoration: "none" }}>
+                          <Button variant="contained">Register</Button>
+                        </Link>
+                      </div>
+                    </div>
                   ) : (
                     <Tutorial
                       setVideoUrl={setVideoUrl}
@@ -64,7 +75,17 @@ function App() {
                 path="/dashboard"
                 element={
                   Object.keys(user).length === 0 ? (
-                    <h1 style={{ textAlign: "center" }}>Not logged in</h1>
+                    <div>
+                      <h1 style={{ textAlign: "center" }}>Not logged in</h1>
+                      <div style={{ display: "flex", width: 385, justifyContent: "space-between" }}>
+                        <Link to="/login" style={{ textDecoration: "none" }}>
+                          <Button variant="contained">Sign in</Button>
+                        </Link>
+                        <Link to="/register" style={{ textDecoration: "none" }}>
+                          <Button variant="contained">Register</Button>
+                        </Link>
+                      </div>
+                    </div>
                   ) : (
                     <Dashboard setSymbol={setCoinSymbol} setName={setCoinName} />
                   )

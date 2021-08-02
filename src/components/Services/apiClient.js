@@ -259,6 +259,11 @@ class ApiClient {
     let req = await this.geckoRequest({ endpoint: endpoint, method: "GET" });
     return req;
   }
+  async getCoinStatistics(){
+    let endpoint='/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+    let req = await this.geckoRequest({endpoint:endpoint, method: "GET" })
+    return req
+  }
 
   async newsRequest({ endpoint, method = "GET", data = {} }) {
     const url = this.newsBaseUrl + endpoint + NEWS_API_KEY;

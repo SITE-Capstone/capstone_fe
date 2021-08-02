@@ -33,6 +33,7 @@ class ApiClient {
 
   async request({ endpoint, method = "GET", data = {}, params = {} }) {
     const url = `${this.remoteHostUrl}/${endpoint}`;
+    console.log("Health Check")
 
     const headers = {
       "Content-Type": "application/json",
@@ -95,6 +96,7 @@ class ApiClient {
     return await this.request({ endpoint: "wallet/exchange", method: "PUT", data: order });
   }
 
+
   async transactionHistory(buying_id) {
     return await this.request({
       endpoint: "wallet/transactions",
@@ -104,6 +106,29 @@ class ApiClient {
       },
     });
   }
+
+  //backend Price Information
+
+  async fetchCoinCurrentPrice(coin_id) {
+    return await this.request({endpoint:"price/current", method: "GET", params:{coin_id}})
+  }
+  
+  async fetchCoinHourlyPrice(coin_id) {
+    return await this.request({endpoint:"price/hourly", method:"GET", params:{coin_id}})
+  }
+  async fetchCoinWeeklyPrice(coin_id) {
+    return await this.request({endpoint:"price/weekly", method:"GET", params:{coin_id}})
+  }
+  async fetchCoinYearlyPrice(coin_id) {
+    return await this.request({endpoint:"price/yearly", method:"GET", params:{coin_id}})
+  }
+  async fetchAllCurrentPrices() {
+    return await this.request({endpoint:"price/", method:"GET"})
+  }
+
+
+
+
 
   // COIN INFORMATION
   async coinRequest({ endpoint, method = "GET", data = {} }, key) {
@@ -268,6 +293,11 @@ class ApiClient {
       "?localization=en&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false";
     let req = await this.geckoRequest({ endpoint: endpoint, method: "GET" });
     return req;
+  }
+  async getCoinStatistics(){
+    let endpoint='/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+    let req = await this.geckoRequest({endpoint:endpoint, method: "GET" })
+    return req
   }
 
   async newsRequest({ endpoint, method = "GET", data = {} }) {

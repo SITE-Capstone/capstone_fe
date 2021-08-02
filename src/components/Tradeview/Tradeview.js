@@ -35,7 +35,7 @@ function Tradeview({ symbol, name, setTutorialId }) {
       {/* <Chart symbol={symbol} /> */}
       <Coinheader symbol={symbol} />
       <About name={name} symbol={symbol} setTutorialId={setTutorialId} />
-      <Statistics />
+      <Statistics symbol={symbol}/>
       <Exchanges />
       <News symbol={symbol} name={name} />
     </div>

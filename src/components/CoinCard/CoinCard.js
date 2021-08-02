@@ -1,6 +1,9 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
+import apiClient from "../Services/apiClient";
+import TransactionHistory from "./TransactionHistory";
 import btc from "../../images/btc.png";
 import eth from "../../images/eth.png";
 import ada from "../../images/ada.png";
@@ -76,6 +79,45 @@ const CoinCard = ({ name, symbol, amount, color, id, setSymbol, setName }) => {
 
   const images = [btc, ada, eth, doge, dot, xmr];
 
+  const [transactionOneAmount, setTransactionOneAmount] = useState();
+  const [transactionOnePrice, setTransactionOnePrice] = useState();
+  const [transactionOneTime, setTransactionOneTime] = useState();
+  const [transactionTwoAmount, setTransactionTwoAmount] = useState();
+  const [transactionTwoPrice, setTransactionTwoPrice] = useState();
+  const [transactionTwoTime, setTransactionTwoTime] = useState();
+  const [transactionThreeAmount, setTransactionThreeAmount] = useState();
+  const [transactionThreePrice, setTransactionThreePrice] = useState();
+  const [transactionThreeTime, setTransactionThreeTime] = useState();
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      let buying_id = symbol.toLowerCase();
+
+      const { data } = await apiClient.transactionHistory(buying_id);
+      console.log("data transactions", data.transactions);
+      if (data.transactions.length > 0) {
+        setTransactionOneAmount(data.transactions[0].buying_quantity);
+        setTransactionOnePrice(data.transactions[0].selling_quantity);
+        setTransactionOneTime(data.transactions[0].created_at);
+      }
+      if (data.transactions.length > 1) {
+        setTransactionTwoAmount(data.transactions[1].buying_quantity);
+        setTransactionTwoPrice(data.transactions[1].selling_quantity);
+        setTransactionTwoTime(data.transactions[1].created_at);
+      }
+      if (data.transactions.length > 2) {
+        setTransactionThreeAmount(data.transactions[2].buying_quantity);
+        setTransactionThreePrice(data.transactions[2].selling_quantity);
+        setTransactionThreeTime(data.transactions[2].created_at);
+      }
+    };
+    fetchTransactions();
+  }, []);
+
+  let time1 = new Date(transactionOneTime);
+  let time2 = new Date(transactionTwoTime);
+  let time3 = new Date(transactionThreeTime);
+
   return (
     <div className={classes.card}>
       <Link
@@ -91,15 +133,44 @@ const CoinCard = ({ name, symbol, amount, color, id, setSymbol, setName }) => {
             {name}
           </Typography>
         </div>
-        <div className={classes.mainCard}>
-          <div className={classes.imgShadow}>
-            <img src={images[id - 1]} alt={name} className={classes.image} />
+        <div style={{ display: "flex" }}>
+          <div className={classes.mainCard}>
+            <div className={classes.imgShadow}>
+              <img src={images[id - 1]} alt={name} className={classes.image} />
+            </div>
+            <div className={classes.info}>
+              <Typography variant="h6">{symbol}</Typography>
+              <Typography variant="h6">{amount}</Typography>
+            </div>
+            <div className="marketData"></div>
           </div>
-          <div className={classes.info}>
-            <Typography variant="h6">{symbol}</Typography>
-            <Typography variant="h6">{amount.toLocaleString()}</Typography>
+
+          <div className="transactions">
+            {transactionOneAmount && (
+              <TransactionHistory
+                time={time1.toLocaleString()}
+                amount={transactionOneAmount}
+                price={transactionOnePrice}
+                symbol={symbol}
+              />
+            )}
+            {transactionTwoAmount && (
+              <TransactionHistory
+                time={time2.toLocaleString()}
+                amount={transactionTwoAmount}
+                price={transactionTwoPrice}
+                symbol={symbol}
+              />
+            )}
+            {transactionThreeAmount && (
+              <TransactionHistory
+                time={time3.toLocaleString()}
+                amount={transactionThreeAmount}
+                price={transactionThreePrice}
+                symbol={symbol}
+              />
+            )}
           </div>
-          <div className="marketData"></div>
         </div>
       </Link>
     </div>

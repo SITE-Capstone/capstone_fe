@@ -80,7 +80,7 @@ const TutorialCard = ({ name, description, color, id }) => {
     <div className="TutorialCard">
       <Box className={classes.card}>
         <Typography variant="h5" className={classes.name}>
-          {name}
+          {name.length < 5 ? name.toUpperCase() : name.charAt(0).toUpperCase() + name.slice(1)}
         </Typography>
         <Typography variant="body1" className={classes.desc}>
           {description}

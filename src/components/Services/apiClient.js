@@ -95,6 +95,16 @@ class ApiClient {
     return await this.request({ endpoint: "wallet/exchange", method: "PUT", data: order });
   }
 
+  async transactionHistory(buying_id) {
+    return await this.request({
+      endpoint: "wallet/transactions",
+      method: "GET",
+      params: {
+        buying_id,
+      },
+    });
+  }
+
   // COIN INFORMATION
   async coinRequest({ endpoint, method = "GET", data = {} }, key) {
     const url = this.coinApiBaseUrl + endpoint + API_KEYs[key];

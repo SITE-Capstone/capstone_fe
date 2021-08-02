@@ -18,6 +18,29 @@ class Chart extends React.Component {
     color:color
   }
   componentDidMount() {
+    apiClient.fetchCoinYearlyPrice(this.props.symbol.toLowerCase()).then(res => {
+      let chartData = Data
+      console.log("SUPA", chartData)
+      if (res.data===null){
+        console.log("Error:", res)
+        setTimeout(
+            apiClient.fetchCoinYearlyPrice(this.props.symbol.toLowerCase()).then( res2 => {
+                
+                if (res2.data===null){
+                    console.log("Error:", res2)
+                    chartData=Data
+                }else{
+                  chartData=res.data
+                }
+            }), 3000
+        )
+      }else{
+       chartData=res.data
+      }
+      console.log("SUPA", chartData)
+    })
+
+
     apiClient.getCoinThreeMonthPriceHistory(this.props.symbol).then(res => {
       let chartData = Data
       if (res.data===null){

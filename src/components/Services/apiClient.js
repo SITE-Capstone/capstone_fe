@@ -33,6 +33,7 @@ class ApiClient {
 
   async request({ endpoint, method = "GET", data = {}, params = {} }) {
     const url = `${this.remoteHostUrl}/${endpoint}`;
+    console.log("Health Check")
 
     const headers = {
       "Content-Type": "application/json",
@@ -94,6 +95,28 @@ class ApiClient {
   async exchangeCurrencies(order) {
     return await this.request({ endpoint: "wallet/exchange", method: "PUT", data: order });
   }
+
+  //backend Price Information
+
+  async fetchCoinCurrentPrice(coin_id) {
+    return await this.request({endpoint:"price/current", method: "GET", params:{coin_id}})
+  }
+  
+  async fetchCoinHourlyPrice(coin_id) {
+    return await this.request({endpoint:"price/hourly", method:"GET", params:{coin_id}})
+  }
+  async fetchCoinWeeklyPrice(coin_id) {
+    return await this.request({endpoint:"price/weekly", method:"GET", params:{coin_id}})
+  }
+  async fetchCoinYearlyPrice(coin_id) {
+    return await this.request({endpoint:"price/yearly", method:"GET", params:{coin_id}})
+  }
+  async fetchAllCurrentPrices() {
+    return await this.request({endpoint:"price/", method:"GET"})
+  }
+
+
+
 
   // COIN INFORMATION
   async coinRequest({ endpoint, method = "GET", data = {} }, key) {

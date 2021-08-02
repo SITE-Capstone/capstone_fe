@@ -27,6 +27,9 @@ const useLogin = ({ setUser }) => {
       color: "white",
       fontSize: "24px",
       fontWeight: "bold",
+      "@media (max-width: 1440px)": {
+        marginBottom: 30,
+      },
     },
     card: {
       backgroundColor: "red",
@@ -40,10 +43,18 @@ const useLogin = ({ setUser }) => {
       justifyContent: "center",
       alignItems: "center",
       textAlign: "center",
+      "@media (max-width: 1440px)": {
+        height: 603,
+        width: 630,
+      },
     },
     title: {
       marginTop: 60,
       marginBottom: 50,
+      "@media (max-width: 1440px)": {
+        marginTop: 40,
+        marginBottom: 30,
+      },
     },
     error: {
       color: "red",

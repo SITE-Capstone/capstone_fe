@@ -32,7 +32,7 @@ function Tradeview({ symbol, name, setTutorialId }) {
       <Link to="/dashboard" className={classes.link}>
         <Icon className={classes.back}>arrow_circle_up</Icon>
       </Link>
-      <Chart symbol={symbol} />
+      {/* <Chart symbol={symbol} /> */}
       <Coinheader symbol={symbol} />
       <About name={name} symbol={symbol} setTutorialId={setTutorialId} />
       <Statistics symbol={symbol}/>

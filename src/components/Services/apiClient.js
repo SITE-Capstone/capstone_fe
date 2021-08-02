@@ -96,6 +96,17 @@ class ApiClient {
     return await this.request({ endpoint: "wallet/exchange", method: "PUT", data: order });
   }
 
+
+  async transactionHistory(buying_id) {
+    return await this.request({
+      endpoint: "wallet/transactions",
+      method: "GET",
+      params: {
+        buying_id,
+      },
+    });
+  }
+
   //backend Price Information
 
   async fetchCoinCurrentPrice(coin_id) {
@@ -114,6 +125,7 @@ class ApiClient {
   async fetchAllCurrentPrices() {
     return await this.request({endpoint:"price/", method:"GET"})
   }
+
 
 
 

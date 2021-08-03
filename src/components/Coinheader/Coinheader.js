@@ -44,13 +44,13 @@ function Coinheader({ symbol }) {
               console.log("#22 Coinheader.js Error:", res2);
               price = "Error";
             } else {
-              price = res2.data.rate.toFixed(2);
+              price = Number(res2.data.data).toFixed(2);
             }
           }),
           3000
         );
       } else {
-        price = res.data.rate.toFixed(2);
+        price = Number(res.data.data).toFixed(2);
       }
       setState({
         symbol: symbol,

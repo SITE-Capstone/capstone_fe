@@ -110,20 +110,24 @@ class ApiClient {
 
   //backend Price Information
 
-  async fetchCoinCurrentPrice(coin_id) {
+  async getCoinCurrentPrice(coin_id) {
+    coin_id=coin_id.toLowerCase()
     return await this.request({endpoint:"price/current", method: "GET", params:{coin_id}})
   }
   
-  async fetchCoinHourlyPrice(coin_id) {
+  async getCoinHourlyPriceHistory(coin_id) {
+    coin_id=coin_id.toLowerCase()
     return await this.request({endpoint:"price/hourly", method:"GET", params:{coin_id}})
   }
-  async fetchCoinWeeklyPrice(coin_id) {
+  async getCoinWeeklyPriceHistory(coin_id) {
+    coin_id=coin_id.toLowerCase()
     return await this.request({endpoint:"price/weekly", method:"GET", params:{coin_id}})
   }
-  async fetchCoinYearlyPrice(coin_id) {
+  async getCoinYearlyPriceHistory(coin_id) {
+    coin_id=coin_id.toLowerCase()
     return await this.request({endpoint:"price/yearly", method:"GET", params:{coin_id}})
   }
-  async fetchAllCurrentPrices() {
+  async fetchAllCurrentPricesHistory() {
     return await this.request({endpoint:"price/", method:"GET"})
   }
 
@@ -180,14 +184,14 @@ class ApiClient {
     return "https://pics.freeicons.io/uploads/icons/png/17917263711578289008-512.png";
   }
 
-  async getCoinYearlyPriceHistory(symbol) {
-    const date = new Date();
-    date.setDate(date.getDate() - 365);
-    let period_id = "1DAY";
-    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 365, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 1);
-    return req;
-  }
+  // async getCoinYearlyPriceHistory(symbol) {
+  //   const date = new Date();
+  //   date.setDate(date.getDate() - 365);
+  //   let period_id = "1DAY";
+  //   let endpoint = this.getPriceHistoryEndpoint(symbol, date, 365, period_id);
+  //   let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 1);
+  //   return req;
+  // }
 
   async getCoinMonthlyPriceHistory(symbol) {
     const date = new Date();
@@ -206,14 +210,14 @@ class ApiClient {
     let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 3);
     return req;
   }
-  async getCoinWeeklyPriceHistory(symbol) {
-    const date = new Date();
-    date.setDate(date.getDate() - 7);
-    let period_id = "4HRS";
-    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 42, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 4);
-    return req;
-  }
+  // async getCoinWeeklyPriceHistory(symbol) {
+  //   const date = new Date();
+  //   date.setDate(date.getDate() - 7);
+  //   let period_id = "4HRS";
+  //   let endpoint = this.getPriceHistoryEndpoint(symbol, date, 42, period_id);
+  //   let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 4);
+  //   return req;
+  // }
   async getCoinDailyPriceHistory(symbol) {
     const date = new Date();
     date.setDate(date.getDate() - 1);
@@ -223,14 +227,14 @@ class ApiClient {
     return req;
   }
 
-  async getCoinHourlyPriceHistory(symbol) {
-    const date = new Date();
-    date.setTime(date.getTime() - (61 * 60 * 1000 + (date.getTime() % 60000)));
-    let period_id = "1MIN";
-    let endpoint = this.getPriceHistoryEndpoint(symbol, date, 60, period_id);
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 6);
-    return req;
-  }
+  // async getCoinHourlyPriceHistory(symbol) {
+  //   const date = new Date();
+  //   date.setTime(date.getTime() - (61 * 60 * 1000 + (date.getTime() % 60000)));
+  //   let period_id = "1MIN";
+  //   let endpoint = this.getPriceHistoryEndpoint(symbol, date, 60, period_id);
+  //   let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 6);
+  //   return req;
+  // }
 
   getPriceHistoryEndpoint(symbol, date, limit, period_id) {
     let monthConnector = "-";
@@ -262,11 +266,11 @@ class ApiClient {
     return endpoint;
   }
 
-  async getCoinCurrentPrice(symbol) {
-    let endpoint = "/v1/exchangerate/" + symbol + "/USD?apikey=";
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 7);
-    return req;
-  }
+  // async getCoinCurrentPrice(symbol) {
+  //   let endpoint = "/v1/exchangerate/" + symbol + "/USD?apikey=";
+  //   let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 7);
+  //   return req;
+  // }
 
   async geckoRequest({ endpoint, method = "GET", data = {} }) {
     const url = this.geckoBaseUrl + endpoint;

@@ -19,7 +19,8 @@ let API_KEY_count = 0;
 
 class ApiClient {
   constructor(remoteHostUrl) {
-    this.remoteHostUrl = remoteHostUrl;
+    // this.remoteHostUrl = remoteHostUrl;
+    this.remoteHostUrl = 'https://kuriosbe.herokuapp.com';
     this.token = null;
     this.coinApiBaseUrl = "https://rest.coinapi.io";
     this.geckoBaseUrl = "https://api.coingecko.com/api/v3";

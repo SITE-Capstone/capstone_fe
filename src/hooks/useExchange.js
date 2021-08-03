@@ -96,13 +96,13 @@ const useExchange = ({ symbol, type }) => {
                 console.log("#22 Coinheader.js Error:", res2);
                 setErrors((e) => ({ ...e, form: res.error }));
               } else {
-                price = res2.data.rate.toFixed(2);
+                price = Number(res2.data.data).toFixed(2);
               }
             }),
             3000
           );
         } else {
-          price = res.data.rate.toFixed(2);
+          price = Number(res.data.data).toFixed(2);
         }    
         console.log("Price", price)
         console.log("SYmbol", symbol)

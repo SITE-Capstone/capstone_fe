@@ -23,13 +23,13 @@ const Sell = ({ symbol }) => {
               console.log("#22 Sell.js Error:", res2);
               price = 0;
             } else {
-              price = res2.data.rate.toFixed(2);
+              price = Number(res2.data.data).toFixed(2);
             }
           }),
           3000
         );
       } else {
-        price = res.data.rate.toFixed(2);
+        price = Number(res.data.data).toFixed(2);
       }
       setState((f) => ({ ...f, ["price"]: price }));
     });

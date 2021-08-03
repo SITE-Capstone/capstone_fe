@@ -110,7 +110,8 @@ class ApiClient {
 
   //backend Price Information
 
-  async fetchCoinCurrentPrice(coin_id) {
+  async getCoinCurrentPrice(coin_id) {
+    coin_id=coin_id.toLowerCase()
     return await this.request({endpoint:"price/current", method: "GET", params:{coin_id}})
   }
   
@@ -262,11 +263,11 @@ class ApiClient {
     return endpoint;
   }
 
-  async getCoinCurrentPrice(symbol) {
-    let endpoint = "/v1/exchangerate/" + symbol + "/USD?apikey=";
-    let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 7);
-    return req;
-  }
+  // async getCoinCurrentPrice(symbol) {
+  //   let endpoint = "/v1/exchangerate/" + symbol + "/USD?apikey=";
+  //   let req = await this.coinRequest({ endpoint: endpoint, method: "GET" }, 7);
+  //   return req;
+  // }
 
   async geckoRequest({ endpoint, method = "GET", data = {} }) {
     const url = this.geckoBaseUrl + endpoint;

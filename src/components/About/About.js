@@ -122,9 +122,6 @@ function About({ symbol, name, setTutorialId }) {
         </div>
       </div>
       <Divider className={classes.divider} />
-      <Typography variant="h3" className={classes.header}>
-        Recent News
-      </Typography>
     </div>
   );
 }

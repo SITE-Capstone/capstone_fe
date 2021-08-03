@@ -18,31 +18,11 @@ class Chart extends React.Component {
     color:color
   }
   componentDidMount() {
-    apiClient.fetchCoinYearlyPrice(this.props.symbol.toLowerCase()).then(res => {
-      let chartData = Data
-      console.log("SUPA", chartData)
-      if (res.data===null){
-        console.log("Error:", res)
-        setTimeout(
-            apiClient.fetchCoinYearlyPrice(this.props.symbol.toLowerCase()).then( res2 => {
-                
-                if (res2.data===null){
-                    console.log("Error:", res2)
-                    chartData=Data
-                }else{
-                  chartData=res.data
-                }
-            }), 3000
-        )
-      }else{
-       chartData=res.data
-      }
-      console.log("SUPA", chartData)
-    })
 
 
-    apiClient.getCoinThreeMonthPriceHistory(this.props.symbol).then(res => {
+    apiClient.getCoinYearlyPriceHistory(this.props.symbol).then(res => {
       let chartData = Data
+      console.log("################:", res)
       if (res.data===null){
         console.log("#24 Chart.js Error:", res)
         setTimeout(
@@ -52,16 +32,17 @@ class Chart extends React.Component {
                     console.log("#29 Chart.js Error:", res2)
                     chartData=Data
                 }else{
-                  chartData=res.data
+                  chartData=res.data.data
                 }
             }), 3000
         )
       }else{
-       chartData=res.data
+       chartData=res.data.data
       }
+      console.log("XXXXX",chartData)
 
-      let open = chartData[0].rate_open;
-      let close = chartData[chartData.length - 1].rate_open;
+      let open = chartData[0].price;
+      let close = chartData[chartData.length - 1].price;
       color = black;
       if (open > close) {
         color = red;
@@ -69,6 +50,10 @@ class Chart extends React.Component {
       if (close > open) {
         color = green;
       }
+      chartData = chartData.map(element =>{
+        return{id:element.id, price:Number(element.price), time: element.time}
+      })
+      chartData.reverse()
     
       this.setState({
         chartData:chartData,
@@ -84,12 +69,12 @@ class Chart extends React.Component {
     return (
       <ResponsiveContainer width="75%" height={500}>
         <LineChart width={600} height={300} data={this.state.chartData}>
-        <Line dataKey="time_open" type="monotone" animationDuration={0} stroke="transparent" dot={false} key={0} />
-        <Line dataKey="rate_open" animationDuration={2200} stroke={color[0]} dot={false} key={1} />
-        <Line dataKey="rate_open" type="monotone" strokeWidth={2} animationDuration={2200} stroke={color[1]} dot={false} key={2}/>
-        <Line dataKey="rate_open" type="monotone" strokeWidth={4} animationDuration={2200} stroke={color[2]} dot={false} key={3}/>
-          <YAxis dataKey="rate_open" stroke="transparent" />
-          <XAxis dataKey="time_open" stroke="transparent" />
+        <Line dataKey="time" type="monotone" animationDuration={2200} stroke="transparent" dot={false} key={0} />
+        <Line dataKey="price" animationDuration={2200} stroke={color[0]} dot={false} key={1} />
+        <Line dataKey="price" type="monotone" strokeWidth={2} animationDuration={2200} stroke={color[1]} dot={false} key={2}/>
+        <Line dataKey="price" type="monotone" strokeWidth={4} animationDuration={2200} stroke={color[2]} dot={false} key={3}/>
+          <YAxis dataKey="price" stroke="transparent" />
+          <XAxis dataKey="time" stroke="transparent" />
           <Tooltip content={CustomTooltip} />
         </LineChart>
       </ResponsiveContainer>
@@ -107,7 +92,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div className="custom-tooltip">
         <p className="label">{`Time: ${new Date(payload[0].value).toLocaleString()}`}</p>
-        <p className="label">{`Price: ${payload[1].value.toFixed(4)}`}</p>
+        <p className="label">{`Price: ${Number(payload[1].value).toFixed(4)}`}</p>
       </div>
     );
   } else {

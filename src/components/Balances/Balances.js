@@ -181,7 +181,7 @@ const Balances = ({ user, wallet }) => {
         </PieChart>
       </div>
       <Typography variant="h4" className={classes.portfolio}>
-        Total Portfolio: ${assetTotal && assetTotal.toLocaleString()}
+        Total Portfolio: {assetTotal ? "$" + assetTotal.toLocaleString() : "calculating..."}
       </Typography>
       <Typography variant="h5" className={classes.usd}>
         Buying Power: ${balance && balance.toLocaleString()}

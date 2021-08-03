@@ -5,7 +5,7 @@ import up from "../../images/up.png";
 import down from "../../images/down.png";
 
 const TransactionHistory = ({ time, amount, price, symbol }) => {
-  const [rate, setRate] = useState(1.35); // REMOVE 1.35 when db is used
+  const [rate, setRate] = useState(1.33); // REMOVE 1.33 when db is used
   // GET THIS FROM DB INSTEAD
   // useEffect(() => {
   //   const fetchCurrentPrice = async () => {

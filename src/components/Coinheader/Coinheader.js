@@ -29,11 +29,9 @@ function Coinheader({ symbol }) {
   const [state, setState] = useState({
     symbol: symbol,
     price: "0.00",
-    url: "https://pics.freeicons.io/uploads/icons/png/17917263711578289008-512.png",
   });
 
   useEffect(() => {
-    let url = "https://pics.freeicons.io/uploads/icons/png/17917263711578289008-512.png";
     let price = 0.0;
 
     apiClient.getCoinCurrentPrice(state.symbol).then((res) => {
@@ -57,7 +55,6 @@ function Coinheader({ symbol }) {
       setState({
         symbol: symbol,
         price: price,
-        url: url,
       });
     });
   }, []);

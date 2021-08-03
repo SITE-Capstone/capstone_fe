@@ -5,18 +5,17 @@ import up from "../../images/up.png";
 import down from "../../images/down.png";
 
 const TransactionHistory = ({ time, amount, price, symbol }) => {
-  const [rate, setRate] = useState(1.33); // REMOVE 1.33 when db is used
-  // GET THIS FROM DB INSTEAD
-  // useEffect(() => {
-  //   const fetchCurrentPrice = async () => {
-  //     const { data } = await apiClient.getCoinCurrentPrice(symbol);
-  //     console.log("data", data.rate);
-  //     if (data) {
-  //       setRate(data.rate);
-  //     }
-  //   };
-  //   fetchCurrentPrice();
-  // }, []);
+  const [rate, setRate] = useState();
+  useEffect(() => {
+    const fetchCurrentPrice = async () => {
+      const { data } = await apiClient.getCoinCurrentPrice(symbol);
+      console.log("data", data.data);
+      if (data) {
+        setRate(data.data);
+      }
+    };
+    fetchCurrentPrice();
+  }, []);
 
   const useStyles = makeStyles({
     container: {

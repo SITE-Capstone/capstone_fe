@@ -23,6 +23,12 @@ const TransactionHistory = ({ time, amount, price, symbol }) => {
       width: "100%",
       justifyContent: "space-around",
       alignItems: "center",
+      height: "40%",
+      "@media (max-width: 1440px)": {
+        height: "33%",
+        marginTop: -30,
+        marginBottom: 30,
+      },
     },
     up: {
       height: 20,
@@ -36,6 +42,11 @@ const TransactionHistory = ({ time, amount, price, symbol }) => {
       marginRight: 10,
       filter: "drop-shadow(0px 4px 5px rgba(243, 80, 80, 0.5))",
     },
+    text: {
+      "@media (max-width: 1440px)": {
+        fontSize: 10,
+      },
+    },
   });
 
   const classes = useStyles();
@@ -48,9 +59,12 @@ const TransactionHistory = ({ time, amount, price, symbol }) => {
         <img src={down} alt="down arrow" className={classes.down} />
       )}
       <div>
-        <Typography variant="body2">{parseFloat(amount).toFixed(2) + " " + symbol}</Typography>
-        <Typography variant="body2">{"purchased for $" + parseFloat(price).toFixed(2)}</Typography>
-        <Typography variant="body2">{time}</Typography>
+        <Typography className={classes.text} variant="body2">
+          {parseFloat(amount).toFixed(2) + " x $" + parseFloat(price).toFixed(2)}
+        </Typography>
+        <Typography className={classes.text} variant="body2">
+          {time.split(",")}
+        </Typography>
         <Divider style={{ backgroundColor: "rgba(255,255,255, 0.2)", marginTop: 3 }} />
       </div>
     </div>

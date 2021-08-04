@@ -51,7 +51,6 @@ const YearChart = ({ symbol }) => {
       chartData = chartData.map((element) => {
         return { id: element.id, price: Number(element.price), time: element.time };
       });
-      chartData.reverse();
 
       setState({
         chartData: chartData,

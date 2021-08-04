@@ -3,7 +3,8 @@ import { string } from "prop-types";
 require("dotenv").config();
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY;
+// const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY;
+const NEWS_API_KEY = '51e6567c15a042dda68b3f712e6937d8';
 const API_KEYs = [
   process.env.REACT_APP_API_KEY1,
   process.env.REACT_APP_API_KEY2,

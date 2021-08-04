@@ -50,9 +50,9 @@ const useExchange = ({ symbol, type }) => {
   });
   const [state, setState] = useState({
     symbol: symbol,
-    price: 0.00,
-    amount:0,
-    text:""
+    price: 0.0,
+    amount: 0,
+    text: "",
   });
   const classes = useStyles();
 
@@ -73,76 +73,70 @@ const useExchange = ({ symbol, type }) => {
   const handleOnInputChange = async (event) => {
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
     await setState((f) => ({ ...f, ["amount"]: event.target.value }));
-      console.log(state.amount)
-      let text = event.target.value* state.price
-      console.log("amount",event.target.value,"price", state.price)
-      setState((f) => ({ ...f, ["text"]: text.toFixed(2) }))
-  
-
+    console.log(state.amount);
+    let text = event.target.value * state.price;
+    console.log("amount", event.target.value, "price", state.price);
+    setState((f) => ({ ...f, ["text"]: text.toFixed(2) }));
   };
 
   const handleOnSubmit = async () => {
     setIsProcessing(true);
     setErrors((e) => ({ ...e, form: null }));
 
-    let price = 0
+    let price = 0;
     apiClient.getCoinCurrentPrice(symbol).then((res) => {
-        if (res.data === null) {
-          console.log("#18  Coinheader.js Error:", res);
-          setErrors((e) => ({ ...e, form: res.error }));
-          setTimeout(
-            apiClient.getCoinCurrentPrice(symbol).then((res2) => {
-              if (res2.data === null) {
-                console.log("#22 Coinheader.js Error:", res2);
-                setErrors((e) => ({ ...e, form: res.error }));
-              } else {
-                price = Number(res2.data.data).toFixed(2);
-              }
-            }),
-            3000
-          );
+      if (res.data === null) {
+        console.log("#18  Coinheader.js Error:", res);
+        setErrors((e) => ({ ...e, form: res.error }));
+        setTimeout(
+          apiClient.getCoinCurrentPrice(symbol).then((res2) => {
+            if (res2.data === null) {
+              console.log("#22 Coinheader.js Error:", res2);
+              setErrors((e) => ({ ...e, form: res.error }));
+            } else {
+              price = Number(res2.data.data).toFixed(2);
+            }
+          }),
+          3000
+        );
+      } else {
+        price = Number(res.data.data).toFixed(2);
+      }
+      console.log("Price", price);
+      console.log("SYmbol", symbol);
+      let order = "";
+      if (price !== 0 && Number(form.quantity)) {
+        if (type === 0) {
+          order = {
+            buying_id: symbol.toLowerCase(),
+            selling_id: "usd",
+            quantity: Number(form.quantity),
+            type: type,
+            price: price,
+          };
         } else {
-          price = Number(res.data.data).toFixed(2);
-        }    
-        console.log("Price", price)
-        console.log("SYmbol", symbol)
-        let order=''
-        if (price!==0 && Number(form.quantity)){
-            if(type===0){
-                order={
-                    "buying_id": symbol.toLowerCase(),
-                    "selling_id": "usd",
-                    "quantity": Number(form.quantity),
-                    "type":type,
-                    "price":price
-                }
-            }
-            else{
-                order={
-                    "buying_id": "usd",
-                    "selling_id": symbol.toLowerCase(),
-                    "quantity": Number(form.quantity),
-                    "type":type,
-                    "price":price
-                }
-
-            }
-
-            console.log("order",order)
-            apiClient.exchangeCurrencies(order).then((orderRes) =>{
-                if (orderRes.data === null) {
-                    console.log("#18 useExchange.js Error:", orderRes);
-                    setErrors((e) => ({ ...e, form: orderRes.error }));
-                    setIsProcessing(false);
-                }
-                else{
-                    setIsProcessing(false);
-                setIsPurchased(true)
-                }
-            })
+          order = {
+            buying_id: "usd",
+            selling_id: symbol.toLowerCase(),
+            quantity: Number(form.quantity),
+            type: type,
+            price: price,
+          };
         }
-    })
 
+        console.log("order", order);
+        apiClient.exchangeCurrencies(order).then((orderRes) => {
+          if (orderRes.data === null) {
+            console.log("#18 useExchange.js Error:", orderRes);
+            setErrors((e) => ({ ...e, form: orderRes.error }));
+            setIsProcessing(false);
+          } else {
+            setIsProcessing(false);
+            setIsPurchased(true);
+          }
+        });
+      }
+    });
   };
 
   return {
@@ -153,7 +147,7 @@ const useExchange = ({ symbol, type }) => {
     isProcessing,
     classes,
     state,
-    setState
+    setState,
   };
 };
 

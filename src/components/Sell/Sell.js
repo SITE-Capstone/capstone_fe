@@ -2,14 +2,17 @@ import { Link } from "react-router-dom";
 import { InputBase, Button } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import apiClient from "../Services/apiClient";
-import useExchange from "../../hooks/useExchange"
+import useExchange from "../../hooks/useExchange";
 import { useState, useEffect } from "react";
 
 const Sell = ({ symbol }) => {
   // custom hook handles all login logic
-  const type=1
+  const type = 1;
 
-  const { state, setState, handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes } = useExchange({ symbol, type });
+  const { state, setState, handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes } = useExchange({
+    symbol,
+    type,
+  });
 
   useEffect(() => {
     let price = 0.0;
@@ -46,18 +49,19 @@ const Sell = ({ symbol }) => {
         <br />
 
         <div className="form">
-        <Typography variant="h5" >{state.price && "Market Price:  $"+state.price}</Typography>
-        <Typography variant="h5" >{state.text && "Estimated Cost:  $"+state.text}</Typography>
+          <Typography variant="h5">{state.price && "Market Price:  $" + state.price}</Typography>
+          <Typography variant="h5">{state.text && "Estimated Cost:  $" + state.text}</Typography>
           <form noValidate autoComplete="off" className="login-form">
             <InputBase
               label="quantity"
               variant="standard"
               name="quantity"
-              placeholder={"Amount in "+state.symbol}
+              placeholder={"Amount in " + state.symbol}
               value={form.quantity}
               onChange={handleOnInputChange}
               fullWidth
               className={classes.input}
+              onKeyPress={(e) => e.key === "Enter" && e.preventDefault()}
             />
             <Button disabled={isProcessing} onClick={handleOnSubmit} variant="contained" className={classes.loginBtn}>
               {isProcessing ? "Loading..." : "Sell"}
@@ -67,7 +71,7 @@ const Sell = ({ symbol }) => {
 
         <div className="footer">
           <Typography variant="body1">
-            Changed your mind? Go to {" "}
+            Changed your mind? Go to{" "}
             <Link style={{ color: "white", fontWeight: "bold" }} to="/dashboard">
               Dashboard
             </Link>

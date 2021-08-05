@@ -1,7 +1,7 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { useState, useEffect } from "react";
 import apiClient from "../Services/apiClient";
-import { Typography } from "@material-ui/core";
+import { CircularProgress, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 
 const Balances = ({ user, wallet }) => {
@@ -139,6 +139,9 @@ const Balances = ({ user, wallet }) => {
         fontSize: 28,
       },
     },
+    progress: {
+      color: "#5FB2FF",
+    },
   });
 
   const classes = useStyles();
@@ -165,12 +168,18 @@ const Balances = ({ user, wallet }) => {
           </Pie>
         </PieChart>
       </div>
+
       <Typography variant="h4" className={classes.portfolio}>
-        Total Portfolio: {assetTotal ? "$" + assetTotal.toLocaleString() : "calculating..."}
+        {assetTotal ? (
+          "Total portfolio: $" + assetTotal.toLocaleString()
+        ) : (
+          <CircularProgress className={classes.progress} />
+        )}
       </Typography>
       <Typography variant="h5" className={classes.usd}>
         Buying Power: ${balance && balance.toLocaleString()}
       </Typography>
+
       <div className={classes.percents}>
         <div className={classes.col}>
           <div className={classes.data}>

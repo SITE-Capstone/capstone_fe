@@ -91,7 +91,7 @@ function Statistics({ symbol }) {
           </div>
           <div>
             <Typography variant="h5" className={classes.subhead}>
-              Market Cap/Volume
+              Volume/Market Cap
             </Typography>
             <Typography variant="h5" className={classes.number}>
               {(stats.total_volume / stats.market_cap).toFixed(4)}

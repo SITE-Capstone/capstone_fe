@@ -68,7 +68,7 @@ function Statistics({ symbol }) {
               Market Cap
             </Typography>
             <Typography variant="h5" className={classes.number}>
-              {parseFloat(stats.market_cap).toLocaleString()}
+              {stats.market_cap ? parseFloat(stats.market_cap).toLocaleString() : "loading..."}
             </Typography>
           </div>
           <div>
@@ -76,7 +76,7 @@ function Statistics({ symbol }) {
               Volume
             </Typography>
             <Typography variant="h5" className={classes.number}>
-              {parseFloat(stats.total_volume).toLocaleString()}
+              {stats.total_volume ? parseFloat(stats.total_volume).toLocaleString() : "loading..."}
             </Typography>
           </div>
         </div>
@@ -86,7 +86,7 @@ function Statistics({ symbol }) {
               Supply
             </Typography>
             <Typography variant="h5" className={classes.number}>
-              {parseFloat(stats.circulating_supply).toLocaleString()}
+              {stats.circulating_supply ? parseFloat(stats.circulating_supply).toLocaleString() : "loading..."}
             </Typography>
           </div>
           <div>
@@ -94,7 +94,9 @@ function Statistics({ symbol }) {
               Volume/Market Cap
             </Typography>
             <Typography variant="h5" className={classes.number}>
-              {(stats.total_volume / stats.market_cap).toFixed(4)}
+              {stats.total_volume && stats.market_cap
+                ? (stats.total_volume / stats.market_cap).toFixed(4)
+                : "loading..."}
             </Typography>
           </div>
         </div>

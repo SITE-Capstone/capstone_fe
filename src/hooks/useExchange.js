@@ -74,7 +74,7 @@ const useExchange = ({ symbol, type }) => {
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
     await setState((f) => ({ ...f, ["amount"]: event.target.value }));
     let text = event.target.value * state.price;
-    setState((f) => ({ ...f, ["text"]: text.toFixed(2) }));
+    setState((f) => ({ ...f, ["text"]: text.toFixed(3) }));
   };
 
   const handleOnSubmit = async () => {

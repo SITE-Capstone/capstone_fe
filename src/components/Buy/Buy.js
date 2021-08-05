@@ -9,10 +9,11 @@ const Buy = ({ symbol }) => {
   // custom hook handles all login logic
   const type = 0;
 
-  const { state, setState, handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes, quantities } = useExchange({
-    symbol,
-    type,
-  });
+  const { state, setState, handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes, quantities } =
+    useExchange({
+      symbol,
+      type,
+    });
 
   useEffect(() => {
     let price = 0.0;
@@ -26,13 +27,13 @@ const Buy = ({ symbol }) => {
               console.log("#22 Buy.js Error:", res2);
               price = 0;
             } else {
-              price = Number(res2.data.data).toFixed(2);
+              price = Number(res2.data.data);
             }
           }),
           3000
         );
       } else {
-        price = Number(res.data.data).toFixed(2);
+        price = Number(res.data.data);
       }
       setState((f) => ({ ...f, ["price"]: price }));
     });
@@ -52,8 +53,12 @@ const Buy = ({ symbol }) => {
         <br />
 
         <div className="form">
-          <Typography style={{color:"#5FB2FF"}} variant="h5">{quantities[0]}</Typography>
-          <Typography style={{color:"#5FB2FF"}} variant="h5">{quantities[1]}</Typography>
+          <Typography style={{ color: "#5FB2FF" }} variant="h5">
+            {quantities[0]}
+          </Typography>
+          <Typography style={{ color: "#5FB2FF" }} variant="h5">
+            {quantities[1]}
+          </Typography>
           <Typography variant="h5">{state.price && "Market Price:  $" + state.price}</Typography>
           <Typography variant="h5">{state.text && "Estimated Cost:  $" + state.text}</Typography>
           <form noValidate autoComplete="off" className="login-form">

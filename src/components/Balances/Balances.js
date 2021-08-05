@@ -17,13 +17,7 @@ const Balances = ({ user, wallet }) => {
         setBalance(result);
       }
 
-      // const coins = [];
       const prices = [];
-
-      // wallet.map((coin) => {
-      //   coins.push(coin.symbol);
-      // });
-      // console.log(coins);
 
       const BTC = await apiClient.getCoinCurrentPrice("BTC");
       const ADA = await apiClient.getCoinCurrentPrice("ADA");
@@ -31,12 +25,6 @@ const Balances = ({ user, wallet }) => {
       const DOGE = await apiClient.getCoinCurrentPrice("DOGE");
       const DOT = await apiClient.getCoinCurrentPrice("DOT");
       const XMR = await apiClient.getCoinCurrentPrice("XMR");
-      // const BTC = 30738.19;
-      // const ADA = 1.12;
-      // const ETH = 1826.22;
-      // const DOGE = 0.17;
-      // const DOT = 11.56;
-      // const XMR = 191.9;
 
       prices.push(BTC.data.data);
       prices.push(ADA.data.data);
@@ -44,21 +32,18 @@ const Balances = ({ user, wallet }) => {
       prices.push(DOGE.data.data);
       prices.push(DOT.data.data);
       prices.push(XMR.data.data);
-      // prices.push(BTC);
-      // prices.push(ADA);
-      // prices.push(ETH);
-      // prices.push(DOGE);
-      // prices.push(DOT);
-      // prices.push(XMR);
 
       console.log("prices", prices);
       setCoinPrice(prices);
-
-      // wallet.map((entry, index) => {
-      //   const obj = { symbol: entry.symbol, amount: entry.amount * prices[index] };
-      // });
     };
     fetchBalances();
+
+    const interval = setInterval(() => {
+      fetchBalances();
+      console.log("fetching data");
+    }, 15000);
+
+    return () => clearInterval(interval);
   }, []);
 
   console.log("coinprice", coinPrice);

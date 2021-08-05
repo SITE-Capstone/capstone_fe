@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { Data } from "../Data/Data";
 import apiClient from "../Services/apiClient";
@@ -9,7 +10,14 @@ const green = ["rgb(138,246, 138,.85)", "rgb(138,246, 138,.25)", "rgb(138,246, 1
 const green2 = ["rgb(175, 243, 173,.85)", "rgb(175, 243, 173,.25)", "rgb(175, 243, 173,.15)"]; //#AFF3AD
 let color = black;
 
-const YearChart = ({ symbol }) => {
+const HourlyChart = ({ symbol }) => {
+  const useStyles = makeStyles({
+    container: {
+      userSelect: "none",
+    },
+  });
+  const classes = useStyles();
+
   console.log("symbol: XXXXXX", symbol);
   const [state, setState] = useState({
     chartData: Data,
@@ -62,7 +70,7 @@ const YearChart = ({ symbol }) => {
   }, []);
 
   return (
-    <ResponsiveContainer width="75%" height={500}>
+    <ResponsiveContainer width="75%" height={500} className={classes.container}>
       <LineChart width={600} height={300} data={state.chartData}>
         <Line dataKey="time" type="monotone" animationDuration={2200} stroke="transparent" dot={false} key={0} />
         <Line dataKey="price" animationDuration={2200} stroke={color[0]} dot={false} key={1} />
@@ -113,4 +121,4 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-export default YearChart;
+export default HourlyChart;

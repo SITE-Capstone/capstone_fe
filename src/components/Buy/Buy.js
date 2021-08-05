@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { InputBase, Button } from "@material-ui/core";
+import { InputBase, Button, Icon } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import apiClient from "../Services/apiClient";
 import useExchange from "../../hooks/useExchange";
@@ -40,6 +40,9 @@ const Buy = ({ symbol }) => {
 
   return (
     <div className="Buy">
+      <Link to={"/coin/" + symbol}>
+        <Icon className={classes.back}>arrow_circle_up</Icon>
+      </Link>
       <div className={classes.card}>
         <Typography variant="h3" className={classes.title}>
           Buy {state.symbol}

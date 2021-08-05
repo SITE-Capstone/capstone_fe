@@ -47,6 +47,14 @@ const useExchange = ({ symbol, type }) => {
       fontSize: "18px",
       fontFamily: "Roboto",
     },
+    back: {
+      transform: "rotate(-90deg)",
+      fontSize: 64,
+      color: "rgba(255,255,255,0.5)",
+      position: "relative",
+      top: "12%",
+      left: "5%",
+    },
   });
   const [state, setState] = useState({
     symbol: symbol,

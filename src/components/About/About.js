@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import apiClient from "../Services/apiClient";
 import { Link } from "react-router-dom";
-import { Typography, makeStyles, Button, Divider } from "@material-ui/core";
+import { Typography, makeStyles, Button, Divider, CircularProgress } from "@material-ui/core";
 
 function About({ symbol, name, setTutorialId }) {
   const [about, setAbout] = useState({
@@ -91,6 +91,9 @@ function About({ symbol, name, setTutorialId }) {
       textDecoration: "none",
       color: "white",
     },
+    progress: {
+      color: "#5FB2FF",
+    },
   });
 
   const classes = useStyles();
@@ -100,28 +103,34 @@ function About({ symbol, name, setTutorialId }) {
       <Typography className={classes.header} variant="h3">
         {about.name}
       </Typography>
-      <div className={classes.section}>
-        <div className={classes.col}>
-          <Typography variant="body1" className={classes.desc}>
-            {about.description}
-          </Typography>
+      {about.description ? (
+        <div className={classes.about}>
+          <div className={classes.section}>
+            <div className={classes.col}>
+              <Typography variant="body1" className={classes.desc}>
+                {about.description}
+              </Typography>
+            </div>
+            <div className={classes.tutorialLinks}>
+              <Typography variant="body1" className={classes.learn}>
+                Learn more about {about.name}
+              </Typography>
+              <Link
+                className={classes.link}
+                to={"/tutorial/" + about.symbol}
+                onClick={() => {
+                  setTutorialId(ids[about.symbol]);
+                }}
+              >
+                <Button className={classes.btn}>Start Lesson</Button>
+              </Link>
+            </div>
+          </div>
+          <Divider className={classes.divider} />
         </div>
-        <div className={classes.tutorialLinks}>
-          <Typography variant="body1" className={classes.learn}>
-            Learn more about {about.name}
-          </Typography>
-          <Link
-            className={classes.link}
-            to={"/tutorial/" + about.symbol}
-            onClick={() => {
-              setTutorialId(ids[about.symbol]);
-            }}
-          >
-            <Button className={classes.btn}>Start Lesson</Button>
-          </Link>
-        </div>
-      </div>
-      <Divider className={classes.divider} />
+      ) : (
+        <CircularProgress className={classes.progress} />
+      )}
     </div>
   );
 }

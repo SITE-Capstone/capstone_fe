@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import apiClient from "../Services/apiClient";
-import { Typography, makeStyles, Divider } from "@material-ui/core";
+import { Typography, makeStyles, Divider, CircularProgress } from "@material-ui/core";
 
 function Statistics({ symbol }) {
   const [stats, setStats] = useState({});
@@ -53,6 +53,9 @@ function Statistics({ symbol }) {
       margin: 2,
       marginBottom: 24,
     },
+    progress: {
+      color: "#5FB2FF",
+    },
   });
 
   const classes = useStyles();
@@ -68,7 +71,11 @@ function Statistics({ symbol }) {
               Market Cap
             </Typography>
             <Typography variant="h5" className={classes.number}>
-              {stats.market_cap ? parseFloat(stats.market_cap).toLocaleString() : "loading..."}
+              {stats.market_cap ? (
+                parseFloat(stats.market_cap).toLocaleString()
+              ) : (
+                <CircularProgress className={classes.progress} />
+              )}
             </Typography>
           </div>
           <div>
@@ -76,7 +83,11 @@ function Statistics({ symbol }) {
               Volume
             </Typography>
             <Typography variant="h5" className={classes.number}>
-              {stats.total_volume ? parseFloat(stats.total_volume).toLocaleString() : "loading..."}
+              {stats.total_volume ? (
+                parseFloat(stats.total_volume).toLocaleString()
+              ) : (
+                <CircularProgress className={classes.progress} />
+              )}
             </Typography>
           </div>
         </div>
@@ -86,7 +97,11 @@ function Statistics({ symbol }) {
               Supply
             </Typography>
             <Typography variant="h5" className={classes.number}>
-              {stats.circulating_supply ? parseFloat(stats.circulating_supply).toLocaleString() : "loading..."}
+              {stats.circulating_supply ? (
+                parseFloat(stats.circulating_supply).toLocaleString()
+              ) : (
+                <CircularProgress className={classes.progress} />
+              )}
             </Typography>
           </div>
           <div>
@@ -94,9 +109,11 @@ function Statistics({ symbol }) {
               Volume/Market Cap
             </Typography>
             <Typography variant="h5" className={classes.number}>
-              {stats.total_volume && stats.market_cap
-                ? (stats.total_volume / stats.market_cap).toFixed(4)
-                : "loading..."}
+              {stats.total_volume && stats.market_cap ? (
+                (stats.total_volume / stats.market_cap).toFixed(4)
+              ) : (
+                <CircularProgress className={classes.progress} />
+              )}
             </Typography>
           </div>
         </div>

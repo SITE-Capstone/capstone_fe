@@ -77,9 +77,16 @@ const useExchange = ({ symbol, type }) => {
     let text = event.target.value * state.price;
     console.log("amount", event.target.value, "price", state.price);
     setState((f) => ({ ...f, ["text"]: text.toFixed(2) }));
+    console.log(form.quantity);
   };
 
   const handleOnSubmit = async () => {
+    console.log("from submit: ", form.quantity);
+    if (form.quantity === undefined || form.quantity <= 0) {
+      setErrors((e) => ({ ...e, form: "Please enter positive numbers only" }));
+      return;
+    }
+
     setIsProcessing(true);
     setErrors((e) => ({ ...e, form: null }));
 

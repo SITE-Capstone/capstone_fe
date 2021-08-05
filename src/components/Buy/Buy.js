@@ -55,6 +55,7 @@ const Buy = ({ symbol }) => {
             <InputBase
               label="quantity"
               variant="standard"
+              type="number"
               name="quantity"
               placeholder={"Amount in " + state.symbol}
               value={form.quantity}

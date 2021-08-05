@@ -71,21 +71,36 @@ const useExchange = ({ symbol, type }) => {
   const [form, setForm] = useState({
     quantity: "",
   });
+const [quantities, setQuantities] = useState([])
 
   useEffect(() => {
     if (isPurchased) {
       navigate("/dashboard");
     }
+    fetchWalletData(symbol)
   }, [isPurchased, navigate]);
+
+  const fetchWalletData = async(symbol) =>{
+    let res = await apiClient.getCoinWallet()
+    console.log("XXXX", res.data)
+    let usd = `USD: $${res.data.Wallet.usd.toFixed(3)}`
+    let coin = ''
+    res.data.Wallet.coins.forEach((element, idx) =>{
+      if( element.symbol === symbol.toUpperCase()){
+        coin = `${element.symbol}: ${element.amount}`
+      }
+    })
+    console.log(usd, coin)
+    setQuantities([usd, coin])
+  }
 
   const handleOnInputChange = async (event) => {
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
     await setState((f) => ({ ...f, ["amount"]: event.target.value }));
-    console.log(state.amount);
     let text = event.target.value * state.price;
-    console.log("amount", event.target.value, "price", state.price);
-    setState((f) => ({ ...f, ["text"]: text.toFixed(2) }));
-    console.log(form.quantity);
+
+    setState((f) => ({ ...f, ["text"]: text.toFixed(3) }));
+
   };
 
   const handleOnSubmit = async () => {
@@ -101,24 +116,21 @@ const useExchange = ({ symbol, type }) => {
     let price = 0;
     apiClient.getCoinCurrentPrice(symbol).then((res) => {
       if (res.data === null) {
-        console.log("#18  Coinheader.js Error:", res);
         setErrors((e) => ({ ...e, form: res.error }));
         setTimeout(
           apiClient.getCoinCurrentPrice(symbol).then((res2) => {
+            console.log("UseExchange Error Fetch Price")
             if (res2.data === null) {
-              console.log("#22 Coinheader.js Error:", res2);
               setErrors((e) => ({ ...e, form: res.error }));
             } else {
-              price = Number(res2.data.data).toFixed(2);
+              price = Number(res2.data.data);
             }
           }),
           3000
         );
       } else {
-        price = Number(res.data.data).toFixed(2);
+        price = Number(res.data.data);
       }
-      console.log("Price", price);
-      console.log("SYmbol", symbol);
       let order = "";
       if (price !== 0 && Number(form.quantity)) {
         if (type === 0) {
@@ -163,6 +175,7 @@ const useExchange = ({ symbol, type }) => {
     classes,
     state,
     setState,
+    quantities
   };
 };
 

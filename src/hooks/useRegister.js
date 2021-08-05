@@ -94,7 +94,7 @@ function useRegister({ setUser }) {
 
   const handleOnInputChange = (event) => {
     if (event.target.name === "email") {
-      if (event.target.value.indexOf("@") === -1) {
+      if (event.target.value.indexOf("@") === -1 || event.target.value.indexOf(".") === -1) {
         setErrors((e) => ({ ...e, email: "Please enter a valid email." }));
       } else {
         setErrors((e) => ({ ...e, email: null }));
@@ -105,6 +105,16 @@ function useRegister({ setUser }) {
   };
 
   const handleOnSubmit = async () => {
+    if (form.password.length < 1) {
+      setErrors((e) => ({ ...e, form: "Must contain a password" }));
+      return;
+    }
+
+    if (form.email.indexOf(".") === -1) {
+      setErrors((e) => ({ ...e, email: "Please enter a valid email." }));
+      return;
+    }
+
     setIsProcessing(true);
     setErrors((e) => ({ ...e, form: null }));
 

@@ -54,6 +54,7 @@ export default function Register({ setUser }) {
                 onChange={handleOnInputChange}
                 className={classes.input}
                 fullWidth
+                inputProps={{ maxLength: 12 }}
               />
               <InputBase
                 type="email"

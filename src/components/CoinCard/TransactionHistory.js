@@ -15,6 +15,13 @@ const TransactionHistory = ({ time, amount, price, symbol }) => {
       }
     };
     fetchCurrentPrice();
+
+    const interval = setInterval(() => {
+      fetchCurrentPrice();
+      console.log("fetching data");
+    }, 15000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const useStyles = makeStyles({

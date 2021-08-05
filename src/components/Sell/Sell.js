@@ -6,7 +6,6 @@ import useExchange from "../../hooks/useExchange";
 import { useState, useEffect } from "react";
 
 const Sell = ({ symbol }) => {
-  // custom hook handles all login logic
   const type = 1;
 
   const { state, setState, handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes, quantities } =

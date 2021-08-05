@@ -82,12 +82,11 @@ const [quantities, setQuantities] = useState([])
 
   const fetchWalletData = async(symbol) =>{
     let res = await apiClient.getCoinWallet()
-    console.log("XXXX", res.data)
-    let usd = `USD: $${res.data.Wallet.usd.toFixed(3)}`
+    let usd = `USD Funds: $${res.data.Wallet.usd.toFixed(3)}`
     let coin = ''
     res.data.Wallet.coins.forEach((element, idx) =>{
       if( element.symbol === symbol.toUpperCase()){
-        coin = `${element.symbol}: ${element.amount}`
+        coin = `${element.symbol} Funds: ${element.amount}`
       }
     })
     console.log(usd, coin)

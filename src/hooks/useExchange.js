@@ -47,6 +47,14 @@ const useExchange = ({ symbol, type }) => {
       fontSize: "18px",
       fontFamily: "Roboto",
     },
+    back: {
+      transform: "rotate(-90deg)",
+      fontSize: 64,
+      color: "rgba(255,255,255,0.5)",
+      position: "relative",
+      top: "12%",
+      left: "5%",
+    },
   });
   const [state, setState] = useState({
     symbol: symbol,
@@ -90,10 +98,18 @@ const [quantities, setQuantities] = useState([])
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
     await setState((f) => ({ ...f, ["amount"]: event.target.value }));
     let text = event.target.value * state.price;
+
     setState((f) => ({ ...f, ["text"]: text.toFixed(3) }));
+
   };
 
   const handleOnSubmit = async () => {
+    console.log("from submit: ", form.quantity);
+    if (form.quantity === undefined || form.quantity <= 0) {
+      setErrors((e) => ({ ...e, form: "Please enter positive numbers only" }));
+      return;
+    }
+
     setIsProcessing(true);
     setErrors((e) => ({ ...e, form: null }));
 

@@ -9,7 +9,7 @@ const Buy = ({ symbol }) => {
   // custom hook handles all login logic
   const type = 0;
 
-  const { state, setState, handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes } = useExchange({
+  const { state, setState, handleOnSubmit, handleOnInputChange, form, errors, isProcessing, classes, quantities } = useExchange({
     symbol,
     type,
   });
@@ -49,6 +49,8 @@ const Buy = ({ symbol }) => {
         <br />
 
         <div className="form">
+          <Typography variant="h5">{quantities[0]}</Typography>
+          <Typography variant="h5">{quantities[1]}</Typography>
           <Typography variant="h5">{state.price && "Market Price:  $" + state.price}</Typography>
           <Typography variant="h5">{state.text && "Estimated Cost:  $" + state.text}</Typography>
           <form noValidate autoComplete="off" className="login-form">

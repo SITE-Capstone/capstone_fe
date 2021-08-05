@@ -63,12 +63,28 @@ const useExchange = ({ symbol, type }) => {
   const [form, setForm] = useState({
     quantity: "",
   });
+const [quantities, setQuantities] = useState([])
 
   useEffect(() => {
     if (isPurchased) {
       navigate("/dashboard");
     }
+    fetchWalletData(symbol)
   }, [isPurchased, navigate]);
+
+  const fetchWalletData = async(symbol) =>{
+    let res = await apiClient.getCoinWallet()
+    console.log("XXXX", res.data)
+    let usd = `USD: $${res.data.Wallet.usd.toFixed(3)}`
+    let coin = ''
+    res.data.Wallet.coins.forEach((element, idx) =>{
+      if( element.symbol === symbol.toUpperCase()){
+        coin = `${element.symbol}: ${element.amount}`
+      }
+    })
+    console.log(usd, coin)
+    setQuantities([usd, coin])
+  }
 
   const handleOnInputChange = async (event) => {
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
@@ -143,6 +159,7 @@ const useExchange = ({ symbol, type }) => {
     classes,
     state,
     setState,
+    quantities
   };
 };
 

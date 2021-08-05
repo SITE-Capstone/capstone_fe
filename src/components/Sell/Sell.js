@@ -54,6 +54,7 @@ const Sell = ({ symbol }) => {
           <form noValidate autoComplete="off" className="login-form">
             <InputBase
               label="quantity"
+              type="number"
               variant="standard"
               name="quantity"
               placeholder={"Amount in " + state.symbol}

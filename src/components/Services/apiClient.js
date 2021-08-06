@@ -335,26 +335,35 @@ class ApiClient {
       return { data: null, error: message || err || "Error" };
     }
   }
-  async getCoinNews(name, symbol) {
-    let pageSize = "5";
-    let sortBy = "publishedAt"; //"publishedAt" || "relevancy"
-    let language = "en";
-    let endpoint =
-      "/v2/everything?q=" +
-      name +
-      " AND " +
-      symbol +
-      "&pageSize=" +
-      pageSize +
-      "&sortBy=" +
-      sortBy +
-      "&language=" +
-      language +
-      "&apiKey=";
 
-    let req = await this.newsRequest({ endpoint: endpoint, method: "GET" });
-    return req;
+  async getCoinNews(name, coin_id) {
+    coin_id=coin_id.toLowerCase()
+    return await this.request({endpoint:"news/coin", method: "GET", params:{coin_id}})
   }
+
+  // async getCoinNews(name, symbol) {
+  //   let pageSize = "5";
+  //   let sortBy = "publishedAt"; //"publishedAt" || "relevancy"
+  //   let language = "en";
+  //   let endpoint =
+  //     "/v2/everything?q=" +
+  //     name +
+  //     " AND " +
+  //     symbol +
+  //     "&pageSize=" +
+  //     pageSize +
+  //     "&sortBy=" +
+  //     sortBy +
+  //     "&language=" +
+  //     language +
+  //     "&apiKey=";
+
+  //   let req = await this.newsRequest({ endpoint: endpoint, method: "GET" });
+  //   return req;
+  // }
+  
+
+
 }
 
 export default new ApiClient(process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001");

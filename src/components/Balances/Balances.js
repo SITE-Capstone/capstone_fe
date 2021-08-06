@@ -41,7 +41,7 @@ const Balances = ({ user, wallet }) => {
     const interval = setInterval(() => {
       fetchBalances();
       console.log("fetching data");
-    }, 15000);
+    }, 18000);
 
     return () => clearInterval(interval);
   }, []);

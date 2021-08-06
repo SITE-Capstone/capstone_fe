@@ -22,7 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "surge-push": "REACT_APP_REMOTE_HOST_URL=https://git.heroku.com/kuriosbe.git npm run build && cp build/index.html build/200.html && surge build"
   },
   "eslintConfig": {
     "extends": [

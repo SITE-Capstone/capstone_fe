@@ -11,6 +11,7 @@ import News from "../News/News";
 import "./Tradeview.css";
 import { makeStyles, Icon } from "@material-ui/core";
 import ChartToggle from "../Chart/ChartToggle";
+import { useLocation } from "react-router-dom";
 
 function Tradeview({ symbol, name, setTutorialId }) {
   const useStyles = makeStyles({
@@ -30,18 +31,53 @@ function Tradeview({ symbol, name, setTutorialId }) {
 
   const classes = useStyles();
 
+  const location = useLocation();
+  let coinData;
+
+  if (location.pathname === "/coin/ADA") {
+    coinData = {
+      symbol: "ADA",
+      name: "Cardano",
+    };
+  } else if (location.pathname === "/coin/BTC") {
+    coinData = {
+      symbol: "BTC",
+      name: "Bitcoin",
+    };
+  } else if (location.pathname === "/coin/DOGE") {
+    coinData = {
+      symbol: "DOGE",
+      name: "Dogecoin",
+    };
+  } else if (location.pathname === "/coin/ETH") {
+    coinData = {
+      symbol: "ETH",
+      name: "Ethereum",
+    };
+  } else if (location.pathname === "/coin/DOT") {
+    coinData = {
+      symbol: "DOT",
+      name: "Polkadot",
+    };
+  } else if (location.pathname === "/coin/XMR") {
+    coinData = {
+      symbol: "XMR",
+      name: "Monero",
+    };
+  }
+
   return (
     <div className="Tradeview">
       <Link to="/dashboard" className={classes.link}>
         <Icon className={classes.back}>arrow_circle_up</Icon>
       </Link>
-      <ChartToggle symbol={symbol} />
+      <ChartToggle symbol={coinData.symbol} />
       {/* <HourlyChart symbol={symbol} /> */}
-      <Coinheader symbol={symbol} />
-      <About name={name} symbol={symbol} setTutorialId={setTutorialId} />
-      <Statistics symbol={symbol} />
+      <Coinheader symbol={coinData.symbol} />
+      <About name={coinData.name} symbol={coinData.symbol} setTutorialId={setTutorialId} />
+      <Statistics symbol={coinData.symbol} />
       <Exchanges />
-      <News symbol={symbol} name={name} />
+      <News symbol={coinData.symbol} name={coinData.name} />
     </div>
   );
 }

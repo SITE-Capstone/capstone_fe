@@ -300,9 +300,17 @@ class ApiClient {
     let req = await this.geckoRequest({ endpoint: endpoint, method: "GET" });
     return req;
   }
+
+
+
+  // async getCoinStatistics(){
+  //   let endpoint='/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+  //   let req = await this.geckoRequest({endpoint:endpoint, method: "GET" })
+  //   return req
+  // }
   async getCoinStatistics(){
-    let endpoint='/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
-    let req = await this.geckoRequest({endpoint:endpoint, method: "GET" })
+    let endpoint ='statistics'
+    let req = await this.request({endpoint:endpoint, method:"GET"})
     return req
   }
 

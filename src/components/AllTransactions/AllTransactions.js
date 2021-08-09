@@ -1,4 +1,4 @@
-import { Button, Typography, makeStyles } from "@material-ui/core";
+import { Typography, makeStyles } from "@material-ui/core";
 import { useEffect, useState, useContext } from "react";
 import apiClient from "../Services/apiClient";
 import { useLocation } from "react-router-dom";
@@ -6,9 +6,7 @@ import UserContext from "../../hooks/userContext";
 import Dialog from "./Dialog";
 import SoldDialog from "./SoldDialog";
 
-const AllTransactions = () => {
-  const [transactions, setTransactions] = useState([]);
-
+const AllTransactions = ({ transactions, setTransactions }) => {
   const user = useContext(UserContext);
 
   const location = useLocation();

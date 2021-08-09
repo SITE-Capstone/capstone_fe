@@ -117,7 +117,7 @@ function About({ symbol, name, setTutorialId }) {
               </Typography>
               <Link
                 className={classes.link}
-                to={"/tutorial/" + about.symbol}
+                to={"/tutorial/" + about.symbol.toLowerCase()}
                 onClick={() => {
                   setTutorialId(ids[about.symbol]);
                 }}

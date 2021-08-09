@@ -75,7 +75,7 @@ function Tradeview({ symbol, name, setTutorialId }) {
       <ChartToggle symbol={coinData.symbol} />
       {/* <HourlyChart symbol={symbol} /> */}
       <Coinheader symbol={coinData.symbol} />
-      <About name={coinData.name} symbol={coinData.symbol} setTutorialId={setTutorialId} />
+      <About name={name} symbol={symbol} setTutorialId={setTutorialId} />
       <Statistics symbol={coinData.symbol} />
       <Exchanges />
       <News symbol={coinData.symbol} name={coinData.name} />

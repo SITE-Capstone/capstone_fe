@@ -6,10 +6,11 @@ import AllTransactions from "../AllTransactions/AllTransactions";
 
 function Statistics({ symbol }) {
   const [stats, setStats] = useState({});
+  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
     apiClient.getCoinStatistics().then((res) => {
-      console.log(res.data.statistics)
+      console.log(res.data.statistics);
       res.data.statistics.forEach((element) => {
         // console.log(element.symbol, symbol.toLowerCase())
         if (element.coin_id === symbol.toLowerCase()) {
@@ -121,11 +122,13 @@ function Statistics({ symbol }) {
         </div>
       </div>
       <Divider className={classes.divider} />
-      <Typography variant="h3" className={classes.header}>
-        Transaction History
-      </Typography>
-      <AllTransactions />
-      <Divider className={classes.divider} style={{ marginTop: 40 }} />
+      {transactions.length > 0 && (
+        <Typography variant="h3" className={classes.header}>
+          Transaction History
+        </Typography>
+      )}
+      <AllTransactions transactions={transactions} setTransactions={setTransactions} />
+      {transactions.length > 0 && <Divider className={classes.divider} style={{ marginTop: 40 }} />}
       <Typography variant="h3" className={classes.header}>
         Recent News
       </Typography>

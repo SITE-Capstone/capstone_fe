@@ -19,6 +19,7 @@ export default function Register({ setUser }) {
         {errors.form && <span className={classes.error}>{errors.form}</span>}
         <br />
         {form.email.length >= 1 && <span className={classes.error}>{errors.email}</span>}
+        {form.password.length >= 1 && <span className={classes.error}>{errors.password}</span>}
 
         <div className="form">
           <form noValidate autoComplete="off" className="register-form">

@@ -8,9 +8,10 @@ function Statistics({ symbol }) {
 
   useEffect(() => {
     apiClient.getCoinStatistics().then((res) => {
-      res.data.forEach((element) => {
+      console.log(res.data.statistics)
+      res.data.statistics.forEach((element) => {
         // console.log(element.symbol, symbol.toLowerCase())
-        if (element.symbol === symbol.toLowerCase()) {
+        if (element.coin_id === symbol.toLowerCase()) {
           setStats(element);
         }
       });
@@ -83,8 +84,8 @@ function Statistics({ symbol }) {
               Volume
             </Typography>
             <Typography variant="h5" className={classes.number}>
-              {stats.total_volume ? (
-                parseFloat(stats.total_volume).toLocaleString()
+              {stats.volume ? (
+                parseFloat(stats.volume).toLocaleString()
               ) : (
                 <CircularProgress className={classes.progress} />
               )}
@@ -97,8 +98,8 @@ function Statistics({ symbol }) {
               Supply
             </Typography>
             <Typography variant="h5" className={classes.number}>
-              {stats.circulating_supply ? (
-                parseFloat(stats.circulating_supply).toLocaleString()
+              {stats.supply ? (
+                parseFloat(stats.supply).toLocaleString()
               ) : (
                 <CircularProgress className={classes.progress} />
               )}
@@ -109,8 +110,8 @@ function Statistics({ symbol }) {
               Volume/Market Cap
             </Typography>
             <Typography variant="h5" className={classes.number}>
-              {stats.total_volume && stats.market_cap ? (
-                (stats.total_volume / stats.market_cap).toFixed(4)
+              {stats.volume && stats.market_cap ? (
+                (stats.volume / stats.market_cap).toFixed(4)
               ) : (
                 <CircularProgress className={classes.progress} />
               )}

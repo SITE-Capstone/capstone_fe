@@ -328,7 +328,9 @@ function News({ symbol, name }) {
           3000
         );
       } else {
-        articles = res.data.articles;
+        console.log("NEWSNEWSNEWS",res.data)
+        articles = res.data.Articles;
+        // console.log
       }
 
       setNews({
@@ -338,14 +340,14 @@ function News({ symbol, name }) {
       });
     });
   }, []);
-
+  
   const newsItems = news.articles.map((article, idx) => (
     <Article
-      source={article.source.name}
-      headline={article.title}
+      source={article.source}
+      headline={article.headline}
       url={article.url}
-      urlToImage={article.urlToImage}
-      publishedAt={article.publishedAt}
+      urlToImage={article.image_url}
+      publishedAt={article.time}
       key={idx}
     />
   ));

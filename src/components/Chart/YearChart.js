@@ -91,7 +91,7 @@ const YearChart = ({ symbol }) => {
           dot={false}
           key={3}
         />
-        <YAxis dataKey="price" stroke="transparent" />
+        <YAxis dataKey="price" stroke="transparent" domain={[datamin=>datamin, datamax=>datamax]}/>
         <XAxis dataKey="time" stroke="transparent" />
         <Tooltip content={CustomTooltip} />
       </LineChart>

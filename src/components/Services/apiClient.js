@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 // const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY;
-const NEWS_API_KEY = '51e6567c15a042dda68b3f712e6937d8';
+const NEWS_API_KEY = "51e6567c15a042dda68b3f712e6937d8";
 const API_KEYs = [
   process.env.REACT_APP_API_KEY1,
   process.env.REACT_APP_API_KEY2,
@@ -21,7 +21,7 @@ let API_KEY_count = 0;
 class ApiClient {
   constructor(remoteHostUrl) {
     // this.remoteHostUrl = remoteHostUrl;
-    this.remoteHostUrl = 'https://kuriosbe.herokuapp.com';
+    this.remoteHostUrl = "https://kuriosbe.herokuapp.com";
     this.token = null;
     this.coinApiBaseUrl = "https://rest.coinapi.io";
     this.geckoBaseUrl = "https://api.coingecko.com/api/v3";
@@ -35,7 +35,7 @@ class ApiClient {
 
   async request({ endpoint, method = "GET", data = {}, params = {} }) {
     const url = `${this.remoteHostUrl}/${endpoint}`;
-    console.log("Health Check")
+    console.log("Health Check");
 
     const headers = {
       "Content-Type": "application/json",
@@ -98,7 +98,6 @@ class ApiClient {
     return await this.request({ endpoint: "wallet/exchange", method: "PUT", data: order });
   }
 
-
   async transactionHistory(buying_id) {
     return await this.request({
       endpoint: "wallet/transactions",
@@ -109,32 +108,37 @@ class ApiClient {
     });
   }
 
-  //backend Price Information
-
-  async getCoinCurrentPrice(coin_id) {
-    coin_id=coin_id.toLowerCase()
-    return await this.request({endpoint:"price/current", method: "GET", params:{coin_id}})
+  async getAllTransactions(buying_id) {
+    return await this.request({
+      endpoint: "wallet/alltransactions",
+      method: "GET",
+      params: {
+        buying_id,
+      },
+    });
   }
-  
+
+  //backend Price Information
+  async getCoinCurrentPrice(coin_id) {
+    coin_id = coin_id.toLowerCase();
+    return await this.request({ endpoint: "price/current", method: "GET", params: { coin_id } });
+  }
+
   async getCoinHourlyPriceHistory(coin_id) {
-    coin_id=coin_id.toLowerCase()
-    return await this.request({endpoint:"price/hourly", method:"GET", params:{coin_id}})
+    coin_id = coin_id.toLowerCase();
+    return await this.request({ endpoint: "price/hourly", method: "GET", params: { coin_id } });
   }
   async getCoinWeeklyPriceHistory(coin_id) {
-    coin_id=coin_id.toLowerCase()
-    return await this.request({endpoint:"price/weekly", method:"GET", params:{coin_id}})
+    coin_id = coin_id.toLowerCase();
+    return await this.request({ endpoint: "price/weekly", method: "GET", params: { coin_id } });
   }
   async getCoinYearlyPriceHistory(coin_id) {
-    coin_id=coin_id.toLowerCase()
-    return await this.request({endpoint:"price/yearly", method:"GET", params:{coin_id}})
+    coin_id = coin_id.toLowerCase();
+    return await this.request({ endpoint: "price/yearly", method: "GET", params: { coin_id } });
   }
   async fetchAllCurrentPricesHistory() {
-    return await this.request({endpoint:"price/", method:"GET"})
+    return await this.request({ endpoint: "price/", method: "GET" });
   }
-
-
-
-
 
   // COIN INFORMATION
   async coinRequest({ endpoint, method = "GET", data = {} }, key) {
@@ -300,10 +304,10 @@ class ApiClient {
     let req = await this.geckoRequest({ endpoint: endpoint, method: "GET" });
     return req;
   }
-  async getCoinStatistics(){
-    let endpoint='/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
-    let req = await this.geckoRequest({endpoint:endpoint, method: "GET" })
-    return req
+  async getCoinStatistics() {
+    let endpoint = "/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
+    let req = await this.geckoRequest({ endpoint: endpoint, method: "GET" });
+    return req;
   }
 
   async newsRequest({ endpoint, method = "GET", data = {} }) {

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import apiClient from "../Services/apiClient";
 import { Typography, makeStyles, Divider, CircularProgress } from "@material-ui/core";
+import AllTransactions from "../AllTransactions/AllTransactions";
 
 function Statistics({ symbol }) {
   const [stats, setStats] = useState({});
@@ -119,6 +120,11 @@ function Statistics({ symbol }) {
         </div>
       </div>
       <Divider className={classes.divider} />
+      <Typography variant="h3" className={classes.header}>
+        Transaction History
+      </Typography>
+      <AllTransactions />
+      <Divider className={classes.divider} style={{ marginTop: 40 }} />
       <Typography variant="h3" className={classes.header}>
         Recent News
       </Typography>

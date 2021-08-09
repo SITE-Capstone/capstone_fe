@@ -12,6 +12,7 @@ import "./Tradeview.css";
 import { makeStyles, Icon } from "@material-ui/core";
 import ChartToggle from "../Chart/ChartToggle";
 import { useLocation } from "react-router-dom";
+import AllTransactions from "../AllTransactions/AllTransactions";
 
 function Tradeview({ symbol, name, setTutorialId }) {
   const useStyles = makeStyles({

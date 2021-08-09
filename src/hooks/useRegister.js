@@ -100,6 +100,13 @@ function useRegister({ setUser }) {
         setErrors((e) => ({ ...e, email: null }));
       }
     }
+    if (event.target.name === "password") {
+      if (event.target.value.indexOf(" ") >= 0) {
+        setErrors((e) => ({ ...e, password: "No spaces allowed in password" }));
+      } else {
+        setErrors((e) => ({ ...e, password: null }));
+      }
+    }
 
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
   };
@@ -107,6 +114,9 @@ function useRegister({ setUser }) {
   const handleOnSubmit = async () => {
     if (form.password.length < 1) {
       setErrors((e) => ({ ...e, form: "Must contain a password" }));
+      return;
+    }
+    if (form.password.indexOf(" ") >= 0) {
       return;
     }
 

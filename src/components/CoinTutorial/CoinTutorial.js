@@ -1,9 +1,10 @@
 import { makeStyles, Typography, Button } from "@material-ui/core";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import apiClient from "../Services/apiClient";
 import UserContext from "../../hooks/userContext";
 import { Grid } from "@material-ui/core";
+import { useLocation } from "react-router-dom";
 
 const CoinTutorial = ({
   videoUrl,
@@ -123,13 +124,34 @@ const CoinTutorial = ({
     "Polkadot is a sharded heterogeneous multi-chain architecture which enables external networks as well as customised layer one 'parachains' to communicate, creating an interconnected internet of blockchains. Polkadot was founded by Robert Habermeier, Peter Czaban, and Dr. Gavin Wood, who was a co founder of Ethereum. Polkadot makes use of proof of stake. Polkadot facilitates an internet where independent blockchains can exchange information and transactions in a trustless way via the Polkadot relay chain. Polkadot makes it easier than ever to create and connect decentralized applications, services, and institutions. By empowering innovators to build better solutions, we seek to free society from its reliance on a broken web where its large institutions can’t violate our trust.",
     "Monero is an open source, privacy oriented, decentralized cryptocurrency. It was launched in 2014 and uses a public distributed ledger with privacy-enhancing technologies that obfuscate transactions to achieve anonymity and fungibility. Fungibility means that two units of a currency can be substituted with no difference between them. If you take two $1 bills, they are both worth the same, but not fungible as they have a unique serial number to differentiate them. Alternitively, two gold bars of the same grade and weight are fungible, as both have the same value and don’t carry any distinguishing features. Monero makes transaction details, like the identity of senders and recipients, and the amount of every transaction, anonymous by disguising the addresses used by participants. Along with anonymity, the mining process for Monero is based on an egalitarian concept. This is the principle that all people are equal and deserve equal opportunities. Its developers did not keep any stake for themselves when they launched Monero but they did bank on contributions and community support to further develop the virtual currency.",
   ];
+  const location = useLocation();
+  const [coinTut, setCoinTut] = useState();
 
   const completeTutorial = async () => {
-    await apiClient.markTutorialAsCompleted(user.id, tutorialId, 1);
+    await apiClient.markTutorialAsCompleted(user.id, coinTut + 1, 1);
   };
 
   useEffect(() => {
     console.log("id", tutorialId);
+    if (location.pathname === "/tutorial/Beginner%E2%80%99s") {
+      setCoinTut(0);
+    } else if (location.pathname === "/tutorial/General") {
+      setCoinTut(1);
+    } else if (location.pathname === "/tutorial/Investing") {
+      setCoinTut(2);
+    } else if (location.pathname === "/tutorial/btc") {
+      setCoinTut(3);
+    } else if (location.pathname === "/tutorial/eth") {
+      setCoinTut(4);
+    } else if (location.pathname === "/tutorial/ada") {
+      setCoinTut(5);
+    } else if (location.pathname === "/tutorial/doge") {
+      setCoinTut(6);
+    } else if (location.pathname === "/tutorial/dot") {
+      setCoinTut(7);
+    } else if (location.pathname === "/tutorial/xmr") {
+      setCoinTut(8);
+    }
     setVideoUrl(videos[tutorialId - 1]);
     setTutorialName(names[tutorialId - 1]);
     setTutorialDesc(description[tutorialId - 1]);
@@ -148,10 +170,10 @@ const CoinTutorial = ({
         <Grid item>
           <div className={classes.text}>
             <Typography variant="h3" className={classes.title}>
-              {name}
+              {names[coinTut]}
             </Typography>
             <Typography varaint="body1" className={classes.desc}>
-              {desc}
+              {description[coinTut]}
             </Typography>
           </div>
         </Grid>
@@ -160,7 +182,7 @@ const CoinTutorial = ({
             <iframe
               width="800"
               height="433"
-              src={videoUrl}
+              src={videos[coinTut]}
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

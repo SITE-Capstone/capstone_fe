@@ -13,6 +13,7 @@ import Sell from "../Sell/Sell";
 import Landing from "../Landing/Landing";
 import UserContext from "../../hooks/userContext";
 import { Button } from "@material-ui/core";
+import Settings from "../Settings/Settings";
 
 function App() {
   const [user, setUser] = useState({});
@@ -113,6 +114,7 @@ function App() {
                   />
                 }
               />
+              <Route path="/settings" element={<Settings />} />
             </Routes>
           </div>
         </div>

@@ -41,7 +41,7 @@ const AllTransactions = ({ transactions, setTransactions }) => {
   const useStyles = makeStyles({
     container: {
       display: "grid",
-      gridTemplateColumns: "repeat(3, 320px)",
+      gridTemplateColumns: "repeat(3, 330px)",
       marginTop: 30,
       justifyContent: "center",
     },

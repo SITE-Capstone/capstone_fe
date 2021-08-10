@@ -48,8 +48,8 @@ const HourlyChart = ({ symbol }) => {
       }
       console.log("XXXXX", chartData);
 
-      let open = chartData[0].price;
-      let close = chartData[chartData.length - 1].price;
+      let open = Number(chartData[0].price);
+      let close = Number(chartData[chartData.length - 1].price);
       color = black;
       if (open > close) {
         color = red;

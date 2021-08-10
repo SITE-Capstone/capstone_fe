@@ -1,13 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button, makeStyles, Typography } from "@material-ui/core";
-
+import { withStyles } from "@material-ui/styles";
+import { MicNone } from "@material-ui/icons";
 function Landing() {
-  const url = "https://img.rasset.ie/0016de33-500.jpg";
-  const img1 = "https://i.imgur.com/GLQ4aTt.png";
-  const img2 = "https://i.imgur.com/TeeOVk8.png";
-  const img3 = "https://i.imgur.com/MWVzVwW.png";
+  const CustomColor = withStyles({
+    root: {
+      fontSize: 84,
+      background: "-webkit-linear-gradient(271.88deg, #3887FE 4.26%, #3BA0FF 51.37%, #5FB2FF 99.01%)",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
+    },
+  })(Typography);
+
+  // const url = "https://img.rasset.ie/0016de33-500.jpg";
+  const url = "https://media.istockphoto.com/photos/macro-view-of-a-screen-of-trading-terminal-with-abstract-financial-picture-id1200938039?k=6&m=1200938039&s=612x612&w=0&h=N5xs0rpf3cqnKDd0rlur2eGdaF3VkkPpr5BS0HuFGb0=";
+  const img1 = "https://i.imgur.com/PDG5zA1.jpeg";
+  const img2 = "https://i.imgur.com/bAC0S3R.jpeg";
+  const img3 = "https://i.imgur.com/y2ss0Ys.jpeg";
   const useStyles = makeStyles({
+    logo: {
+      marginTop: 20,
+      fontWeight: 800,
+      letterSpacing: "0.05em",
+      fontFamily: "Roboto",
+      textShadow:"none"
+    },
     backImg: {
       backgroundImage: `url('${url}')`,
       backgroundRepeat: "no-repeat",
@@ -27,9 +45,9 @@ function Landing() {
       flexFlow: "column nowrap",
     },
     hero: {
-      position: "absolute",
+      position: "relative",
       width: "100%",
-      top: "256px",
+      bottom: "512px",
       display: "flex",
       flexFlow: "column nowrap",
       justifyContent: "center",
@@ -44,7 +62,6 @@ function Landing() {
       width: 350,
       display: "flex",
       justifyContent: "space-between",
-      marginTop: "8rem",
     },
     btn: {
       width: 150,
@@ -59,6 +76,8 @@ function Landing() {
       color: "white",
     },
     section: {
+      position: "relative",
+      bottom: "256px",
       display: "flex",
       flexFlow: "row nowrap",
       justifyContent: "center",
@@ -78,7 +97,8 @@ function Landing() {
       <div classname={classes.heroContainer}>
         <div className={classes.backImg}></div>
         <div className={classes.hero}>
-          <Typography variant="h1">Start Learning. Start Investing.</Typography>
+        <CustomColor className={classes.logo} variant="h1">Kurios</CustomColor>
+          <Typography variant="h2">Start Learning. Start Investing.</Typography>
           <Typography variant="h2">Get started with your crypto learning today.</Typography>
           <div className={classes.btnContainer}>
             <Link className={classes.link} to={"/login"}>
@@ -92,19 +112,24 @@ function Landing() {
       </div>
       <div className={classes.section}>
         <img src={img2} alt="Tutorial View" className={classes.img} />
-        <Typography variant={textVariant}>
-          Learn about crypto currencies and develop essential knowledge with quick lessons
-        </Typography>
+        <div>
+        <Typography className={classes.title}variant="h3">LEARN</Typography>
+        <Typography variant={textVariant}>Learn about crypto currencies and develop essential knowledge with quick lessons</Typography>
+        </div>
       </div>
       <div className={classes.section}>
-        <Typography variant={textVariant}>
-          Paper Trade crypto currency trading strategies before investing with real money
-        </Typography>
+        <div>
+        <Typography className={classes.title}variant="h3">TRADE</Typography>
+        <Typography variant={textVariant}>Paper Trade crypto currency trading strategies before investing with real money</Typography>
+        </div>
         <img src={img3} alt="Buy View" className={classes.img} />
       </div>
       <div className={classes.section}>
         <img src={img1} alt="Portfolio View" className={classes.img} />
+        <div>
+        <Typography className={classes.title}variant="h3">GROW</Typography>
         <Typography variant={textVariant}>Diversify your portfolio and build up your account</Typography>
+        </div>
       </div>
     </div>
   );

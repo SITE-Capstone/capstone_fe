@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core";
+import { Typography, makeStyles } from "@material-ui/core";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { Data } from "../Data/Data";
 import apiClient from "../Services/apiClient";
@@ -109,8 +109,8 @@ const CustomTooltip = ({ active, payload, label }) => {
     //This is to show the price at different points in time
     return (
       <div className="custom-tooltip">
-        <p className="label">{`Time: ${new Date(payload[0].value).toLocaleString()}`}</p>
-        <p className="label">{`Price: ${Number(payload[1].value).toFixed(4)}`}</p>
+        <Typography variant="h5" className="label">{`Time: ${new Date(payload[0].value).toLocaleString().replace(':00',"")}`}</Typography>
+        <Typography variant="h5" className="label">{`Price: ${Number(payload[1].value).toFixed(4)}`}</Typography>
       </div>
     );
   } else {

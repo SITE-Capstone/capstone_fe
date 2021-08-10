@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { Data } from "../Data/Data";
 import apiClient from "../Services/apiClient";
-import { makeStyles } from "@material-ui/core";
+import { Typography, makeStyles } from "@material-ui/core";
 
 const black = ["rgb(0,0,0,.85)", "rgb(0,0,0,.25)", "rgb(0,0,0,.15)"]; //#F68A8A
 const red = ["rgb(246,138,138,.85)", "rgb(246,138,138,.25)", "rgb(246,138,138,.15)"]; //#F68A8A
@@ -108,8 +108,8 @@ const CustomTooltip = ({ active, payload, label }) => {
     //This is to show the price at different points in time
     return (
       <div className="custom-tooltip">
-        <p className="label">{`Time: ${new Date(payload[0].value).toLocaleString()}`}</p>
-        <p className="label">{`Price: ${Number(payload[1].value).toFixed(4)}`}</p>
+        <Typography variant="h5" className="label">{`Time: ${new Date(new Date(payload[0].value).getTime()+60000).toLocaleString().replace(':00:00', ':00')}`}</Typography>
+        <Typography variant="h5" className="label">{`Price: ${Number(payload[1].value).toFixed(4)}`}</Typography>
       </div>
     );
   } else {

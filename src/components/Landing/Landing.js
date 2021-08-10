@@ -62,6 +62,7 @@ function Landing() {
       width: 350,
       display: "flex",
       justifyContent: "space-between",
+      marginTop: "32px"
     },
     btn: {
       width: 150,
@@ -80,11 +81,12 @@ function Landing() {
       bottom: "256px",
       display: "flex",
       flexFlow: "row nowrap",
-      justifyContent: "center",
+      justifyContent: "space-between",
       alignItems: "center",
       textAlign: "center",
       color: "white",
       padding: "32px",
+      width:"90%"
     },
     Landing: {
       width: "100vw!important",
@@ -94,7 +96,7 @@ function Landing() {
   let textVariant = "h4";
   return (
     <div className="Landing">
-      <div classname={classes.heroContainer}>
+      <div className={classes.heroContainer}>
         <div className={classes.backImg}></div>
         <div className={classes.hero}>
         <CustomColor className={classes.logo} variant="h1">Kurios</CustomColor>
@@ -113,13 +115,13 @@ function Landing() {
       <div className={classes.section}>
         <img src={img2} alt="Tutorial View" className={classes.img} />
         <div>
-        <Typography className={classes.title}variant="h3">LEARN</Typography>
+        <CustomColor className={classes.logo} variant="h3">Learn</CustomColor>
         <Typography variant={textVariant}>Learn about crypto currencies and develop essential knowledge with quick lessons</Typography>
         </div>
       </div>
       <div className={classes.section}>
         <div>
-        <Typography className={classes.title}variant="h3">TRADE</Typography>
+        <CustomColor className={classes.logo} variant="h3">Trade</CustomColor>
         <Typography variant={textVariant}>Paper Trade crypto currency trading strategies before investing with real money</Typography>
         </div>
         <img src={img3} alt="Buy View" className={classes.img} />
@@ -127,7 +129,7 @@ function Landing() {
       <div className={classes.section}>
         <img src={img1} alt="Portfolio View" className={classes.img} />
         <div>
-        <Typography className={classes.title}variant="h3">GROW</Typography>
+        <CustomColor className={classes.logo} variant="h3">Grow</CustomColor>
         <Typography variant={textVariant}>Diversify your portfolio and build up your account</Typography>
         </div>
       </div>

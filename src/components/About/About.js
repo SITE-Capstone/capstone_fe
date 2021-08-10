@@ -21,7 +21,7 @@ function About({ symbol, name, setTutorialId }) {
 
   useEffect(() => {
     apiClient.getCoinDescription(name.toLowerCase()).then((res) => {
-      let html = res.data.description.en;
+      let html = res;
 
       let div = document.createElement("div");
       div.innerHTML = html;

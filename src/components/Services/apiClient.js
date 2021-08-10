@@ -297,12 +297,23 @@ class ApiClient {
   }
 
   async getCoinDescription(name) {
-    let endpoint =
-      "/coins/" +
-      name +
-      "?localization=en&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false";
-    let req = await this.geckoRequest({ endpoint: endpoint, method: "GET" });
+    const descriptions = {
+      bitcoin: 'Bitcoin is the first successful internet money based on peer-to-peer technology; whereby no central bank or authority is involved in the transaction and production of the Bitcoin currency. It was created by an anonymous individual/group under the name, Satoshi Nakamoto. The source code is available publicly as an open source project, anybody can look at it and be part of the developmental process.',
+      ethereum: 'Ethereum is a smart contract platform that enables developers to build tokens and decentralized applications (dapps). ETH is the native currency for the Ethereum platform and also works as the transaction fees to miners on the Ethereum network. Ethereum is the pioneer for blockchain based smart contracts.',
+      cardano: 'Cardano is a decentralised platform that will allow complex programmable transfers of value in a secure and scalable fashion. It is one of the first blockchains to be built in the highly secure Haskell programming language. Cardano is developing a smart contract platform which seeks to deliver more advanced features than any protocol previously developed.',
+      monero: 'What is Monero? Monero (XMR) is the top privacy-centric cryptocurrency based on the CryptoNote protocol, a secure, private and untraceable currency system. Monero uses a special kind of cryptography to ensure that all of its transactions are remain 100% unlinkable and untraceable. In an increasingly transparent world, you can see why something like Monero can become so desirable.',
+      polkadot:'Polkadot is a platform that allows diverse blockchains to transfer messages, including value, in a trust-free fashion; sharing their unique features while pooling their security. In brief, Polkadot is a scalable heterogeneous multi-chain technology. Polkadot is heterogeneous because it is entirely flexible and makes no assumption about the nature or structure of the chains in the network.',
+      dogecoin: 'Dogecoin is a cryptocurrency based on the popular "Doge" Internet meme and features a Shiba Inu on its logo. Dogecoin is a Litecoin fork. Introduced as a "joke currency" on 6 December 2013, Dogecoin quickly developed its own online community and reached a capitalization of US$60 million in January 2014.'
+    }
+
+    let req = descriptions[name]
     return req;
+  
+  
+  
+  
+  
+  
   }
 
 

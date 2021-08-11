@@ -1,5 +1,5 @@
 import { Typography, makeStyles } from "@material-ui/core";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import apiClient from "../Services/apiClient";
 import { useLocation } from "react-router-dom";
 import UserContext from "../../hooks/userContext";

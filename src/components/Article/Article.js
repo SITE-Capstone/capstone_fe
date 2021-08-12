@@ -4,7 +4,6 @@ import { makeStyles, Typography, Divider } from "@material-ui/core";
 function Article(props) {
   const useStyles = makeStyles({
     article: {
-      // background: "yellow",
       width: "67vw",
       display: "flex",
       justifyContent: "space-between",
@@ -12,11 +11,7 @@ function Article(props) {
       textDecoration: "none",
       color: "white",
     },
-    text: {
-      // background: "green",
-    },
     subhead: {
-      // background: "green",
       display: "flex",
       width: "25rem",
       justifyContent: "space-between",
@@ -24,7 +19,6 @@ function Article(props) {
       color: "rgba(255,255,255,0.5)",
     },
     headline: {
-      // background: "red",
       height: "75%",
       fontSize: "18px",
       display: "flex",

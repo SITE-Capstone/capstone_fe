@@ -3,7 +3,7 @@ import { InputBase, Button, Icon } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import apiClient from "../Services/apiClient";
 import useExchange from "../../hooks/useExchange";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 const Buy = ({ symbol }) => {
   const type = 0;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button, makeStyles } from "@material-ui/core";
 import HourlyChart from "./HourlyChart";
 import WeeklyChart from "./WeeklyChart";
@@ -18,18 +18,15 @@ const ChartToggle = ({ symbol }) => {
     buttons: {
       display: "flex",
       marginBottom: 100,
-      // background: "grey",
       width: "50%",
       justifyContent: "space-around",
     },
     btn: {
-      // background: "linear-gradient(271.88deg, #3887FE 4.26%, #3BA0FF 51.37%, #5FB2FF 99.01%)",
       fontSize: 18,
       fontWeight: "bold",
       color: "rgba(255,255,255,0.5)",
     },
     active: {
-      // background: "linear-gradient(271.88deg, #3887FE 4.26%, #3BA0FF 51.37%, #5FB2FF 99.01%)",
       fontSize: 18,
       fontWeight: "bold",
       color: "#5FB2FF",

@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
 import { useState, useEffect } from "react";
 import apiClient from "../Services/apiClient";
 import { CircularProgress, Typography } from "@material-ui/core";
@@ -75,7 +75,6 @@ const Balances = ({ user, wallet }) => {
     totalCoinWalletInUsd = balance;
   }
 
-  // console.log("------", wallet[2].amount * coinPrice[2]);
   console.log("portfolio", portfolio);
 
   console.log("coinWallet", totalCoinWalletInUsd);

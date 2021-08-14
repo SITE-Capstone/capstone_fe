@@ -16,7 +16,7 @@ Backend Repository: https://github.com/SITE-Capstone/capstone_be
 
 Planning Repository: https://github.com/SITE-Capstone/capstone_plan 
 
-Deployment Website: **Add Link to Deployed Project**
+Deployment Website: https://kurios.surge.sh
 
 ### Open-source libraries or APIs used
 
